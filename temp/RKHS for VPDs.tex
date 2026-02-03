@@ -1,0 +1,2319 @@
+%Version 3.1 December 2024
+% See section 11 of the User Manual for version history
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                 %%
+%% Please do not use \input{...} to include other tex files.       %%
+%% Submit your LaTeX manuscript as one .tex document.              %%
+%%                                                                 %%
+%% All additional figures and files should be attached             %%
+%% separately and not embedded in the \TeX\ document itself.       %%
+%%                                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%\documentclass[referee,sn-basic]{sn-jnl}% referee option is meant for double line spacing
+
+%%=======================================================%%
+%% to print line numbers in the margin use lineno option %%
+%%=======================================================%%
+
+%%\documentclass[lineno,pdflatex,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+%%=========================================================================================%%
+%% the documentclass is set to pdflatex as default. You can delete it if not appropriate.  %%
+%%=========================================================================================%%
+
+%%\documentclass[sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+%%Note: the following reference styles support Namedate and Numbered referencing. By default the style follows the most common style. To switch between the options you can add or remove “Numbered” in the optional parenthesis. 
+%%The option is available for: sn-basic.bst, sn-chicago.bst%  
+ 
+%%\documentclass[pdflatex,sn-nature]{sn-jnl}% Style for submissions to Nature Portfolio journals
+%%\documentclass[pdflatex,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+\documentclass[pdflatex,sn-mathphys-num]{sn-jnl}% Math and Physical Sciences Numbered Reference Style
+%%\documentclass[pdflatex,sn-mathphys-ay]{sn-jnl}% Math and Physical Sciences Author Year Reference Style
+%%\documentclass[pdflatex,sn-aps]{sn-jnl}% American Physical Society (APS) Reference Style
+%%\documentclass[pdflatex,sn-vancouver-num]{sn-jnl}% Vancouver Numbered Reference Style
+%%\documentclass[pdflatex,sn-vancouver-ay]{sn-jnl}% Vancouver Author Year Reference Style
+%%\documentclass[pdflatex,sn-apa]{sn-jnl}% APA Reference Style
+%%\documentclass[pdflatex,sn-chicago]{sn-jnl]% Chicago-based Humanities Reference Style
+
+%%%% Standard Packages
+%%<additional latex packages if required can be included here>
+
+\usepackage{graphicx}%
+\usepackage{multirow}%
+\usepackage{amsmath,amssymb,amsfonts}%
+\usepackage{amsthm}%
+\usepackage{mathrsfs}%
+\usepackage[title]{appendix}%
+\usepackage{xcolor}%
+\usepackage{textcomp}%
+\usepackage{manyfoot}%
+\usepackage{booktabs}%
+\usepackage{algorithm}%
+\usepackage{algorithmicx}%
+\usepackage{algpseudocode}%
+\usepackage{listings}%
+\usepackage{tikz-cd}%
+%%%%
+
+%%%%%=============================================================================%%%%
+%%%%  Remarks: This template is provided to aid authors with the preparation
+%%%%  of original research articles intended for submission to journals published 
+%%%%  by Springer Nature. The guidance has been prepared in partnership with 
+%%%%  production teams to conform to Springer Nature technical requirements. 
+%%%%  Editorial and presentation requirements differ among journal portfolios and 
+%%%%  research disciplines. You may find sections in this template are irrelevant 
+%%%%  to your work and are empowered to omit any such section if allowed by the 
+%%%%  journal you intend to submit to. The submission guidelines and policies 
+%%%%  of the journal take precedence. A detailed User Manual is available in the 
+%%%%  template package for technical guidance.
+%%%%%=============================================================================%%%%
+
+%% as per the requirement new theorem styles can be included as shown below
+\theoremstyle{thmstyleone}%
+\newtheorem{theorem}{Theorem}%  meant for continuous numbers
+%%\newtheorem{theorem}{Theorem}[section]% meant for sectionwise numbers
+%% optional argument [theorem] produces theorem numbering sequence instead of independent numbers for Proposition
+\newtheorem{proposition}[theorem]{Proposition}% 
+%%\newtheorem{proposition}{Proposition}% to get separate numbers for theorem and proposition etc.
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{thmstyletwo}%
+\newtheorem{example}{Example}%
+\newtheorem{remark}{Remark}%
+
+\theoremstyle{thmstylethree}%
+\newtheorem{definition}{Definition}%
+
+\raggedbottom
+%%\unnumbered% uncomment this for unnumbered level heads
+
+\begin{document}
+
+\title[Reproducing Kernel Hilbert Spaces for Virtual Persistence Diagrams]{Reproducing Kernel Hilbert Spaces for Virtual Persistence Diagrams}
+
+%%=============================================================%%
+%% GivenName	-> \fnm{Joergen W.}
+%% Particle	-> \spfx{van der} -> surname prefix
+%% FamilyName	-> \sur{Ploeg}
+%% Suffix	-> \sfx{IV}
+%% \author*[1,2]{\fnm{Joergen W.} \spfx{van der} \sur{Ploeg} 
+%%  \sfx{IV}}\email{iauthor@gmail.com}
+%%=============================================================%%
+
+\author[1]{\fnm{Charles} \sur{Fanning}} \email{cfannin8@students.kennesaw.edu}
+
+\author[1]{\fnm{Mehmet Emin} \sur{Aktas}} \email{maktas1@kennesaw.edu}
+
+\affil[1]{\orgdiv{Department of Data Science and Analytics}, \orgname{Kennesaw State University}, \orgaddress{\street{1000 Chastain Road}, \city{Kennesaw, \postcode{30144}, \state{Georgia}, \country{United States of America}}}}
+
+%%==================================%%
+%% Sample for unstructured abstract %%
+%%==================================%%
+
+\abstract{A persistence diagram is a finite multiset of birth-death pairs representing the lifetimes of topological features across a filtration. Persistence diagrams do not carry intrinsic spectral or kernel structures, so applications typically use auxiliary vectorizations of diagrams. Virtual persistence diagrams, given by the Grothendieck completion of finite diagrams with the $W_1$ metric, yield a group structure with additive cancellation and a translation--invariant metric. For a finite metric pair $(X,d,A)$ we use the identification $K(X,A)\cong \mathbb Z^{|X\setminus A|}$ and parametrize its Pontryagin dual torus. The Lipschitz seminorms of characters in the $W_1$ geometry are expressed in terms of edgewise phase differences on the quotient $X/A$. A weighted graph Laplacian on $X/A$ determines a Dirichlet symbol $\lambda(\theta)$, and the corresponding heat spectral multipliers induce translation--invariant kernels and their reproducing-kernel Hilbert spaces. We obtain explicit global $W_1$--Lipschitz bounds for all functions in these spaces. Random Fourier feature maps are constructed by sampling from the heat measures; they are unbiased kernel approximations and satisfy asymptotic Lipschitz estimates based on the same spectral quantities. We apply these kernels and their finite-dimensional approximations in a synthetic segmentation experiment that compares baseline, Wasserstein, and Reproducing Kernel Hilbert Space (RKHS)-based losses.}
+
+%%================================%%
+%% Sample for structured abstract %%
+%%================================%%
+
+% \abstract{\textbf{Purpose:} ...
+% \textbf{Methods:} ...
+% \textbf{Results:} ...
+% \textbf{Conclusion:} ...}
+
+\keywords{Persistent homology, Fourier multipliers, Stability, Topological data analysis}
+
+%%\pacs[JEL Classification]{D8, H51}
+
+\pacs[Mathematics Subject Classification]{55N31, 43A25, 43A35}
+
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+In computational practice, one-parameter persistent homology returns a finite indexed multiset of birth-death pairs—persistence diagrams \cite{892133}—compared via $p$-Wasserstein distances with stability guarantees \cite{CohenSteiner2007StabilityPD}. These objects are central to TDA; see the monographic treatment in \cite{Oudot2015PersistenceT}. However, the usual diagram space is only a commutative monoid under disjoint union, so there is no native subtraction. The \emph{virtual} (signed) completion restores add/cancel algebra and supplies a canonical group metric framework \cite{Bubenik2022VirtualPD}, opening the door to analytic tools on \emph{differences} of topological signal.
+
+We work in the finite-support regime and \emph{fix $p=1$}. For a finite metric pair $(X,d,A)$ we use the Grothendieck group $K(X,A)$, which is a discrete LCA group with Pontryagin dual a compact torus. The metric on $K(X,A)$ is the canonical translation-invariant metric induced from the diagram $W_1$. Heat spectral multipliers on the dual induce translation-invariant kernels whose Reproducing Kernel Hilbert Space (RKHS) embeddings admit explicit global $W_1$-Lipschitz control written directly as the integral appearing throughout this paper (no auxiliary constants). This yields stable, tunable functionals of topological \emph{differences} that are downstream-model-agnostic, with connections to kernel methods \cite{10.5555/2981562.2981710} and harmonic analysis on LCA groups \cite{Folland2015CourseAH}.
+
+\subsection{Our contributions}\label{subsec:intro-our-contribs}
+A persistent obstacle in topological data analysis is that persistence diagrams do not natively admit the spectral and kernel machinery that power modern analytics and machine learning methods.
+
+\subsubsection{Virtual persistence diagrams.}
+For a metric pair $(X,d,A)$ with $X\setminus A=\{x_1,\dots,x_N\}$, we use the Grothendieck group $K(X,A)\cong\mathbb Z^N$ with the translation-invariant group metric induced from the diagram $W_1$-distance, as in the virtual framework of \cite{Bubenik2022VirtualPD}. This identifies the algebraic setting where add/cancel is exact. Related categorical and metric perspectives on generalized persistence appear in \cite{Bubenik2015MetricsGPM}.
+
+\subsubsection{Pontryagin duality.}
+Since $K(X,A)$ is discrete LCA, its dual is $\widehat{K(X,A)}\cong\mathbb T^N$ with characters $\chi_\theta(\alpha)=e^{i\langle\alpha,\theta\rangle}$. The weighted graph Laplacian on $X/A$ with symbol $\lambda(\theta)$ quantifies the Lipschitz behaviour of characters in the $W_1$ geometry on $K(X,A)$ through the edgewise phase differences that determine $\mathrm{Lip}_\rho(\chi_\theta)$ \cite{Folland2015CourseAH}.
+
+\subsubsection{Heat flow, spectral multipliers, and RKHSs on the dual.}
+With Haar probability measure $d\mu(\theta)$ on $\mathbb T^N$ and Laplacian symbol $\lambda(\theta)\ge 0$, the heat spectral multipliers $e^{-t\lambda(\theta)}\,d\mu(\theta)$ define translation-invariant kernels $k_t$ and RKHSs $\mathcal H_t$. For every $f\in\mathcal H_t$ we prove the global bound
+\[
+\mathrm{Lip}_\rho(f)\ \le\ \|f\|_{\mathcal H_t}
+\left(\int_{\mathbb T^N}\!\mathrm{Lip}_\rho(\chi_\theta)^2\,e^{-t\lambda(\theta)}\,d\mu(\theta)\right)^{\!1/2},
+\]
+and the right-hand side is nonincreasing in $t$ because $e^{-t\lambda(\theta)}$ decreases pointwise in $t$ and $\lambda(\theta)\ge 0$.
+
+\subsubsection{Random Fourier features.}
+Sampling $\theta$ from the heat law on $\mathbb T^N$ yields unbiased random Fourier features $\Phi_{t,R}$ in the sense of \cite{10.5555/2981562.2981710}. Their Lipschitz seminorm scales like
+\[
+R^{-1/2}\,
+\left(\int_{\mathbb T^N}\!\mathrm{Lip}_\rho(\chi_\theta)^2\,e^{-t\lambda(\theta)}\,d\mu(\theta)\right)^{\!1/2}.
+\]
+
+\subsubsection{Computational implications.}
+Character Lipschitz seminorms reduce to edgewise phase gaps on a graph model of $X/A$, so evaluating the integrand $\mathrm{Lip}_\rho(\chi_\theta)^2$ is $O(|E|)$ and scales linearly with the underlying complex size.
+
+\subsection{Related work}\label{subsec:intro-related}
+Foundational results on persistence and stability are given in \cite{892133,CohenSteiner2007StabilityPD}, with a broader background in \cite{Oudot2015PersistenceT}. The virtual/Grothendieck viewpoint is developed in \cite{Bubenik2022VirtualPD} and related generalized metrics in \cite{Bubenik2015MetricsGPM}. For harmonic analysis and duality, we follow \cite{Folland2015CourseAH}. In segmentation, persistent homology has been used as a loss term and as a feature \cite{9186664, 10378018, QAISER20191}.
+
+\subsection{Organization}\label{subsec:intro-organization}
+Section~\ref{sec:background} reviews persistent homology, Wasserstein stability, and the virtual diagram framework of \cite{Bubenik2022VirtualPD}, and collects the harmonic-analysis and RKHS tools used throughout the paper. 
+
+Section~\ref{subsec:LCA} specializes to finite metric pairs, identifies $K(X,A)\cong \mathbb Z^{X\setminus A}$ equipped with the lifted $W_1$ metric, parametrizes the Pontryagin dual torus and its characters, and develops phase--Lipschitz estimates for characters via edgewise phase differences on $X/A$. 
+
+Section~\ref{sec:stable-multipliers} introduces the weighted graph model of $X/A$, defines the associated Dirichlet form and graph Laplacian, derives its symbol $\lambda(\theta)$ on the dual torus, and constructs the heat spectral multipliers and translation--invariant heat kernels on virtual diagrams. 
+
+Section~\ref{subsec:rkhs-layer} develops the RKHSs induced by these spectral kernels and proves explicit global $W_1$--Lipschitz bounds for all functions in $\mathcal H_t$. 
+
+Section~\ref{subsec:heat-rff} defines random Fourier feature maps sampled from the heat spectral multipliers, shows that they provide unbiased kernel approximations, and obtains asymptotic spectral control of their Lipschitz seminorms. 
+
+Section~\ref{sec:experiments} introduces the topological loss derived from these kernels, presents its random-feature approximation, and reports synthetic segmentation experiments comparing the resulting method with baseline and Wasserstein losses.
+
+Section~\ref{sec:conclusion} summarizes the mathematical and experimental contributions of the paper and concludes with limitations and directions for future work.
+
+\section{Background and notation}\label{sec:background}
+
+This section collects the topological and analytic tools used in the rest of the paper. On the topological side, we recall the classical one-parameter formulation of persistent homology and its stability theory in terms of bottleneck and Wasserstein distances on persistence diagrams (Section~\ref{subsec:ph-wasserstein}), then briefly survey standard extensions such as extended, zigzag, and multiparameter persistence together with generalized persistence diagrams (Section~\ref{subsec:ph-generalizations}).  We then specialize to the virtual persistence diagram framework of Bubenik and Elchesen (Section~\ref{subsec:VPD}), formulated in the category of metric pairs and Lipschitz maps and equipped with a translation-invariant $1$-Wasserstein metric via the Grothendieck completion of the diagram monoid.
+
+On the analytic side, we recall basic notions from the theory of positive definite kernels and reproducing kernel Hilbert spaces (Section~\ref{subsec:rkhs-toolkit}), and standard facts from abstract harmonic analysis on discrete locally compact abelian groups (Section~\ref{subsec:harmonic-toolkit}).  These tools will be applied later to $K(X,A)$, the group of virtual persistence diagrams on a finite metric pair $(X,d,A)$, to build translation-invariant kernels and to control the Lipschitz regularity
+of the associated feature maps.
+
+\subsection{Persistent homology}\label{subsec:ph-wasserstein}
+
+We recall the classical one-parameter formulation of persistent homology following \cite{892133,Zomorodian2005ComputingPH,CohenSteiner2007StabilityPD,Oudot2015PersistenceT,chazal2013structurestabilitypersistencemodules}. 
+Fix a coefficient field $\mathbb{F}$; all homology groups are taken with $\mathbb{F}$-coefficients. 
+We keep in mind two equivalent constructions: (i) a finite, discretely indexed filtration of complexes
+\[
+  K_0\ \subset\ K_1\ \subset\ \cdots\ \subset\ K_m=K,
+\]
+indexed by the poset $\{0,\dots,m\}$, and (ii) a sublevel-set filtration $\{X_t=f^{-1}((-\infty,t])\}_{t\in\mathbb{R}}$ of a tame function $f$ (in the sense of \cite[Ch.~2]{Oudot2015PersistenceT}; cf.\ \cite{chazal2013structurestabilitypersistencemodules}). 
+Fix $k\ge 0$. Functoriality of homology gives a persistence module $H_k$ valued in $\mathrm{Vect}_{\mathbb{F}}$ (indexed by $\{0,\dots,m\}$ in (i) or by $\mathbb{R}$ in (ii)). 
+Under the standard pointwise finite-dimensional/tameness hypotheses, the structure theorem over a field classifies $H_k$ by a multiset of half-open intervals $[b,d)$, the barcode \cite{Zomorodian2005ComputingPH,Oudot2015PersistenceT,chazal2013structurestabilitypersistencemodules}. 
+
+Equivalently, one obtains a persistence diagram $D_k$, a multiset of points in the extended birth--death plane
+\[
+  \overline{\mathbb{R}}^2_{<}\ :=\ \{(b,d)\in \mathbb{R}\times(\mathbb{R}\cup\{\infty\}) : b<d\},
+\]
+together with the diagonal $\Delta=\{(x,x):x\in\mathbb{R}\}$ taken with infinite multiplicity for matching. 
+Points $(b,\infty)$ encode essential features; by convention we do not allow such points to be matched to $\Delta$ \cite{892133,Oudot2015PersistenceT}.
+
+Let $D,D'$ be finite persistence diagrams, and write $\|\cdot\|_\infty$ for the max norm on $\mathbb{R}^2$. 
+A (partial) matching between $D$ and $D'$ is a bijection
+\[
+  \gamma:\ D\cup\Delta\ \longrightarrow\ D'\cup\Delta
+\]
+respecting multiplicities, where $\Delta$ is available with infinite multiplicity and all but finitely many diagonal points are fixed by $\gamma$. 
+The bottleneck and $p$-Wasserstein distances on diagrams are
+\[
+  d_B(D,D')\ :=\ \inf_{\gamma}\ \sup_{x\in D}\ \|x-\gamma(x)\|_\infty,
+  \qquad
+  W_p(D,D')\ :=\ \Big(\inf_{\gamma}\ \sum_{x\in D}\ \|x-\gamma(x)\|_\infty^p\Big)^{1/p},
+\]
+for $p\in[1,\infty)$, where the sum is over off-diagonal points of $D$ counted with multiplicity, and $W_\infty$ is defined to be $d_B$ \cite{CohenSteiner2007StabilityPD,chazal2013structurestabilitypersistencemodules}. 
+Matching a point $(b,d)$ to $\Delta$ costs $\tfrac{d-b}{2}$ under $\|\cdot\|_\infty$.
+
+For tame functions $f,g$ on a common domain and any $k$ one has the classical stability inequality \cite{CohenSteiner2007StabilityPD,Oudot2015PersistenceT}
+\[
+  d_B\big(D_k(f),D_k(g)\big)\ \le\ \|f-g\|_\infty.
+\]
+
+We will frequently measure the regularity of scalar-valued functions on metric spaces via their Lipschitz seminorm.
+
+\begin{definition}\label{def:Lip-seminorm}
+Let $(M,\rho)$ be a metric space and $f:M\to\mathbb C$.  
+The \emph{$\rho$--Lipschitz seminorm} of $f$ is
+\[
+  \mathrm{Lip}_\rho(f)\ :=\ \sup_{\alpha\neq\beta}\,
+  \frac{|f(\alpha)-f(\beta)|}{\rho(\alpha,\beta)}\ \in [0,\infty].
+\]
+This is the smallest constant $L$ for which
+\[
+  |f(\alpha)-f(\beta)|\ \le\ L\,\rho(\alpha,\beta)
+  \quad\text{for all }\alpha,\beta\in M.
+\]
+If $\mathrm{Lip}_\rho(f)<\infty$, we say that $f$ is \emph{$\rho$--Lipschitz}.
+\end{definition}
+
+In particular, the stability inequality above says that for each fixed $k$, the map
+\[
+  f\ \longmapsto\ D_k(f)
+\]
+from the metric space of tame functions with the norm metric $\|f-g\|_\infty$ to the space of persistence diagrams with bottleneck distance $d_B$ is $1$-Lipschitz.
+
+\subsection{Generalizations of persistent homology}\label{subsec:ph-generalizations}
+
+The basic one-parameter construction admits several variants that still produce
+barcodes or persistence diagrams. 
+\emph{Extended persistence} augments a sublevel filtration by relative homology of
+superlevel sets so that essential classes are paired via Poincar\'e--Lefschetz
+duality; the resulting extended diagrams may place points below the diagonal
+while enjoying stability properties analogous to the classical case
+\cite{CohenSteiner2009ExtendingPU,Oudot2015PersistenceT,chazal2013structurestabilitypersistencemodules}. 
+\emph{Zigzag persistence} replaces a monotone filtration by a diagram indexed by
+a zigzag poset
+\[
+  V_0 \longleftrightarrow V_1 \longleftrightarrow \cdots \longleftrightarrow V_n,
+\]
+allowing both forward and backward maps; over a field, such representations still decompose uniquely into interval summands, which give barcodes and associated algorithms and stability results \cite{carlsson2008zigzagpersistence,Oudot2015PersistenceT,chazal2013structurestabilitypersistencemodules}. Time-dependent filtrations yield \emph{vineyards}, in which points of a persistence diagram trace continuous paths (vines) as the underlying function varies smoothly in a parameter; this provides update algorithms and differentiable dependence of persistence on the data \cite{CohenSteiner2006VinesAV}.
+
+In the \emph{multiparameter} setting, one considers persistence modules
+\[
+  M:\ (\mathbb R^n,\preceq)\ \longrightarrow\ \mathrm{Vect}_{\mathbb F},
+  \qquad
+  u\preceq v\iff u_i\le v_i\ \text{for all }i,
+\]
+or discretized versions indexed by $\mathbb Z^n$ or $\mathbb N^n$. 
+For $n\ge 2$, there is in general no finite barcode that classifies such modules
+\cite{Carlsson2009ComputingMP,chazal2013structurestabilitypersistencemodules,Oudot2015PersistenceT}. 
+Instead, one works with invariants such as the \emph{rank invariant}
+\[
+  \mathrm{rk}_M(u\preceq v)\ :=\ \mathrm{rank}\bigl(M(u\preceq v)\bigr),
+  \qquad u\preceq v\in\mathbb R^n,
+\]
+and, in an algebraic formulation, the multigraded Betti numbers of the associated
+$\mathbb N^n$-graded module over a polynomial ring
+\cite{Carlsson2009ComputingMP,chazal2013structurestabilitypersistencemodules,Oudot2015PersistenceT}. 
+A canonical notion of distance is provided by the \emph{interleaving distance}
+$d_I$: for $\varepsilon\ge 0$ one defines the shifted module
+$M(\varepsilon)$ by $M(\varepsilon)(u):=M(u+\varepsilon\mathbf 1)$, and an
+$\varepsilon$-interleaving between $M$ and $N$ consists of natural
+transformations $M\Rightarrow N(\varepsilon)$ and $N\Rightarrow M(\varepsilon)$
+satisfying coherence relations
+\cite{Lesnick2015InterleavingMP}. 
+The quantity
+\[
+  d_I(M,N)\ :=\ \inf\{\varepsilon\ge 0:\ M,N\text{ admit an }\varepsilon\text{-interleaving}\}
+\]
+defines a pseudometric on multiparameter modules, coincides with the bottleneck
+distance on one-parameter barcodes, and enjoys an optimality property among
+stable metrics \cite{Lesnick2015InterleavingMP,chazal2013structurestabilitypersistencemodules}. 
+Practical summaries include fibered or sliced barcodes obtained by restricting
+along lines in parameter space, together with distances such as matching or
+sliced Wasserstein distances
+\cite{chazal2013structurestabilitypersistencemodules,Oudot2015PersistenceT}.
+
+There are also generalizations of persistence diagrams beyond the classical vector-space setting. Given a constructible persistence module valued in a suitable symmetric monoidal
+or an abelian category, one can form a rank-type invariant on the poset of intervals and apply M\"obius inversion to obtain a formal sum of intervals with possibly signed multiplicities, a \emph{generalized persistence diagram}
+\cite{Patel_2018,Kim2021GeneralizedPD,chazal2013structurestabilitypersistencemodules}. For ordinary one-parameter modules over a field this construction recovers the
+usual diagram as the M\"obius inversion of the rank function, and in more general contexts, it produces signed interval data that behaves well with respect to interleavings \cite{Patel_2018,Kim2021GeneralizedPD}.
+
+\subsection{Virtual persistence diagrams}\label{subsec:VPD}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figures/1_diagram_final.png}
+    \caption{ 
+    Visualization of a virtual persistence diagram: the vertex $A$ denotes the collapsed diagonal point, edges are weighted by the metric on the (discrete) persistence diagram, and the vertex labels record the (possibly negative) multiplicities.}
+    \label{fig:toy-example}
+\end{figure}
+
+We follow Bubenik--Elchesen \cite{Bubenik2022VirtualPD} and work in the category $\mathbf{Lip}$ of metric spaces and Lipschitz maps. 
+A \emph{metric pair} is a triple $(X,d,A)$ consisting of a metric space $(X,d)$ and a distinguished subset $A\subseteq X$.
+
+\begin{definition}\label{def:pstrength}
+Let $(X,d,A)$ be a metric pair and let $p\in[1,\infty]$. 
+Write $d(x,A):=\inf_{a\in A} d(x,a)$ and let $\|(\cdot,\cdot)\|_p$ denote the $\ell^p$ norm on $\mathbb{R}^2$. 
+The \emph{$p$-strengthening} \cite{Bubenik2022VirtualPD} of $d$ with respect to $A$ is
+\begin{equation}\label{eq:pstrength}
+d_p(x,y)\ :=\ \min\!\bigl\{\,d(x,y),\ \|(d(x,A),\,d(y,A))\|_p\,\bigr\},\qquad x,y\in X.
+\end{equation}
+\end{definition}
+
+\begin{remark}\label{rem:quotient}
+Let $q:X\to X/A$ be the quotient map and let $\overline d_p$ be the $p$-quotient metric on $X/A$. 
+Then $d_p=q^\ast \overline d_p$ (so $d_p(x,y)=\overline d_p(q(x),q(y))$), one has $d_p\le d$ on $X$, and $\overline d_p$ metrizes $X/A$ (equivalently, $d_p$ is a pullback pseudo-metric on $X$ inducing the quotient topology) \cite{Bubenik2022VirtualPD}.
+\end{remark}
+
+We use the free commutative monoid on $X$ to model persistence diagrams as formal sums.
+
+\begin{definition}\label{def:finite-diagrams}
+Let $D(X)$ denote the free commutative monoid on $X$ (finite formal sums $\sum_i n_i x_i$ with $n_i\in\mathbb N$). 
+For a metric pair $(X,d,A)$ set
+\[
+D(X,A)\ :=\ D(X)/D(A)\ \cong\ D(X\setminus A),
+\]
+whose elements are the (finite) persistence diagrams on $(X,A)$ \cite{Bubenik2022VirtualPD}.
+\end{definition}
+
+Distances between diagrams are given by Wasserstein metrics built from matchings.
+
+\begin{definition}\label{def:Wp-diagrams}
+Let $\pi_1,\pi_2:X\times X\to X$ be the coordinate projections and write $(\pi_i)_*:D(X\times X)\to D(X)$ for the induced monoid maps. 
+For $\alpha,\beta\in D(X,A)$, a \emph{matching} \cite{Bubenik2022VirtualPD} between $\alpha$ and $\beta$ is any $\sigma\in D(X\times X)$ such that
+\[
+(\pi_1)_*\sigma\ =\ \alpha\ \ (\mathrm{mod}\ D(A)),\qquad
+(\pi_2)_*\sigma\ =\ \beta\ \ (\mathrm{mod}\ D(A)).
+\]
+For $p\in[1,\infty]$, the \emph{$p$-Wasserstein distance} is
+\[
+W_p[d](\alpha,\beta)\ :=\ \inf_{\sigma}\ \Bigl(\sum_{(x,y)\in\sigma} d(x,y)^p\Bigr)^{1/p},
+\]
+where the infimum is over all matchings $\sigma$ as above.
+\end{definition}
+
+The key structural property we need is translation invariance of $W_p$ on the monoid $D(X,A)$.
+
+\begin{theorem}\label{thm:TI-criterion}
+For a metric pair $(X,d,A)$ and $p\in[1,\infty]$, the following are equivalent:
+\begin{enumerate}
+  \item $W_p[d]$ is translation invariant on $D(X,A)$;
+  \item the quotient metric $\overline d_p$ on $X/A$ is a $p$-metric, i.e.
+  \[
+  \overline d_p(\overline x,\overline y)\ \le\ \bigl\|(\overline d_p(\overline x,\overline z),\overline d_p(\overline z,\overline y))\bigr\|_p
+  \]
+  for all $\overline x,\overline y,\overline z\in X/A$. 
+\end{enumerate}
+In particular, $W_1[d]$ is always translation invariant.
+\end{theorem}
+
+\begin{remark}
+Unless otherwise stated, we work with the $1$-Wasserstein distance $W_1$. 
+For $p>1$ translation invariance may fail, so the Grothendieck-group construction recalled below does not in general apply directly to $W_p$.
+\end{remark}
+
+We next recall the Grothendieck completion of a cancellative monoid and the induced metric extension.
+
+\begin{definition}\label{def:groth}
+Let $(M,+)$ be a cancellative commutative monoid. 
+Define an equivalence relation on $M\times M$ by
+\[
+(a,b)\sim(c,e)\ \Longleftrightarrow\ \exists\,k\in M:\ a+e+k=b+c+k.
+\]
+Write $a-b$ for the equivalence class of $(a,b)$ and set $K(M):=(M\times M)/\!\sim$ with
+\[
+(a-b)+(c-e)\ :=\ (a+c)-(b+e),\qquad 0:=0-0,\qquad -(a-b):=b-a.
+\]
+The canonical map $u:M\to K(M)$ given by $u(a)=a-0$ is a monoid homomorphism with the usual universal property: any monoid map $M\to H$ into an abelian group $H$ factors uniquely through a group homomorphism $K(M)\to H$.
+\end{definition}
+
+\begin{proposition}\label{prop:metric-lift}
+Let $(M,+)$ be a cancellative commutative monoid equipped with a translation-invariant metric $d$. 
+Then
+\[
+\rho(a-b,\ c-e)\ :=\ d(a+e,\ c+b)
+\]
+is a well-defined translation-invariant metric on $K(M)$, and $u:M\to K(M)$ is $1$-Lipschitz. 
+Moreover, $\rho$ is the unique translation-invariant metric on $K(M)$ extending $d$ in the sense that $\rho(u(a),u(b))=d(a,b)$ for all $a,b\in M$.
+\end{proposition}
+
+\begin{remark}
+Specializing to $M=D(X,A)$ and $d=W_1[d]$, Bubenik and Elchesen denote the Grothendieck group $K(D(X,A))$ by $K(X,A)$ and call its elements \emph{virtual persistence diagrams} on $(X,A)$ \cite{Bubenik2022VirtualPD}. 
+We adopt this terminology; the detailed specialization will be used later, but the only input needed in this section is the abstract metric-lift construction above.
+\end{remark}
+
+\subsection{Reproducing Kernel Hilbert Spaces}\label{subsec:rkhs-toolkit}
+
+Positive definite kernels provide a way to encode similarity between points by
+means of inner products in an implicit feature space.  Reproducing kernel
+Hilbert spaces make this correspondence precise and underlie the classical
+\emph{kernel trick}: linear methods in a Hilbert space of functions can be
+implemented using only kernel evaluations $k(x,y)$, without ever writing
+feature vectors explicitly; see, for example, \cite{Berlinet2004RKHS}.
+
+\begin{definition}\label{def:pd-kernel}
+Let $X$ be a set. A function $k:X\times X\to\mathbb{C}$ is a
+\emph{positive definite kernel} if for every $n\in\mathbb{N}$, every choice of
+points $x_1,\dots,x_n\in X$, and every $c_1,\dots,c_n\in\mathbb{C}$,
+\[
+  \sum_{i,j=1}^n k(x_i,x_j)\,c_i\overline{c_j}\ \ge\ 0.
+\]
+Equivalently, every Gram matrix $[\,k(x_i,x_j)\,]_{i,j=1}^n$ is positive
+semidefinite.  In particular, such a kernel can always be written in the form
+\[
+  k(x,y)\ =\ \langle \Phi(x),\Phi(y)\rangle_{\mathcal H}
+\]
+for some Hilbert space $\mathcal H$ and feature map $\Phi:X\to\mathcal H$.
+\end{definition}
+
+The RKHS viewpoint fixes $\mathcal H$ canonically as a space of functions on
+$X$, in which evaluation is compatible with the kernel.
+
+\begin{definition}\label{def:rkhs}
+Let $X$ be a set. A \emph{reproducing kernel Hilbert space} (RKHS) on $X$ is a
+Hilbert space $\mathcal{H}$ of complex-valued functions on $X$ such that, for
+every $x\in X$, the evaluation functional
+\[
+  \mathcal{H}\longrightarrow\mathbb{C},\qquad f\longmapsto f(x),
+\]
+is continuous.
+\end{definition}
+
+By the Riesz representation theorem, continuity of evaluation implies that for
+each $x\in X$ there is a unique function $k(\cdot,x)\in\mathcal H$ with
+\[
+  f(x)\ =\ \langle f,\ k(\cdot,x)\rangle_{\mathcal H}
+  \qquad\text{for all }f\in\mathcal H.
+\]
+The function $k$ is a positive definite kernel, and the following theorem
+describes the resulting correspondence.
+
+\begin{theorem}\label{thm:rkhs}
+Let $X$ be a set and $k:X\times X\to\mathbb{C}$ a positive definite kernel.
+Then there exists a unique RKHS $\mathcal{H}_k$ on $X$ such that:
+\begin{enumerate}
+\item for each $x\in X$, the function $k(\cdot,x)$ lies in $\mathcal{H}_k$;
+\item for all $f\in\mathcal{H}_k$ and $x\in X$,
+  \[
+    f(x)\ =\ \langle f,\ k(\cdot,x)\rangle_{\mathcal{H}_k}
+    \quad\text{\emph{(reproducing property).}}
+  \]
+\end{enumerate}
+Conversely, every RKHS of functions on $X$ arises in this way from a unique
+positive definite kernel $k$.
+\end{theorem}
+
+In particular, the map $x\mapsto k(\cdot,x)$ embeds $X$ into $\mathcal H_k$ as
+feature vectors with
+\[
+  k(x,y)\ =\ \langle k(\cdot,x),k(\cdot,y)\rangle_{\mathcal H_k}.
+\]
+Working with $\mathcal H_k$ thus amounts to working with the kernel $k$:
+inner products, norms, and linear constructions in feature space can all be
+expressed purely in terms of kernel evaluations.
+
+\subsection{Prerequisite harmonic analysis}\label{subsec:harmonic-toolkit}
+
+We recall standard notions from abstract harmonic analysis on locally compact abelian (LCA) groups; see, for example, \cite{Folland2015CourseAH}.
+
+\begin{definition}
+A \emph{locally compact abelian group} (LCA group) is a topological group $G$ that is abelian and locally compact Hausdorff. A \emph{Haar measure} on $G$ is a nonzero Radon measure $\mu$ on $G$ that is left invariant:
+\[
+\mu(xE)=\mu(E)\qquad\text{for all Borel }E\subseteq G\text{ and all }x\in G.
+\]
+Haar measures exist and are unique up to a positive scalar multiple. When $G$ is discrete one may take $\mu$ to be counting measure, and when $G$ is compact there is a unique Haar probability measure.
+\end{definition}
+
+\begin{definition}\label{def:characters-dual}
+Let $G$ be an LCA group. A \emph{(unitary) character} of $G$ is a continuous group homomorphism
+\[
+\chi : G \longrightarrow \mathbb T := \{z\in\mathbb{C} : |z|=1\}.
+\]
+Each character is a one-dimensional unitary representation of $G$.  
+The \emph{Pontryagin dual} $\widehat G$ is the set of all characters, endowed with pointwise multiplication and the compact--open topology.
+\end{definition}
+
+\begin{example}\label{ex:ZN-dual}
+For $G=\mathbb{Z}^N$ with the discrete topology, the dual group is the $N$-torus
+\[
+\widehat G\ \cong\ \mathbb{T}^N:=\mathbb{R}^N/2\pi\mathbb{Z}^N.
+\]
+Writing $\theta=(\theta_1,\dots,\theta_N)\in[0,2\pi)^N$ and $k=(k_1,\dots,k_N)\in\mathbb{Z}^N$, the corresponding character is
+\[
+\chi_\theta(k)\ :=\ \exp\!\big(i\langle k,\theta\rangle\big),
+\qquad
+\langle k,\theta\rangle\ :=\ \sum_{j=1}^N k_j\theta_j.
+\]
+Under this identification, Haar measure on $\widehat G$ is normalized Lebesgue measure on $\mathbb{T}^N$.
+\end{example}
+
+\begin{definition}\label{def:fourier}
+Let $G$ be an LCA group with Haar measure $\mu$. For $f\in L^1(G,\mu)$, the \emph{Fourier transform} $\widehat f:\widehat G\to\mathbb{C}$ is
+\[
+\widehat f(\chi)\ :=\ \int_G \chi(x)\,f(x)\,d\mu(x),
+\qquad \chi\in\widehat G.
+\]
+When $G$ is discrete with counting measure and we index characters by $\theta\in\widehat G$, this specializes to
+\[
+\widehat f(\theta)\ :=\ \sum_{k\in G} \chi_\theta(k)\,f(k).
+\]
+The Fourier transform extends uniquely to a unitary operator
+\[
+\mathcal{F}:L^2(G,\mu)\longrightarrow L^2(\widehat G,\widehat\mu),
+\]
+where $\widehat\mu$ is Haar measure on $\widehat G$ (Plancherel theorem).
+\end{definition}
+
+\begin{definition}\label{def:FS}
+Let $G$ be an LCA group and let $\nu$ be a finite complex Borel measure on $\widehat G$. The \emph{Fourier--Stieltjes transform} of $\nu$ is the function $F_\nu:G\to\mathbb{C}$ defined by
+\[
+F_\nu(\alpha)\ :=\ \int_{\widehat G} \chi(\alpha)\,d\nu(\chi),
+\qquad \alpha\in G.
+\]
+We write $|\nu|$ for the total variation measure of $\nu$.
+\end{definition}
+
+\begin{proposition}\label{prop:FS-translation}
+Let $G$ and $\nu$ be as above. The kernel
+\[
+k_\nu(\alpha,\beta)\ :=\ F_\nu(\alpha-\beta),\qquad \alpha,\beta\in G,
+\]
+is translation invariant in the sense that
+\[
+k_\nu(\alpha+\gamma,\beta+\gamma)\ =\ k_\nu(\alpha,\beta)
+\qquad\text{for all }\gamma\in G.
+\]
+\end{proposition}
+
+\begin{definition}\label{def:pd-function}
+A function $\varphi:G\to\mathbb{C}$ is \emph{positive definite} if, for every $n\in\mathbb{N}$, points $\alpha_1,\dots,\alpha_n\in G$, and coefficients $c_1,\dots,c_n\in\mathbb{C}$,
+\[
+\sum_{i,j=1}^n \varphi(\alpha_i-\alpha_j)\,c_i\overline{c_j}\ \ge\ 0.
+\]
+If $\varphi$ is positive definite, the kernel $k(\alpha,\beta):=\varphi(\alpha-\beta)$ is positive definite on $G\times G$ in the sense of Definition~\ref{def:pd-kernel}.
+\end{definition}
+
+\begin{theorem}\label{thm:bochner}
+Let $G$ be an LCA group. A continuous function $\varphi:G\to\mathbb{C}$ is positive definite if and only if there exists a finite positive Borel measure $\nu$ on $\widehat G$ such that
+\[
+\varphi(\alpha)\ =\ \int_{\widehat G} \chi(\alpha)\,d\nu(\chi),
+\qquad \alpha\in G.
+\]
+Equivalently, a continuous kernel $k:G\times G\to\mathbb{C}$ is positive definite and translation invariant if and only if $k(\alpha,\beta)=\varphi(\alpha-\beta)$ with $\varphi$ of the above form.
+\end{theorem}
+
+\section{Pontryagin duality}\label{subsec:LCA}
+
+We work in the finite regime
+\[
+X\setminus A = \{x_1,\dots,x_N\}.
+\]
+We fix $p=1$ and write $\overline d_1$ for the quotient metric on $X/A$
+(see Remark~\ref{rem:quotient}). Let $W_1$ denote the corresponding
+$1$-Wasserstein distance on $D(X,A)$ induced by $(X/A,\overline d_1)$
+as in Definition~\ref{def:Wp-diagrams}. Via the Grothendieck
+completion (Proposition~\ref{prop:metric-lift}), we equip $K(X,A)$ with
+the translation-invariant metric
+\[
+\rho(a-b,\ c-d)\ :=\ W_1(a+d,\ c+b),\qquad a,b,c,d\in D(X,A).
+\]
+Since $X\setminus A$ is finite, we identify
+\[
+K(X,A)\ \cong\ \mathbb Z^{X\setminus A}
+\]
+by sending the class of each $x_j\in X\setminus A$ to the standard basis
+vector $e_j$ and the collapsed basepoint $[A]\in X/A$ to $0\in K(X,A)$.
+
+\begin{lemma}\label{prop:K-discrete-lc}
+$(K(X,A),\rho)$ is a discrete metric group, hence locally compact Hausdorff.
+\end{lemma}
+
+\begin{proof}
+Since $X/A$ is finite and $\overline d_1$ is a metric, there is a minimal
+nonzero ground distance
+\[
+d_{\min}\ :=\ \min\!\Bigl(\ \min_{j\neq k}\overline d_1(x_j,x_k),\ 
+                           \min_j \overline d_1(x_j,[A])\ \Bigr)\ >\ 0.
+\]
+By the definitions of $W_1$ and $\rho$, every nonzero value
+$\rho(\kappa,\lambda)$ is a sum of finitely many terms, each at least
+$d_{\min}$, so $\rho(\kappa,\lambda)\ge d_{\min}$ whenever
+$\kappa\neq\lambda$. Thus each ball $B_\rho(\kappa,d_{\min}/2)$ is a
+singleton, so $(K(X,A),\rho)$ is discrete. Any discrete metric space is
+locally compact Hausdorff.
+\end{proof}
+
+\subsection{Characters}\label{subsec:characters}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.55\linewidth]{figures/2_torus_dual_wireframe_soft.png}
+    \caption{
+    The embedding of the virtual persistence diagram from Fig.~1 into the Pontryagin dual torus. 
+    Each point $\chi_\theta(0,0)$ and $\chi_\theta(-3,8)$ denotes the character evaluation of the collapsed diagonal point and the off-diagonal point from Fig.~1, respectively. 
+    The black curve represents the resulting character difference function, whose arclength equals the distance from the trivial diagram.}
+    \label{fig:torus-embedding}
+\end{figure}
+
+The virtual diagram group $K(X,A)$ plays the role of a discrete configuration space for topological signal, equipped with the translation-invariant metric $\rho$ lifted from the $1$-Wasserstein distance. For the analytic constructions below, we also need a \emph{frequency} description of this space: a way to probe virtual diagrams by Fourier modes and to build translation-invariant kernels from them. Pontryagin duality supplies exactly this data: characters on $K(X,A)$ form a compact dual group, and positive-definite, translation- invariant kernels on $K(X,A)$ arise by averaging these characters against measures on the dual (cf.\ Section~\ref{subsec:harmonic-toolkit}).
+
+Since $(K(X,A),\rho)$ is a discrete abelian group (Lemma~\ref{prop:K-discrete-lc}), it is an LCA group in the sense of Definition~\ref{def:characters-dual}, and its Pontryagin dual $\widehat{K(X,A)}$ is compact. We now fix an explicit parametrization of characters.
+
+Recall from Section~\ref{subsec:LCA} that we identify $K(X,A)$ with the free abelian group $\mathbb Z^{X\setminus A}$ by sending the class of each $x_j\in X\setminus A$ to a basis vector $e_j$ and the collapsed basepoint $[A]$ to $0$. Writing an element $k\in K(X,A)$ as a finite sum $k=\sum_j k_j e_j$, we have the following standard description of the dual group; see, for example, \cite{Folland2015CourseAH}.
+
+\begin{proposition}\label{prop:dual} Write $\theta=(\theta_1,\dots,\theta_{|X\setminus A|})$ with $\theta_j\in[0,2\pi)$. Every character $\chi$ on $K(X,A)$ is of the form
+\[
+\chi_\theta\!\left(\sum_{j=1}^{|X\setminus A|} n_j e_j\right)
+\ =\
+\exp\!\left(i\sum_{j=1}^{|X\setminus A|} n_j\,\theta_j\right),
+\qquad n_j\in\mathbb Z,
+\]
+and this identifies $\widehat{K(X,A)}$ with the $|X\setminus A|$-torus $\mathbb T^{|X\setminus A|}=\mathbb R^{|X\setminus A|}/2\pi\mathbb Z^{|X\setminus A|}$. The pairing between
+$K(X,A)$ and its dual is
+\[
+\langle k,\theta\rangle\ :=\ \sum_{j=1}^{|X\setminus A|} k_j\theta_j\quad(\mathrm{mod}\ 2\pi),
+\]
+so that $\chi_\theta(k)=e^{i\langle k,\theta\rangle}$. Haar measure on
+$K(X,A)$ is counting measure, and Haar measure on
+$\widehat{K(X,A)}\cong\mathbb T^{|X \setminus A|}$ is normalized Lebesgue measure
+$(2\pi)^{-|X\setminus A|}d\theta$ on $[0,2\pi)^{|X\setminus A|}$, so that $\mu\left(\mathbb T^{|X\setminus A|}\right)=1$.
+\end{proposition}
+
+\begin{proof}
+It is classical that $\widehat{\mathbb Z}\cong\mathbb T$ via
+$n\mapsto e^{in\theta}$ with Haar measure $(2\pi)^{-1}d\theta$ on
+$[0,2\pi)$, and that Pontryagin duality preserves finite products
+\cite{Folland2015CourseAH}. Since $K(X,A)\cong\mathbb Z^{|X\setminus A|}$ is a
+finite product of copies of $\mathbb Z$, its dual is a finite product of
+circles, i.e.\ $\widehat{K(X,A)}\cong\mathbb T^{|X\setminus A|}$. The displayed formula for
+$\chi_\theta$ is the product of the one-dimensional characters, and the
+pairing and Haar normalization are inherited from the one-dimensional case.
+\end{proof}
+
+For a fixed probability measure $\nu$ on $\widehat{K(X,A)}$, Bochner's theorem (Theorem~\ref{thm:bochner}) applied to the Fourier-Stieltjes transform of $\nu$ produces a translation-invariant positive-definite kernel on $K(X,A)$ by averaging the characters $\chi_\theta$. In our setting, $\nu$ will be chosen with density proportional to the spectral multiplier of the heat semigroup generated by the discrete Laplacian, so individual modes $\chi_\theta$ play the role of Fourier waves on the virtual diagram group.
+
+To control stability of the resulting features with respect to the diagram metric, we need to quantify how sensitive each mode $\chi_\theta$ is to perturbations in $(K(X,A),\rho)$. We measure this via the Lipschitz seminorm $\mathrm{Lip}_\rho(\cdot)$ from
+Definition~\ref{def:Lip-seminorm}.
+
+\begin{lemma}\label{lem:char-lip}
+For every $\theta\in\mathbb T^{|X\setminus A|}$,
+\[
+\mathrm{Lip}_\rho(\chi_\theta)
+\ =\
+\sup_{\gamma\ne 0}\frac{|\chi_\theta(\gamma)-1|}{\rho(\gamma,0)}.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $\alpha,\beta\in K(X,A)$ and set $\gamma=\alpha-\beta$.
+Translation invariance of both $\chi_\theta$ and $\rho$ gives
+\[
+|\chi_\theta(\alpha)-\chi_\theta(\beta)|
+\ =\
+|\chi_\theta(\gamma)-1|,
+\qquad
+\rho(\alpha,\beta)
+\ =\
+\rho(\gamma,0).
+\]
+Taking the supremum over $\alpha\ne\beta$ is therefore equivalent to taking the supremum over $\gamma\ne0$, which yields the claim.
+\end{proof}
+
+\subsection{Phase bound}\label{subsec:phase-bound}
+
+Characters $\chi_\theta$ on $K(X,A)$ admit a concrete phase
+interpretation on the base space $X/A$, and it is this phase that
+determines how oscillatory they are with respect to the diagram metric $\rho$. In this subsection we make that relationship quantitative: we compare the Lipschitz seminorm of a character $\chi_\theta$ on $(K(X,A),\rho)$ with the maximal edgewise phase increment of the associated phase function on $(X/A,\overline d_1)$. This comparison is the only ingredient we will use later when weighting modes by the spectral multiplier of the heat semigroup generated by the discrete Laplacian: it identifies the geometric notion of frequency that this multiplier penalizes, and hence the quantity that governs stability under Wasserstein perturbations of diagrams.
+
+For each $\theta\in\mathbb T^{|X\setminus A|}$ we define the \emph{phase
+function}
+\[
+\phi_\theta: X/A\longrightarrow \mathbb R/2\pi\mathbb Z,\qquad
+\phi_\theta([A])=0,\quad \phi_\theta(x_j)=\theta_j\ (\mathrm{mod}\ 2\pi),
+\]
+and denote by $\operatorname{dist}$ the geodesic distance on
+$\mathbb R/2\pi\mathbb Z$.  The Lipschitz seminorm
+$\mathrm{Lip}_{\overline d_1}(\phi_\theta)$ therefore measures the maximal
+edgewise phase increment per unit ground distance in the quotient metric
+$\overline d_1$ on $X/A$.
+
+The next lemma shows that this edgewise phase slope controls—and is controlled, up to a universal constant—by the Lipschitz seminorm of the entire character $\chi_\theta$ with respect to the Wasserstein-lifted metric $\rho$ on $K(X,A)$. It identifies the frequency of $\chi_\theta$ as a geometric quantity on $X/A$, and explains why the spectral multiplier of the heat semigroup generated by the discrete Laplacian later suppresses modes with large Lipschitz seminorms.
+
+\begin{lemma}\label{thm:char-lip-comparison}
+For every $\theta\in\mathbb T^{|X\setminus A|}$,
+\[
+\frac{2}{\pi}\,
+\mathrm{Lip}_{\overline d_1}(\phi_\theta)
+\ \le\
+\mathrm{Lip}_\rho(\chi_\theta)
+\ \le\
+\mathrm{Lip}_{\overline d_1}(\phi_\theta).
+\]
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:char-lip},
+\[
+\mathrm{Lip}_\rho(\chi_\theta)
+=\sup_{\gamma\ne0}
+\frac{|\chi_\theta(\gamma)-1|}{\rho(\gamma,0)}.
+\]
+
+\medskip
+\noindent\textbf{Upper bound.}
+Let $\gamma\in K(X,A)$ with $\gamma\ne0$. Choose diagrams
+$\alpha,\beta\in D(X,A)$ such that $\gamma=\alpha-\beta$.
+Viewing $\alpha$ and $\beta$ as atomic measures on $(X/A,\overline d_1)$,
+let $\sigma$ be an optimal matching for $W_1(\alpha,\beta)$.
+Thus $\sigma$ can be written using multiplicities $m_{x,y}\ge0$ satisfying
+\[
+\alpha(x)=\sum_y m_{x,y},\qquad
+\beta(y)=\sum_x m_{x,y},
+\]
+and
+\[
+W_1(\alpha,\beta)=\sum_{x,y} m_{x,y}\,\overline d_1(x,y).
+\]
+By the metric lift
+(Proposition~\ref{prop:metric-lift}),
+\[
+\rho(\gamma,0)=W_1(\alpha,\beta).
+\]
+
+For each $(x,y)$ choose $\delta_{x,y}\in[-\pi,\pi]$ such that
+\[
+e^{i\delta_{x,y}}=e^{i(\phi_\theta(x)-\phi_\theta(y))},\qquad
+|\delta_{x,y}|=\operatorname{dist}\bigl(\phi_\theta(x),\phi_\theta(y)\bigr)
+\ \le\ \mathrm{Lip}_{\overline d_1}(\phi_\theta)\,\overline d_1(x,y).
+\]
+
+Write
+\[
+\alpha=\sum_x \alpha(x)e_x,\qquad
+\beta=\sum_y \beta(y)e_y.
+\]
+Then
+\[
+\chi_\theta(\gamma)
+=\chi_\theta(\alpha-\beta)
+=\exp\!\Bigl(i\!\sum_x\alpha(x)\phi_\theta(x)\Bigr)\,
+ \exp\!\Bigl(\!-i\!\sum_y\beta(y)\phi_\theta(y)\Bigr),
+\]
+and the phase difference reduces modulo $2\pi$ to
+\[
+\sum_x \alpha(x)\phi_\theta(x)-\sum_y\beta(y)\phi_\theta(y)
+\ \equiv\ \sum_{x,y} m_{x,y}\,\delta_{x,y}.
+\]
+Thus there exists
+\[
+S:=\sum_{x,y} m_{x,y}\,\delta_{x,y}\in\mathbb R
+\quad\text{with}\quad
+\chi_\theta(\gamma)=e^{iS}.
+\]
+
+Using $|e^{iS}-1|\le |S|$,
+\begin{align*}
+|\chi_\theta(\gamma)-1|
+&\le \sum_{x,y} m_{x,y}\,|\delta_{x,y}| \\
+&\le \mathrm{Lip}_{\overline d_1}(\phi_\theta)
+    \sum_{x,y}m_{x,y}\,\overline d_1(x,y) \\
+&= \mathrm{Lip}_{\overline d_1}(\phi_\theta)\,\rho(\gamma,0).
+\end{align*}
+Taking the supremum yields
+\[
+\mathrm{Lip}_\rho(\chi_\theta)
+\ \le\ \mathrm{Lip}_{\overline d_1}(\phi_\theta).
+\]
+
+\medskip
+\noindent\textbf{Lower bound.}
+If $\mathrm{Lip}_{\overline d_1}(\phi_\theta)=0$ then $\phi_\theta$ is
+constant on $X/A$; hence $\chi_\theta$ is constant on $K(X,A)$ and
+$\mathrm{Lip}_\rho(\chi_\theta)=0$, giving the lower bound trivially.
+
+Assume $\mathrm{Lip}_{\overline d_1}(\phi_\theta)>0$.  Since $X/A$ is
+finite, choose $x\ne y$ attaining
+\[
+\operatorname{dist}\bigl(\phi_\theta(x),\phi_\theta(y)\bigr)
+= \mathrm{Lip}_{\overline d_1}(\phi_\theta)\,\overline d_1(x,y).
+\]
+Let
+\[
+\delta:=\operatorname{dist}\bigl(\phi_\theta(x),\phi_\theta(y)\bigr)\in(0,\pi],
+\]
+choose $\delta'\in[-\pi,\pi]$ with $|\delta'|=\delta$ and
+$e^{i\delta'}=e^{i(\phi_\theta(x)-\phi_\theta(y))}$, and set
+\[
+\gamma:=e_x-e_y.
+\]
+Then
+\[
+\rho(\gamma,0)=\overline d_1(x,y),
+\qquad
+\chi_\theta(\gamma)=e^{i\delta'}.
+\]
+Hence
+\[
+\frac{|\chi_\theta(\gamma)-1|}{\rho(\gamma,0)}
+= \frac{2\sin(\delta/2)}{\overline d_1(x,y)}.
+\]
+
+Since $\delta/2\in[0,\pi/2]$, the elementary inequality
+$\sin t\ge \frac{2}{\pi}t$ applies, giving
+\[
+\frac{|\chi_\theta(\gamma)-1|}{\rho(\gamma,0)}
+\ \ge\ \frac{2}{\pi}\,
+      \frac{\delta}{\overline d_1(x,y)}
+\ =\ \frac{2}{\pi}\,\mathrm{Lip}_{\overline d_1}(\phi_\theta).
+\]
+Taking the supremum over $\gamma\ne0$ completes the proof.
+\end{proof}
+
+The comparison in Lemma~\ref{thm:char-lip-comparison} shows that the oscillation scale of a character on the virtual diagram group is entirely controlled by its phase variation on the base space.  On the one hand, any difference $\gamma=\alpha-\beta$ of diagrams decomposes into edgewise transport between points of $X/A$, and the proof of the upper bound shows that the total phase change of $\chi_\theta(\gamma)$ is bounded by the sum of the phase increments along these edges.  On the other hand, the lower bound is already attained, up to a universal constant, by the simplest possible group element $\gamma=e_x-e_y$ connecting a pair of points that realizes the Lipschitz seminorm of $\phi_\theta$.  Thus the global Lipschitz seminorm $\mathrm{Lip}_\rho(\chi_\theta)$ is equivalent to the maximal edgewise phase slope of $\phi_\theta$ on $(X/A,\overline d_1)$.
+
+In particular, no additional notion of frequency is created by passing from the ground space $(X/A,\overline d_1)$ to the diagram space $(K(X,A),\rho)$: seen through characters, the geometry of $K(X,A)$ is completely inherited from the edge structure of $X/A$.  A mode $\chi_\theta$ is high frequency on $(K(X,A),\rho)$ precisely when its phase function $\phi_\theta$ has large increments across nearby points in $X/A$, and the most oscillatory direction for $\chi_\theta$ is realized by a single elementary move $e_x-e_y$ between such a pair.
+
+\subsection{Edgewise bound}\label{subsec:edgewise-bound}
+
+Lemma~\ref{thm:char-lip-comparison} shows that the Lipschitz seminorm of a character $\chi_\theta$ on $(K(X,A),\rho)$ is equivalent, up to universal constants, to the Lipschitz seminorm of its phase function $\phi_\theta:X/A\to\mathbb R/2\pi\mathbb Z$ with respect to the quotient metric $\overline d_1$ on $X/A$. In the discretized setting we use later, $(X/A,\overline d_1)$ is represented by a finite weighted graph with shortest-path metric equal to $\overline d_1$. In that case the Lipschitz seminorm of $\phi_\theta$ is determined entirely by its behaviour on edges, so $\mathrm{Lip}_\rho(\chi_\theta)$ can be read off from edgewise phase increments.
+
+\begin{corollary}\label{cor:edgewise-char}
+Let $\theta\in\mathbb T^{|X\setminus A|}$ and let $\phi_\theta$ be the
+associated phase function. Suppose $H=(X/A,E)$ is a connected weighted graph
+whose shortest-path metric coincides with $\overline d_1$. Then
+\[
+\frac{2}{\pi}\,
+\max_{(u,v)\in E}
+\frac{\operatorname{dist}_{\mathbb R/2\pi\mathbb Z}(\phi_\theta(u),\phi_\theta(v))}
+     {\overline d_1(u,v)}
+\ \le\
+\mathrm{Lip}_\rho(\chi_\theta)
+\ \le\
+\max_{(u,v)\in E}
+\frac{\operatorname{dist}_{\mathbb R/2\pi\mathbb Z}(\phi_\theta(u),\phi_\theta(v))}
+     {\overline d_1(u,v)}.
+\]
+In particular, the quantity
+\[
+\max_{(u,v)\in E}
+\frac{\operatorname{dist}_{\mathbb R/2\pi\mathbb Z}(\phi_\theta(u),\phi_\theta(v))}
+     {\overline d_1(u,v)}
+\]
+can be computed in $O(|E|)$ time, and this yields upper and lower bounds
+on $\mathrm{Lip}_\rho(\chi_\theta)$ within the universal factor $\pi/2$.
+\end{corollary}
+
+\begin{proof}
+Let $f:X/A\to\mathbb R/2\pi\mathbb Z$ be any function. Since the metric on
+$X/A$ is the shortest-path metric of $H$, for any distinct $x,y\in X/A$ there
+is a path
+\[
+x=u_0,u_1,\dots,u_m=y
+\]
+with
+\[
+\overline d_1(x,y)
+=\sum_{k=0}^{m-1} \overline d_1(u_k,u_{k+1}).
+\]
+By the triangle inequality for $\operatorname{dist}_{\mathbb R/2\pi\mathbb Z}$,
+\[
+\operatorname{dist}_{\mathbb R/2\pi\mathbb Z}\bigl(f(x),f(y)\bigr)
+\ \le\
+\sum_{k=0}^{m-1}
+\operatorname{dist}_{\mathbb R/2\pi\mathbb Z}\bigl(f(u_k),f(u_{k+1})\bigr),
+\]
+so
+\[
+\frac{\operatorname{dist}_{\mathbb R/2\pi\mathbb Z}(f(x),f(y))}
+     {\overline d_1(x,y)}
+\ \le\
+\max_{0\le k<m}
+\frac{\operatorname{dist}_{\mathbb R/2\pi\mathbb Z}\bigl(f(u_k),f(u_{k+1})\bigr)}
+     {\overline d_1(u_k,u_{k+1})}.
+\]
+Taking the supremum over all $x\neq y$ shows that, on a finite graph with the
+shortest-path metric,
+\[
+\mathrm{Lip}_{\overline d_1}(f)
+\ =\
+\max_{(u,v)\in E}
+\frac{\operatorname{dist}_{\mathbb R/2\pi\mathbb Z}\bigl(f(u),f(v)\bigr)}
+     {\overline d_1(u,v)}.
+\]
+
+Applying this to $f=\phi_\theta$ gives
+\[
+\mathrm{Lip}_{\overline d_1}(\phi_\theta)
+\ =\
+\max_{(u,v)\in E}
+\frac{\operatorname{dist}_{\mathbb R/2\pi\mathbb Z}(\phi_\theta(u),\phi_\theta(v))}
+     {\overline d_1(u,v)}.
+\]
+Substituting this identity into the inequalities of
+Lemma~\ref{thm:char-lip-comparison} yields the desired bounds on
+$\mathrm{Lip}_\rho(\chi_\theta)$.
+
+For the complexity statement, note that the right-hand side is obtained by a
+single pass over the edge set $E$, computing the ratio
+\[
+\frac{\operatorname{dist}_{\mathbb R/2\pi\mathbb Z}(\phi_\theta(u),\phi_\theta(v))}
+     {\overline d_1(u,v)}
+\]
+for each edge $(u,v)$ and taking a maximum, which requires $O(|E|)$
+operations.
+\end{proof}
+
+In particular, whenever $X/A$ is represented by a weighted graph model $H=(X/A,E)$ (for example, as the $1$-skeleton of a finite cubical complex with edge lengths prescribed by $\overline d_1$), the frequency of a mode $\chi_\theta$ with respect to the VPD metric is completely determined by the largest phase increment of $\phi_\theta$ along a single edge, and can be evaluated in time linear in the size of the graph.
+
+\section{Heat flow and spectral multipliers on the dual}\label{sec:stable-multipliers}
+
+The previous section identifies characters $\chi_\theta$ on the virtual diagram group $K(X,A)$ with phase functions $\phi_\theta$ on the finite metric space $X/A$ and shows that their Lipschitz seminorms with respect to the VPD metric are controlled by edgewise phase gaps. We now pass to the dual side: characters on $\widehat{K(X,A)}\cong\mathbb T^{|X\setminus A|}$ will be weighted by a spectral multiplier --- in particular, that of the heat semigroup on the discrete Laplacian --- which plays the role of an energy associated to each mode $\chi_\theta$. In this way, kernels on $K(X,A)$ arise as Fourier-Stieltjes averages over the torus, in exact analogy with Bochner-type constructions on $\mathbb R^d$. In this section, we define the Laplacian via a Dirichlet form on the graph model of $X/A$, express it explicitly in terms of edgewise phase differences, and then define the heat semigroup on it as a spectral multiplier to build translation-invariant kernels on virtual persistence diagrams.
+
+\subsection{Graph Laplacian and Dirichlet energy}\label{subsec:dirichlet-symbol}
+
+Our goal in this section is to construct, in the next subsection, translation-invariant positive definite kernels on the virtual diagram group $K(X,A)$ by integrating characters against a nonnegative weight on the dual torus.  By Bochner's theorem on locally compact abelian groups, such kernels arise as Fourier-Stieltjes transforms of finite positive measures.  In the Euclidean prototype, the Gaussian kernel is obtained in exactly this way from the nonnegative eigenvalue function of the Laplacian.  We now recall that pattern and then adapt it to $X/A$.
+
+\medskip
+
+On $\mathbb R^d$ we start with the Dirichlet energy of a smooth, compactly
+supported function $f$,
+\[
+  \mathcal E(f)
+  := \int_{\mathbb R^d} |\nabla f(x)|^2\,dx.
+\]
+Writing $\nabla f = (\partial_1 f,\dots,\partial_d f)$ and integrating by parts
+componentwise (no boundary term because $f$ is compactly supported) gives
+\[
+  \mathcal E(f)
+  = \sum_{j=1}^d \int_{\mathbb R^d} |\partial_j f(x)|^2\,dx
+  = \sum_{j=1}^d \int_{\mathbb R^d} \overline{f(x)}\,(-\partial_j^2 f)(x)\,dx
+  = \int_{\mathbb R^d} \overline{f(x)}\,(-\Delta f)(x)\,dx.
+\]
+Thus the quadratic form $f\mapsto\mathcal E(f)$ has (formal) generator
+$L := -\Delta$ in the sense that
+\[
+  \mathcal E(f) = \langle f, Lf\rangle_{L^2(\mathbb R^d)}
+  \qquad\text{for }f\in C_c^\infty(\mathbb R^d).
+\]
+We use the unitary Fourier transform
+\[
+  \widehat f(\xi)
+  := (2\pi)^{-d/2} \int_{\mathbb R^d} e^{-i x\cdot\xi} f(x)\,dx.
+\]
+Differentiating under the integral sign yields
+\[
+  \widehat{\partial_j f}(\xi) = i\xi_j \widehat f(\xi),
+  \qquad
+  \widehat{\partial_j^2 f}(\xi) = -\xi_j^2 \widehat f(\xi),
+\]
+and hence
+\[
+  \widehat{Lf}(\xi)
+  = \widehat{-\Delta f}(\xi)
+  = \sum_{j=1}^d \xi_j^2 \widehat f(\xi)
+  = |\xi|^2\,\widehat f(\xi).
+\]
+So the Fourier transform diagonalizes $L$ with eigenvalue function
+$\lambda(\xi)=|\xi|^2$.
+
+For $t>0$ we define the associated heat operator $e^{-tL}$ on such $f$ by
+multiplying by the spectral weight $e^{-t|\xi|^2}$ in Fourier variables:
+\[
+  \widehat{e^{-tL}f}(\xi) := e^{-t|\xi|^2}\,\widehat f(\xi).
+\]
+Let
+\[
+  p_t(z) := \mathcal F^{-1}\big(e^{-t|\xi|^2}\big)(z)
+  = (2\pi)^{-d/2} \int_{\mathbb R^d} e^{i z\cdot\xi} e^{-t|\xi|^2}\,d\xi.
+\]
+The basic one-dimensional Gaussian integral $\int_{\mathbb R} e^{-t\xi^2 + i z\xi}\,d\xi$ factors over coordinates and gives the explicit formula
+\[
+  p_t(z)
+  = \frac{1}{(4\pi t)^{d/2}} \exp\!\Big(-\frac{|z|^2}{4t}\Big).
+\]
+
+If we write $t = \sigma^2/2$ for some $\sigma>0$, then
+\[
+  p_t(z) = \frac{1}{(2\pi \sigma^2)^{d/2}} \exp\!\Big(-\frac{|z|^2}{2\sigma^2}\Big),
+\]
+Thus for each fixed $t>0$ the heat kernel $p_t$ is a centered Gaussian density with covariance $\sigma^2 I_d$, and up to the constant factor $(2\pi \sigma^2)^{-d/2}$ it has the same radial form as the Gaussian kernel $z\mapsto \exp(-|z|^2/(2\sigma^2))$.
+
+Since the inverse Fourier transform turns products into convolutions,
+\[
+  (e^{-tL}f)(x)
+  = \mathcal F^{-1}\!\big(e^{-t|\xi|^2}\widehat f(\xi)\big)(x)
+  = (p_t * f)(x)
+  = \int_{\mathbb R^d} p_t(x-y)\,f(y)\,dy.
+\]
+In particular $p_t(x-y)$ is a translation-invariant kernel obtained by
+Fourier-transforming the nonnegative function $\xi\mapsto e^{-t|\xi|^2}$.
+By Bochner's theorem this kernel is positive definite, and the nonnegativity of
+$|\xi|^2$ is exactly what makes the spectral weight $e^{-t|\xi|^2}$ admissible.
+
+\medskip
+
+We now recall the finite analogue on a weighted graph.  Let $V$ be a finite set and
+let $H = (V,E,w)$ be a finite connected weighted graph with symmetric edge weights
+$w_{uv} = w_{vu}\ge 0$, extended by $w_{uv}=0$ if $\{u,v\}\notin E$.
+The graph Laplacian is
+\[
+  (Lf)(u) := \sum_{v\in V} w_{uv}\,\bigl(f(u)-f(v)\bigr),
+  \qquad u\in V,
+\]
+equivalently $L = D-A$ in matrix form, where $D_{uu}=\sum_{v} w_{uv}$ and
+$A_{uv}=w_{uv}$.
+The associated Dirichlet form is
+\[
+  \mathcal E(f)
+  := \frac12\sum_{u,v\in V} w_{uv}\,\bigl\lvert f(u)-f(v)\bigr\rvert^2
+  = \langle f,Lf\rangle_{\ell^2(V)}.
+\]
+This is the discrete analogue of $\int \lvert \nabla f\rvert^2$: it is nonnegative,
+vanishes exactly on constant functions, and increases as $f$ oscillates more
+strongly across edges with large weight.  In particular, $L$ is positive semidefinite
+and all of its eigenvalues are nonnegative, so the graph heat semigroup $(e^{-tL})_{t>0}$
+and its heat kernels are well defined.
+
+\medskip
+
+We now specialize to our metric quotient.  Let $V := X/A$ and let $H=(V,E,w)$ be a
+finite connected weighted graph whose shortest-path metric agrees with the quotient
+metric $\overline d_1$ from Section~\ref{subsec:LCA}.  Among the many choices of
+symmetric edge weights compatible with this metric, we fix the concrete convention
+\[
+  w_{uv} := \overline d_1(u,v)\qquad\text{for }\{u,v\}\in E.
+\]
+This choice ties the Dirichlet form directly to the same ground distance $\overline d_1$
+that underlies the Wasserstein metric on diagrams.
+
+\begin{proposition}\label{prop:symbol-lambda}
+Define
+\[
+  \lambda(\theta)
+  := \mathcal E(\chi_\theta)
+  = \frac12\sum_{u,v\in V}
+     w_{uv}\,\bigl\lvert e^{i\phi_\theta(u)} - e^{i\phi_\theta(v)}\bigr\rvert^2,
+  \qquad
+  \theta\in\mathbb T^{|X\setminus A|}.
+\]
+Then $\lambda:\mathbb T^{|X\setminus A|}\to[0,\infty)$ is continuous and $\lambda(0)=0$.
+Using the identity
+$\lvert e^{ia}-e^{ib}\rvert^2
+ = 2\bigl(1-\cos(\operatorname{dist}(a,b))\bigr)$
+for $a,b\in\mathbb R/2\pi\mathbb Z$, this can also be written as
+\[
+  \lambda(\theta)
+  = \sum_{\{u,v\}\in E}
+    w_{uv}\,\Bigl(1 -
+      \cos\bigl(\operatorname{dist}(\phi_\theta(u),\phi_\theta(v))\bigr)\Bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+Each summand in the definition of $\mathcal E(\chi_\theta)$ is nonnegative,
+so $\lambda(\theta)\ge 0$ for all $\theta$, and continuity follows from the
+finiteness of $V$ together with the continuity of $\chi_\theta$ in $\theta$.
+At $\theta=0$ the character $\chi_\theta$ is constantly $1$, so
+$\mathcal E(\chi_\theta)=0$ and hence $\lambda(0)=0$.
+The alternate expression follows by applying the elementary identity
+$\lvert e^{ia}-e^{ib}\rvert^2
+ = 2\bigl(1-\cos(\operatorname{dist}(a,b))\bigr)$ edgewise.
+\end{proof}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.85\linewidth]{figures/2.5_lambda_heatmap.png}
+    \caption{Heatmap of the Laplacian applied to the character embedding shown in Fig.~2, visualized over the Pontryagin dual torus.}
+    \label{fig:torus-laplacian}
+\end{figure}
+
+Thus $\lambda(\theta)$ is the eigenvalue function of the graph Laplacian in the
+character basis on $K(X,A)$: it measures how strongly the mode $\chi_\theta$
+oscillates across the edges of $(X/A,\overline d_1)$, and it is everywhere
+nonnegative.  In the next subsection, we use the heat multipliers
+$\theta\mapsto e^{-t\lambda(\theta)}$ and their Fourier-Stieltjes transforms to
+build translation-invariant heat kernels on $K(X,A)$ that play the role of
+Gaussian kernels on virtual persistence diagrams.
+
+\subsection{Phase-energy comparison}\label{subsec:phase-energy}
+
+We now relate the spectral symbol $\lambda(\theta)$ from
+Proposition~\ref{prop:symbol-lambda} to the geometric seminorm
+$\mathrm{Lip}_\rho(\chi_\theta)$. Intuitively, both quantities measure how
+oscillatory the mode $\chi_\theta$ is: $\lambda(\theta)$ does so through
+the Dirichlet energy of $\chi_\theta$ on the graph model of $X/A$, while
+$\mathrm{Lip}_\rho(\chi_\theta)$ measures how rapidly the character varies
+with respect to the VPD metric on $K(X,A)$. The next lemma makes this
+precise up to graph-dependent constants.
+
+We work with the edgewise notation from
+Proposition~\ref{prop:symbol-lambda} and Corollary~\ref{cor:edgewise-char}.
+For each edge $\{u,v\}\in E$ set
+\[
+\ell_{uv} := \overline d_1(u,v),\qquad
+\Delta_{uv} := \operatorname{dist}\bigl(\phi_\theta(u),\phi_\theta(v)\bigr)
+\in[0,\pi].
+\]
+Recall that
+\[
+\lambda(\theta)
+= \sum_{\{u,v\}\in E}
+  w_{uv}\,\Bigl(1-\cos\bigl(\Delta_{uv}\bigr)\Bigr),
+\]
+and that $\mathrm{Lip}_{\overline d_1}(\phi_\theta)$ is attained on edges:
+\[
+\mathrm{Lip}_{\overline d_1}(\phi_\theta)
+= \max_{\{u,v\}\in E}\frac{\Delta_{uv}}{\ell_{uv}}
+\quad\text{(Corollary~\ref{cor:edgewise-char}).}
+\]
+
+To control the dependence on the underlying graph, we introduce the edge-
+wise extremal quantities
+\[
+w_{\min} := \min\{w_{uv} : w_{uv}>0\},\quad
+w_{\max} := \max\{w_{uv}\},\quad
+M := |\{\{u,v\}\in E : w_{uv}>0\}|,
+\]
+and
+\[
+d_{\min} := \min\{\overline d_1(u,v) : \{u,v\}\in E,\ w_{uv}>0\},\qquad
+d_{\max} := \max\{\overline d_1(u,v) : \{u,v\}\in E,\ w_{uv}>0\},
+\]
+with the standing assumption $w_{\min}>0$ (so we ignore zero-weight
+non-edges). These simply record the smallest and largest nonzero weights,
+the smallest and largest edge lengths in the ground metric, and the number
+of realized edges.
+
+\begin{lemma}\label{lem:lambda-vs-L}
+For every $\theta\in\mathbb T^{|X\setminus A|}$,
+\[
+\frac{2\,w_{\min}\,d_{\min}^2}{\pi^2}\,
+\mathrm{Lip}_\rho(\chi_\theta)^2
+\ \le\
+\lambda(\theta)
+\ \le\
+\frac{\pi^2}{4}\,w_{\max}\,M\,d_{\max}^2\,
+\mathrm{Lip}_\rho(\chi_\theta)^2.
+\]
+\end{lemma}
+
+\begin{proof}
+Fix $\theta\in\mathbb T^{|X\setminus A|}$ and abbreviate
+\[
+\Delta_{uv} := \operatorname{dist}\bigl(\phi_\theta(u),\phi_\theta(v)\bigr),
+\qquad
+\ell_{uv} := \overline d_1(u,v),
+\]
+for $\{u,v\}\in E$. By Corollary~\ref{cor:edgewise-char},
+\[
+\mathrm{Lip}_{\overline d_1}(\phi_\theta)
+= \max_{\{u,v\}\in E}\frac{\Delta_{uv}}{\ell_{uv}}.
+\]
+In particular, if we set
+\[
+\Delta_{\max} := \max_{\{u,v\}\in E}\Delta_{uv},
+\]
+then by definition of $d_{\min},d_{\max}$ we have
+\[
+d_{\min}\,\mathrm{Lip}_{\overline d_1}(\phi_\theta)
+\ \le\ \Delta_{\max}\ \le\
+d_{\max}\,\mathrm{Lip}_{\overline d_1}(\phi_\theta).
+\]
+
+From Proposition~\ref{prop:symbol-lambda} we know
+\[
+\lambda(\theta)
+= \sum_{\{u,v\}\in E}
+  w_{uv}\,\Bigl(1-\cos\Delta_{uv}\Bigr).
+\]
+For $t\in[0,\pi]$ the elementary bounds
+\[
+\frac{2}{\pi^2}\,t^2\ \le\ 1-\cos t\ \le\ \frac12\,t^2
+\]
+hold. Applying these edgewise and using $w_{\min}\le w_{uv}\le w_{\max}$
+gives
+\[
+\frac{2w_{\min}}{\pi^2}\sum_{\{u,v\}\in E}\Delta_{uv}^2
+\ \le\
+\lambda(\theta)
+\ \le\
+w_{\max}\sum_{\{u,v\}\in E}\Delta_{uv}^2.
+\]
+Since $\Delta_{\max}$ is the largest $\Delta_{uv}$,
+\[
+\sum_{\{u,v\}\in E}\Delta_{uv}^2
+\ \ge\ \Delta_{\max}^2,
+\qquad
+\sum_{\{u,v\}\in E}\Delta_{uv}^2
+\ \le\ M\,\Delta_{\max}^2,
+\]
+and therefore
+\[
+\frac{2w_{\min}}{\pi^2}\,\Delta_{\max}^2
+\ \le\
+\lambda(\theta)
+\ \le\
+w_{\max}M\,\Delta_{\max}^2.
+\]
+
+Combining this with
+\[
+d_{\min}\,\mathrm{Lip}_{\overline d_1}(\phi_\theta)
+\ \le\ \Delta_{\max}\ \le\
+d_{\max}\,\mathrm{Lip}_{\overline d_1}(\phi_\theta)
+\]
+yields
+\[
+\frac{2w_{\min}d_{\min}^2}{\pi^2}\,
+\mathrm{Lip}_{\overline d_1}(\phi_\theta)^2
+\ \le\
+\lambda(\theta)
+\ \le\
+w_{\max}M d_{\max}^2\,
+\mathrm{Lip}_{\overline d_1}(\phi_\theta)^2.
+\]
+Finally, Theorem~\ref{thm:char-lip-comparison} gives
+\[
+\frac{2}{\pi}\,\mathrm{Lip}_{\overline d_1}(\phi_\theta)
+\ \le\
+\mathrm{Lip}_\rho(\chi_\theta)
+\ \le\
+\mathrm{Lip}_{\overline d_1}(\phi_\theta),
+\]
+so
+\[
+\mathrm{Lip}_{\overline d_1}(\phi_\theta)^2
+\ \le\ \frac{\pi^2}{4}\,\mathrm{Lip}_\rho(\chi_\theta)^2,
+\qquad
+\mathrm{Lip}_{\overline d_1}(\phi_\theta)^2
+\ \ge\ \mathrm{Lip}_\rho(\chi_\theta)^2.
+\]
+Substituting these into the previous inequality gives
+\[
+\frac{2w_{\min}d_{\min}^2}{\pi^2}\,\mathrm{Lip}_\rho(\chi_\theta)^2
+\ \le\
+\lambda(\theta)
+\ \le\
+\frac{\pi^2}{4}\,w_{\max}\,M\,d_{\max}^2\,
+\mathrm{Lip}_\rho(\chi_\theta)^2,
+\]
+as claimed.
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:lambda-vs-L} shows that, up to graph-dependent constants,
+the spectral energy $\lambda(\theta)$ and the geometric seminorm
+$\mathrm{Lip}_\rho(\chi_\theta)$ define the same scale on modes:
+high-frequency characters in the sense of the VPD metric are exactly those
+with large Dirichlet energy, and conversely. When the graph model of
+$(X/A,\overline d_1)$ has uniformly comparable edge lengths and weights
+(for example, when $w_{uv}=\overline d_1(u,v)$ and the aspect ratios
+$d_{\max}/d_{\min}$, $w_{\max}/w_{\min}$ are bounded), the constants in
+Lemma~\ref{lem:lambda-vs-L} can be absorbed into fixed numerical factors.
+In later sections, we will use this equivalence to transfer Lipschitz
+control on characters into Lipschitz control on heat-weighted
+Fourier-Stieltjes kernels on $K(X,A)$.
+\end{remark}
+
+\subsection{Lipschitz bounds for heat-weighted Fourier-Stieltjes transforms}\label{subsec:lipschitz-heat}
+
+The preceding subsections attach to each character $\chi_\theta$ an energy
+$\lambda(\theta)\ge 0$ via the Dirichlet form on the graph model of $X/A$,
+and show that $\lambda(\theta)$ is equivalent, up to graph-dependent constants,
+to the squared Lipschitz seminorm of $\chi_\theta$ for the VPD metric~$\rho$.
+We now insert this energy scale directly into the Fourier side: for each
+time parameter $t>0$ we weight characters by $e^{-t\lambda(\theta)}$ and
+average them to obtain translation-invariant kernels on $K(X,A)$.
+Our goal is to quantify how the corresponding Lipschitz seminorms depend on~$t$.
+
+\begin{definition}\label{def:heat-measure}
+For $t>0$ define the \emph{heat measure} on $\mathbb T^{|X\setminus A|}$ by
+\[
+  d\nu_t(\theta)\ :=\ e^{-t\lambda(\theta)}\,d\mu(\theta),
+  \qquad \theta\in\mathbb T^{|X\setminus A|},
+\]
+where $\lambda:\mathbb T^{|X\setminus A|}\to[0,\infty)$ is the energy function from
+Proposition~\ref{prop:symbol-lambda} and $\mu$ is normalized Haar measure
+on $\mathbb T^{|X\setminus A|}$.
+The corresponding Fourier--Stieltjes transform is
+\[
+  F_{\nu_t}(\alpha)
+  \ :=\ \int_{\mathbb T^{|X\setminus A|}}\chi_\theta(\alpha)\,e^{-t\lambda(\theta)}\,d\mu(\theta),
+  \qquad \alpha\in K(X,A),
+\]
+and, as in Definition~\ref{def:FS}, it induces a translation-invariant
+positive definite kernel on $K(X,A)$ by
+$k_{\nu_t}(\alpha,\beta):=F_{\nu_t}(\alpha-\beta)$.
+\end{definition}
+
+Thus $t\mapsto\nu_t$ is the heat flow on the dual torus, and
+$t\mapsto F_{\nu_t}$ is the induced family of translation-invariant kernels
+on the virtual diagram group.
+
+\medskip
+
+We first record a general Lipschitz estimate for Fourier--Stieltjes transforms
+with respect to the VPD metric.
+
+\begin{figure}[ht]
+    \centering
+
+    % --- Row 1: real parts ---
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Fourier_Transform/fourier_real_patch_small.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Fourier_Transform/fourier_real_lightsource_soft.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Fourier_Transform/fourier_real_heatmap.png}
+    \end{minipage}
+
+    \vspace{0.8em}
+
+    % --- Row 2: imaginary parts ---
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Fourier_Transform/fourier_imag_patch_small.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Fourier_Transform/fourier_imag_lightsource_soft.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Fourier_Transform/fourier_imag_heatmap.png}
+    \end{minipage}
+
+    \caption{
+    Fourier transform of the virtual persistence diagram from Fig.~1, evaluated over the Pontryagin dual torus from Fig.~2.
+    Columns show patch, surface, and heatmap visualizations; rows show the real and imaginary parts, respectively.}
+    \label{fig:fourier-vpd}
+\end{figure}
+
+\begin{lemma}\label{lem:multiplier-stability}
+Let $\nu$ be a finite complex Borel measure on $\mathbb T^{|X\setminus A|}$ and let $F_\nu$
+be its Fourier--Stieltjes transform as in Definition~\ref{def:FS}. Then
+\[
+  \mathrm{Lip}_\rho(F_\nu)
+  \ \le\
+  \int_{\mathbb T^{|X\setminus A|}} \mathrm{Lip}_\rho(\chi_\theta)\,d|\nu|(\theta).
+\]
+\end{lemma}
+
+\begin{proof}
+Fix $\alpha,\beta\in K(X,A)$ and set $\gamma:=\alpha-\beta$.
+Then
+\[
+\begin{aligned}
+F_\nu(\alpha)-F_\nu(\beta)
+ &= \int_{\mathbb T^{|X \setminus A|}}\!\bigl(\chi_\theta(\alpha)-\chi_\theta(\beta)\bigr)\,d\nu(\theta)\\
+ &= \int_{\mathbb T^{|X \setminus A|}}\!\chi_\theta(\beta)\,\bigl(\chi_\theta(\gamma)-1\bigr)\,d\nu(\theta),
+\end{aligned}
+\]
+since $\chi_\theta(\alpha)=\chi_\theta(\beta)\chi_\theta(\gamma)$.
+By the total-variation inequality $|\int g\,d\nu|\le\int |g|\,d|\nu|$,
+\[
+  \bigl|F_\nu(\alpha)-F_\nu(\beta)\bigr|
+  \ \le\
+  \int_{\mathbb T^{|X\setminus A|}}\!\bigl|\chi_\theta(\gamma)-1\bigr|\,d|\nu|(\theta).
+\]
+For each fixed $\theta$, the character $\chi_\theta$ is $\rho$-Lipschitz, so
+\[
+  \bigl|\chi_\theta(\alpha)-\chi_\theta(\beta)\bigr|
+  \ \le\ \mathrm{Lip}_\rho(\chi_\theta)\,\rho(\alpha,\beta).
+\]
+By translation invariance of $\chi_\theta$ and $\rho$ we have
+\[
+  \bigl|\chi_\theta(\gamma)-1\bigr|
+  \ =\ \bigl|\chi_\theta(\alpha)-\chi_\theta(\beta)\bigr|,
+\]
+and therefore
+\[
+  \bigl|F_\nu(\alpha)-F_\nu(\beta)\bigr|
+  \ \le\
+  \rho(\alpha,\beta)\,
+  \int_{\mathbb T^{|X \setminus A|}}\!\mathrm{Lip}_\rho(\chi_\theta)\,d|\nu|(\theta).
+\]
+Dividing by $\rho(\alpha,\beta)$ and taking the supremum over
+$\alpha\neq\beta$ yields the claim.
+\end{proof}
+
+Specializing to the heat measures $\nu_t$ gives the desired Lipschitz
+control for the heat-weighted transforms.
+
+\begin{figure}[ht]
+    \centering
+
+    %%%%%%%%%%%%% Row 1: Real part (surface) %%%%%%%%%%%%%
+    \begin{minipage}{0.30\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Heat_Kernel/real/fourier_real_heat_t0_00.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.30\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Heat_Kernel/real/fourier_real_heat_t0_06.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.30\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Heat_Kernel/real/fourier_real_heat_t0_12.png}
+    \end{minipage}
+
+    \vspace{0.8em}
+
+    %%%%%%%%%%%%% Row 2: Imaginary part (surface) %%%%%%%%%%%%%
+    \begin{minipage}{0.30\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Heat_Kernel/imaginary/fourier_imag_heat_t0_00.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.30\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Heat_Kernel/imaginary/fourier_imag_heat_t0_06.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.30\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Heat_Kernel/imaginary/fourier_imag_heat_t0_12.png}
+    \end{minipage}
+
+    \caption{
+    Heat flow of the Fourier transform from Fig.~\ref{fig:fourier-vpd} on the Pontryagin dual torus from Fig.~\ref{fig:torus-embedding}, originating from the virtual persistence diagram in Fig.~\ref{fig:toy-example}. Columns correspond to times $t=0.0,\ 0.0625,$ and $0.125$. The two rows show the real and imaginary parts as surfaces.
+    }
+    \label{fig:heat-kernel-surfaces}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+
+    %%%%%%%%%%%%% Row 3: Real part (heatmap) %%%%%%%%%%%%%
+    \begin{minipage}{0.30\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Heat_Kernel/real/heat_fourier_real_00.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.30\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Heat_Kernel/real/heat_fourier_real_125.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.30\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Heat_Kernel/real/heat_fourier_real_25.png}
+    \end{minipage}
+
+    \vspace{0.8em}
+
+    %%%%%%%%%%%%% Row 4: Imaginary part (heatmap) %%%%%%%%%%%%%
+    \begin{minipage}{0.30\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Heat_Kernel/imaginary/heat_fourier_imag_0.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.30\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Heat_Kernel/imaginary/heat_fourier_imag_125.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.30\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/Heat_Kernel/imaginary/heat_fourier_imag_25.png}
+    \end{minipage}
+
+    \caption{
+    Heat flow of the Fourier transform from Fig.~\ref{fig:fourier-vpd} on the Pontryagin dual torus from Fig.~\ref{fig:torus-embedding}, originating from the virtual persistence diagram in Fig.~\ref{fig:toy-example}. Columns correspond to times $t=0.0,\ 0.125,$ and $0.25$.  The two rows show the corresponding real and imaginary parts rendered as heatmaps.
+}
+    \label{fig:heat-kernel-heatmaps}
+\end{figure}
+
+\begin{proposition}\label{prop:lip-heat-transform}
+For $t>0$ let $\nu_t$ be the heat measure from
+Definition~\ref{def:heat-measure}.
+Then
+\[
+  \mathrm{Lip}_\rho\bigl(F_{\nu_t}\bigr)
+  \ \le\
+  \int_{\mathbb T^{|X\setminus A|}}\!\mathrm{Lip}_\rho(\chi_\theta)\,
+                        e^{-t\lambda(\theta)}\,d\mu(\theta),
+\]
+and the right-hand side is nonincreasing in $t$.
+\end{proposition}
+
+\begin{proof}
+Applying Lemma~\ref{lem:multiplier-stability} with
+$d\nu_t(\theta)=e^{-t\lambda(\theta)}\,d\mu(\theta)$ gives
+\[
+  \mathrm{Lip}_\rho(F_{\nu_t})
+  \ \le\
+  \int_{\mathbb T^{|X\setminus A|}}\!\mathrm{Lip}_\rho(\chi_\theta)\,d|\nu_t|(\theta).
+\]
+Since $e^{-t\lambda(\theta)}\ge 0$ for all $\theta$, we have
+$d|\nu_t|=d\nu_t$, which yields the displayed inequality.
+
+For monotonicity, let $0<t_1<t_2$.
+For every $\theta\in\mathbb T^{|X\setminus A|}$ we have $\lambda(\theta)\ge 0$ and hence
+$e^{-t_2\lambda(\theta)}\le e^{-t_1\lambda(\theta)}$.
+Multiplying by the nonnegative factor $\mathrm{Lip}_\rho(\chi_\theta)$ and
+integrating against $\mu$ shows that
+\[
+  \int_{\mathbb T^{|X\setminus A|}}\!\mathrm{Lip}_\rho(\chi_\theta)\,
+                       e^{-t_2\lambda(\theta)}\,d\mu(\theta)
+  \ \le\
+  \int_{\mathbb T^{|X\setminus A|}}\!\mathrm{Lip}_\rho(\chi_\theta)\,
+                       e^{-t_1\lambda(\theta)}\,d\mu(\theta),
+\]
+so the bound on $\mathrm{Lip}_\rho(F_{\nu_t})$ is nonincreasing in~$t$.
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:lambda-vs-L} identifies the energy $\lambda(\theta)$ with
+the squared Lipschitz seminorm of $\chi_\theta$ up to explicit graph-dependent
+constants. In particular,
+\[
+  \lambda(\theta)
+  \ \ge\
+  \frac{2w_{\min}d_{\min}^2}{\pi^2}\,
+  \mathrm{Lip}_\rho(\chi_\theta)^2,
+\]
+so
+\[
+  \mathrm{Lip}_\rho(\chi_\theta)
+  \ \le\
+  \Bigl(\frac{\pi^2}{2w_{\min}d_{\min}^2}\Bigr)^{1/2}
+  \lambda(\theta)^{1/2},
+  \qquad \theta\in\mathbb T^{|X\setminus A|}.
+\]
+Combining this with Proposition~\ref{prop:lip-heat-transform} yields the more
+intrinsic bound
+\[
+  \mathrm{Lip}_\rho\bigl(F_{\nu_t}\bigr)
+  \ \le\
+  \Bigl(\frac{\pi^2}{2w_{\min}d_{\min}^2}\Bigr)^{1/2}
+  \int_{\mathbb T^{|X\setminus A|}}\!\lambda(\theta)^{1/2}\,
+                       e^{-t\lambda(\theta)}\,d\mu(\theta).
+\]
+Thus the Lipschitz norm of the heat-weighted Fourier--Stieltjes transform
+is controlled directly by the energy scale~$\lambda(\theta)$: modes with
+large $\lambda(\theta)$ are strongly damped as $t$ increases, and this
+damping is measured in exactly the same frequency units as the VPD metric.
+\end{remark}
+
+\section{Reproducing kernel Hilbert spaces}\label{subsec:rkhs-layer}
+
+We now upgrade the characterwise and kernel-level Lipschitz control from Sections~\ref{subsec:characters}-\ref{subsec:lipschitz-heat} to a function-level statement in reproducing kernel Hilbert spaces. For any finite positive Borel measure $\nu$ on $\mathbb T^{|X \setminus A|}$, Bochner's theorem and the RKHS framework recalled in Sections~\ref{subsec:rkhs-toolkit} and~\ref{subsec:harmonic-toolkit} associate to $\nu$ a translation-invariant kernel
+\[
+k_\nu(\alpha,\beta)
+\;=\;
+\int_{\mathbb T^{|X\setminus A|}}\chi_\theta(\alpha-\beta)\,d\nu(\theta)
+\]
+and an RKHS $\mathcal H_\nu$ of functions on $K(X,A)$. Our goal in this section is to show that, for the heat measures $\nu_t$ built from the Dirichlet symbol $\lambda$ in Definition~\ref{def:heat-measure}, every $f\in\mathcal H_{\nu_t}$ is globally $\rho$-Lipschitz with an explicit constant controlled by the same spectral integrals of $\mathrm{Lip}_\rho(\chi_\theta)$ (or $\lambda(\theta)$) that appear in Section~\ref{subsec:lipschitz-heat}. Conceptually, this identifies the heat RKHS as a space of stable topological features of virtual diagrams, and prepares the ground for the finite-dimensional random Fourier feature layer in Section~\ref{subsec:heat-rff}.
+
+\subsection{Heat-weighted RKHS on virtual diagrams}\label{subsec:heat-rkhs}
+
+For a finite positive Borel measure $\nu$ on $\mathbb T^{|X\setminus A|}$, Bochner's theorem
+identifies the corresponding RKHS $\mathcal H_\nu$ on $G$ as the closure of
+the span of the feature functions
+\[
+  \Phi_\nu(\alpha)(\theta)\ :=\ \chi_\theta(\alpha),
+  \qquad \alpha\in G,\ \theta\in\mathbb T^{|X\setminus A|},
+\]
+inside $L^2(\nu)$, with kernel
+\[
+  k_\nu(\alpha,\beta)\ =\ \int_{\mathbb T^{|X\setminus A|}}\chi_\theta(\alpha-\beta)\,d\nu(\theta)
+  \ =\ \langle \Phi_\nu(\alpha),\Phi_\nu(\beta)\rangle_{L^2(\nu)}.
+\]
+In this realization, $\mathcal H_\nu$ is generated by the same characters
+$\chi_\theta$ that control the geometry of $G$, and the kernel encodes their
+superposition with spectral weight~$\nu$.
+
+The next lemma lifts the pointwise Lipschitz bounds for characters to
+arbitrary functions in $\mathcal H_\nu$, with constants expressed directly in
+terms of the $\rho$-Lipschitz seminorms of $\chi_\theta$.
+
+\begin{lemma}\label{lem:rkhs-lip}
+Let $\nu$ be a finite positive Borel measure on $\mathbb T^{|X\setminus A|}$, and let
+$\mathcal H_\nu$ be the associated RKHS on $G$. Then every $f\in\mathcal H_\nu$
+satisfies
+\[
+  \mathrm{Lip}_\rho(f)\ \le\ \|f\|_{\mathcal H_\nu}\,
+  \Bigg(\int_{\mathbb T^{|X\setminus A|}}\mathrm{Lip}_\rho(\chi_\theta)^2\,d\nu(\theta)\Bigg)^{1/2}.
+\]
+\end{lemma}
+
+\begin{proof}
+By the reproducing property,
+\[
+  f(\alpha)-f(\beta)
+  \ =\ \langle f,\ k_\nu(\cdot,\alpha)-k_\nu(\cdot,\beta)\rangle_{\mathcal H_\nu},
+  \qquad \alpha,\beta\in G,
+\]
+so Cauchy--Schwarz gives
+\[
+  |f(\alpha)-f(\beta)|
+  \ \le\ \|f\|_{\mathcal H_\nu}\,
+        \|k_\nu(\cdot,\alpha)-k_\nu(\cdot,\beta)\|_{\mathcal H_\nu}.
+\]
+
+The squared norm of the difference of two representers can be written as
+\[
+  \|k_\nu(\cdot,\alpha)-k_\nu(\cdot,\beta)\|_{\mathcal H_\nu}^2
+  \ =\ k_\nu(\alpha,\alpha)+k_\nu(\beta,\beta)-2\Re\,k_\nu(\alpha,\beta),
+\]
+and using the Bochner form of $k_\nu$,
+\[
+  k_\nu(\alpha,\beta)
+  \ =\ \int_{\mathbb T^{|X\setminus A|}} \chi_\theta(\alpha-\beta)\,d\nu(\theta),
+\]
+this becomes
+\[
+  \|k_\nu(\cdot,\alpha)-k_\nu(\cdot,\beta)\|_{\mathcal H_\nu}^2
+  \ =\ \int_{\mathbb T^{|X\setminus A|}}\bigl|\chi_\theta(\alpha)-\chi_\theta(\beta)\bigr|^2\,d\nu(\theta).
+\]
+
+For each $\theta$, the definition of $\mathrm{Lip}_\rho(\chi_\theta)$ gives
+\[
+  \bigl|\chi_\theta(\alpha)-\chi_\theta(\beta)\bigr|
+  \ \le\ \mathrm{Lip}_\rho(\chi_\theta)\,\rho(\alpha,\beta),
+\]
+hence
+\[
+  \|k_\nu(\cdot,\alpha)-k_\nu(\cdot,\beta)\|_{\mathcal H_\nu}^2
+  \ \le\ \rho(\alpha,\beta)^2
+        \int_{\mathbb T^{|X\setminus A|}}\mathrm{Lip}_\rho(\chi_\theta)^2\,d\nu(\theta),
+\]
+and therefore
+\[
+  \|k_\nu(\cdot,\alpha)-k_\nu(\cdot,\beta)\|_{\mathcal H_\nu}
+  \ \le\ \rho(\alpha,\beta)\,
+        \Bigg(\int_{\mathbb T^{|X\setminus A|}}
+               \mathrm{Lip}_\rho(\chi_\theta)^2\,d\nu(\theta)\Bigg)^{1/2}.
+\]
+
+Combining this with the previous estimate yields
+\[
+  |f(\alpha)-f(\beta)|
+  \ \le\ \rho(\alpha,\beta)\,\|f\|_{\mathcal H_\nu}\,
+        \Bigg(\int_{\mathbb T^{|X\setminus A|}}\mathrm{Lip}_\rho(\chi_\theta)^2\,d\nu(\theta)\Bigg)^{1/2}.
+\]
+Taking the supremum over $\alpha\neq\beta$ gives the claimed bound on
+$\mathrm{Lip}_\rho(f)$.
+\end{proof}
+
+Thus $\mathcal H_\nu$ inherits a Lipschitz scale directly from the character
+family $\{\chi_\theta\}$: functions with bounded $\mathcal H_\nu$-norm are
+automatically $\rho$-Lipschitz, with a constant controlled by a quadratic
+average of $\mathrm{Lip}_\rho(\chi_\theta)$ against the spectral weight~$\nu$.
+
+\medskip
+
+We now specialize to the heat measures on the dual introduced in
+Definition~\ref{def:heat-measure}. For each $t>0$ the measure
+\[
+  d\nu_t(\theta)\ :=\ e^{-t\lambda(\theta)}\,d\mu(\theta),
+\]
+weights characters according to their Dirichlet energy $\lambda(\theta)$,
+suppressing high-energy modes as $t$ increases. Let
+$\mathcal H_t:=\mathcal H_{\nu_t}$ be the corresponding RKHS on $G$.
+
+\begin{theorem}\label{thm:heat-lip}
+For every $t>0$ and $f\in\mathcal H_t$,
+\[
+  \mathrm{Lip}_\rho(f)\ \le\ \|f\|_{\mathcal H_t}\,
+  \Bigg(\int_{\mathbb T^{|X\setminus A|}}\mathrm{Lip}_\rho(\chi_\theta)^2\,
+                        e^{-t\lambda(\theta)}\,d\mu(\theta)\Bigg)^{1/2},
+\]
+and the integral prefactor
+\[
+  t\ \longmapsto\ \int_{\mathbb T^{|X\setminus A|}}\mathrm{Lip}_\rho(\chi_\theta)^2\,
+                                 e^{-t\lambda(\theta)}\,d\mu(\theta)
+\]
+is finite and nonincreasing on $(0,\infty)$.
+\end{theorem}
+
+\begin{proof}
+Apply Lemma~\ref{lem:rkhs-lip} with $\nu=\nu_t$. This gives, for every
+$f\in\mathcal H_t$,
+\[
+  \mathrm{Lip}_\rho(f)\ \le\ \|f\|_{\mathcal H_t}\,
+  \Bigg(\int_{\mathbb T^{|X\setminus A|}}\mathrm{Lip}_\rho(\chi_\theta)^2\,
+                        e^{-t\lambda(\theta)}\,d\mu(\theta)\Bigg)^{1/2},
+\]
+which is the first claim.
+
+For finiteness and monotonicity of the prefactor, note that
+$\mathrm{Lip}_\rho(\chi_\theta)^2\,e^{-t\lambda(\theta)}\ge 0$ and
+$\mu$ is a probability measure, so the integral is finite for each $t>0$
+as soon as $\theta\mapsto\mathrm{Lip}_\rho(\chi_\theta)^2$ is $\mu$-integrable,
+which holds by the uniform bounds from Section \ref{subsec:LCA}.
+Moreover, $\lambda(\theta)\ge 0$ for all $\theta$, so for each fixed $\theta$
+the map $t\mapsto e^{-t\lambda(\theta)}$ is nonincreasing on $(0,\infty)$.
+Multiplying by the nonnegative factor $\mathrm{Lip}_\rho(\chi_\theta)^2$
+preserves pointwise monotonicity, and integration against $\mu$ preserves
+the order. Hence the prefactor is nonincreasing in $t$.
+\end{proof}
+
+In words, the heat weight $e^{-t\lambda(\theta)}$ enforces a Lipschitz
+smoothing effect on the entire RKHS: as $t$ grows, high-energy characters are
+progressively damped in the Fourier representation, and every function in
+$\mathcal H_t$ becomes uniformly more regular with respect to the VPD metric.
+The frequency scale governing this smoothing is exactly the one identified
+earlier by the comparison between $\lambda(\theta)$ and
+$\mathrm{Lip}_\rho(\chi_\theta)$, so geometric control on characters transfers
+directly to geometric control on heat-regularized functionals of virtual
+persistence diagrams.
+
+\subsection{Geometric corollaries}\label{subsec:heat-geom}
+
+Theorem~\ref{thm:heat-lip} expresses the $\rho$-Lipschitz constant of
+$f\in\mathcal H_t$ in terms of a weighted average of the characterwise
+Lipschitz seminorms $\mathrm{Lip}_\rho(\chi_\theta)$ against the spectral multiplier of the heat semigroup
+$e^{-t\lambda(\theta)}$ on the discrete Laplacian.  We now quantify this prefactor in two complementary
+ways using the comparison between Dirichlet energies $\lambda(\theta)$ and
+phase gaps from Section \ref{subsec:LCA}.
+
+Recall that Lemma~\ref{lem:lambda-vs-L} relates the Dirichlet symbol
+$\lambda(\theta)$ of the graph Laplacian on $X/A$ to the $\rho$-Lipschitz
+seminorms of characters on $G$ via the lower bound
+\[
+  \frac{2w_{\min}d_{\min}^2}{\pi^2}\,\mathrm{Lip}_\rho(\chi_\theta)^2
+  \ \le\ \lambda(\theta),
+\]
+where $w_{\min}$ and $d_{\min}$ are the minimal edge weight and edge length
+in the underlying graph.  On the other hand,
+Theorem~\ref{thm:char-lip-comparison} compares $\mathrm{Lip}_\rho(\chi_\theta)$
+to the Lipschitz constant of the phase function $\phi_\theta$ on the quotient
+metric space $(X/A,\overline d_1)$, so that the same frequency scale can be
+read either spectrally (via $\lambda$) or geometrically (via phase gaps on
+$X/A$).  Inserting these comparisons into Theorem~\ref{thm:heat-lip} yields
+spectral and geometric forms of the heat Lipschitz bound.
+
+\begin{corollary}[Spectral form]\label{cor:heat-lip-spectral}
+For every $t>0$ and $f\in\mathcal H_t$,
+\[
+  \mathrm{Lip}_\rho(f)\ \le\ \frac{\pi}{d_{\min}\sqrt{2\,w_{\min}}}\,
+  \|f\|_{\mathcal H_t}\,
+  \Bigg(\int_{\mathbb T^{|X \setminus A|}}\lambda(\theta)\,e^{-t\lambda(\theta)}\,d\mu(\theta)\Bigg)^{1/2},
+\]
+with $w_{\min},d_{\min}$ as in Lemma~\ref{lem:lambda-vs-L}.
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:lambda-vs-L},
+\[
+  \lambda(\theta)\ \ge\ \frac{2w_{\min}d_{\min}^2}{\pi^2}\,
+                        \mathrm{Lip}_\rho(\chi_\theta)^2,
+\]
+which is equivalent to
+\[
+  \mathrm{Lip}_\rho(\chi_\theta)^2
+  \ \le\ \frac{\pi^2}{2w_{\min}d_{\min}^2}\,\lambda(\theta).
+\]
+Substitute this into the integral in Theorem~\ref{thm:heat-lip} to obtain
+\[
+  \int_{\mathbb T^{|X\setminus A|}}
+    \mathrm{Lip}_\rho(\chi_\theta)^2\,e^{-t\lambda(\theta)}\,d\mu(\theta)
+  \ \le\
+  \frac{\pi^2}{2w_{\min}d_{\min}^2}\,
+  \int_{\mathbb T^{|X\setminus A|}}\lambda(\theta)\,e^{-t\lambda(\theta)}\,d\mu(\theta).
+\]
+Thus for every $f\in\mathcal H_t$,
+\[
+\begin{aligned}
+  \mathrm{Lip}_\rho(f)
+  &\ \le\ \|f\|_{\mathcal H_t}\,
+         \Bigg(\int_{\mathbb T^{|X\setminus A|}}
+                 \mathrm{Lip}_\rho(\chi_\theta)^2\,
+                 e^{-t\lambda(\theta)}\,d\mu(\theta)\Bigg)^{1/2}\\[4pt]
+  &\ \le\ \|f\|_{\mathcal H_t}\,
+         \Bigg(\frac{\pi^2}{2w_{\min}d_{\min}^2}\,
+                 \int_{\mathbb T^{|X\setminus A|}}\lambda(\theta)\,
+                                    e^{-t\lambda(\theta)}\,d\mu(\theta)
+         \Bigg)^{1/2}\\[4pt]
+  &\ =\ \frac{\pi}{d_{\min}\sqrt{2\,w_{\min}}}\,
+         \|f\|_{\mathcal H_t}\,
+         \Bigg(\int_{\mathbb T^{|X\setminus A|}}\lambda(\theta)\,
+                                e^{-t\lambda(\theta)}\,d\mu(\theta)\Bigg)^{1/2},
+\end{aligned}
+\]
+which is the claimed inequality.
+\end{proof}
+
+In this form, the Lipschitz constant is controlled by a heat-weighted spectral
+moment of the Dirichlet symbol.  The factor
+$\lambda(\theta)\,e^{-t\lambda(\theta)}$ concentrates around the frequencies
+where the heat multiplier $e^{-t\lambda}$ begins to significantly attenuate
+high-energy modes, so Corollary~\ref{cor:heat-lip-spectral} can be understood
+as saying that the effective frequency band of the heat RKHS controls the
+$\rho$-regularity of its functions, up to explicit graph-geometric constants.
+
+\medskip
+
+The next corollary rewrites the same bound directly in terms of phase
+Lipschitz constants on the finite metric space $(X/A,\overline d_1)$.  This
+eliminates $\lambda$ from the statement and makes the dependence on the
+underlying quotient geometry completely explicit.
+
+\begin{corollary}[Geometric form]\label{cor:heat-lip-geom}
+For every $t>0$ and $f\in\mathcal H_t$,
+\[
+  \mathrm{Lip}_\rho(f)\ \le\ \|f\|_{\mathcal H_t}\,
+  \Bigg(\int_{\mathbb T^{|X \setminus A|}}\!
+    \mathrm{Lip}_{\overline d_1}(\phi_\theta)^2\,
+    \exp\!\Big(-t\,\frac{8w_{\min}d_{\min}^2}{\pi^4}\,
+                 \mathrm{Lip}_{\overline d_1}(\phi_\theta)^2\Big)\,d\mu(\theta)
+  \Bigg)^{1/2},
+\]
+where $\phi_\theta$ is the phase function from Theorem~\ref{thm:char-lip-comparison}.
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:char-lip-comparison} gives
+\[
+  \mathrm{Lip}_\rho(\chi_\theta)\ \ge\ \frac{2}{\pi}\,
+                                      \mathrm{Lip}_{\overline d_1}(\phi_\theta),
+  \qquad
+  \mathrm{Lip}_\rho(\chi_\theta)\ \le\ \mathrm{Lip}_{\overline d_1}(\phi_\theta).
+\]
+Combining the lower bound with Lemma~\ref{lem:lambda-vs-L} yields
+\[
+\begin{aligned}
+  \lambda(\theta)
+  &\ \ge\ \frac{2w_{\min}d_{\min}^2}{\pi^2}\,
+          \mathrm{Lip}_\rho(\chi_\theta)^2\\[3pt]
+  &\ \ge\ \frac{2w_{\min}d_{\min}^2}{\pi^2}
+          \Big(\frac{2}{\pi}\,
+               \mathrm{Lip}_{\overline d_1}(\phi_\theta)\Big)^2
+   \ =\ \frac{8w_{\min}d_{\min}^2}{\pi^4}\,
+        \mathrm{Lip}_{\overline d_1}(\phi_\theta)^2.
+\end{aligned}
+\]
+Hence
+\[
+  e^{-t\lambda(\theta)}
+  \ \le\
+  \exp\!\Big(-t\,\frac{8w_{\min}d_{\min}^2}{\pi^4}\,
+               \mathrm{Lip}_{\overline d_1}(\phi_\theta)^2\Big).
+\]
+From the upper bound in Theorem~\ref{thm:char-lip-comparison} we also have
+\[
+  \mathrm{Lip}_\rho(\chi_\theta)^2
+  \ \le\ \mathrm{Lip}_{\overline d_1}(\phi_\theta)^2.
+\]
+Substituting these two inequalities into the integral in
+Theorem~\ref{thm:heat-lip} gives
+\[
+\begin{aligned}
+  \int_{\mathbb T^{|X\setminus A|}}\mathrm{Lip}_\rho(\chi_\theta)^2\,
+                      e^{-t\lambda(\theta)}\,d\mu(\theta)
+  &\ \le\
+  \int_{\mathbb T^{|X\setminus A|}}
+    \mathrm{Lip}_{\overline d_1}(\phi_\theta)^2\,
+    \exp\!\Big(-t\,\frac{8w_{\min}d_{\min}^2}{\pi^4}\,
+                 \mathrm{Lip}_{\overline d_1}(\phi_\theta)^2\Big)\,d\mu(\theta).
+\end{aligned}
+\]
+Combining with Theorem~\ref{thm:heat-lip} yields the claimed inequality.
+\end{proof}
+
+This form isolates the dependence on the geometry of the quotient metric
+space $(X/A,\overline d_1)$: the integrand involves only the phase
+Lipschitz constants $\mathrm{Lip}_{\overline d_1}(\phi_\theta)$ and a Gaussian
+decay in that quantity.  In particular, characters whose phases oscillate
+rapidly with respect to $\overline d_1$ are strongly suppressed as $t$
+grows.  The heat RKHS $\mathcal H_t$ thus favours functions whose Fourier
+mass is concentrated on characters with small phase Lipschitz constants,
+i.e.\ functions that vary slowly along the persistence-induced metric on
+$G$.
+
+\begin{remark}\label{rem:gaussian-heat}
+On $\mathbb R^d$ with the Euclidean Laplacian $\Delta$, the heat semigroup
+$e^{-t\Delta}$ has Fourier multiplier $e^{-t|\xi|^2}$ and fundamental solution
+\[
+  K_t(x,y)\ =\ \frac{1}{(4\pi t)^{d/2}}
+               \exp\Big(-\frac{|x-y|^2}{4t}\Big),
+\]
+the standard Gaussian radial basis kernel.  The corresponding RKHS consists
+of functions whose Fourier transforms are square-integrable with respect to
+the heat weight $e^{-t|\xi|^2}$, and Corollary~\ref{cor:heat-lip-spectral}
+reduces to the familiar statement that Gaussian RKHS functions are
+Lipschitz, with a constant controlled by a heat-weighted second moment of
+$|\xi|$.
+
+In our setting, $k_t=k_{\nu_t}$ plays the analogous role on $G$:
+$\lambda(\theta)$ takes the place of $|\xi|^2$, the weight
+$e^{-t\lambda(\theta)}$ is the heat multiplier on the dual torus
+$\widehat G\cong\mathbb T^{|X\setminus A|}$, and Corollaries~\ref{cor:heat-lip-spectral}
+and~\ref{cor:heat-lip-geom} quantify how this spectral damping translates
+into Lipschitz regularity with respect to the VPD metric~$\rho$.  The
+resulting bounds are the analytic input we will use later to control the
+stability of learned functionals of virtual persistence diagrams under
+$W_1$-perturbations of the underlying diagrams.
+\end{remark}
+
+\section{Random Fourier features}\label{subsec:heat-rff}
+
+The heat kernels from Section \ref{subsec:heat-rkhs} give a canonical family of
+translation-invariant RKHSs $\{\mathcal H_t\}_{t>0}$ on the virtual diagram
+group $G:=K(X,A)$, with Lipschitz control quantified in
+Theorem~\ref{thm:heat-lip} and Corollaries~\ref{cor:heat-lip-spectral}-\ref{cor:heat-lip-geom}. In applications, however, we do not work directly in the
+infinite-dimensional space $\mathcal H_t$: we need explicit finite-dimensional
+features of virtual diagrams that (i) approximate the heat kernel $k_t$ and
+(ii) inherit the same $\rho$-Lipschitz regularity scale. In this section we
+construct such features by sampling characters from the heat law on the dual
+torus and taking the usual cosine-sine random Fourier features, in the spirit
+of \cite{10.5555/2981562.2981710}, specialized to the VPD geometry.
+
+Recall the heat spectral multiplier and kernel from
+Section \ref{sec:stable-multipliers}-\ref{subsec:heat-rkhs}:
+\[
+  d\nu_t(\theta)\ :=\ e^{-t\lambda(\theta)}\,d\mu(\theta),
+  \qquad
+  k_t(\alpha,\beta)
+  \ =\ \int_{\mathbb T^{|X\setminus A|}}\chi_\theta(\alpha-\beta)\,e^{-t\lambda(\theta)}\,d\mu(\theta),
+\]
+Thus $k_t$ is exactly the Bochner kernel corresponding to the heat weight $e^{-t\lambda(\theta)}$, and Theorem~\ref{thm:heat-lip} describes how this weight enforces $\rho$-Lipschitz smoothing at the level of $\mathcal H_t$.
+
+\subsection{Sampling from the heat law}\label{subsec:heat-rff-sampling}
+
+We now pass from the integral representation of $k_t$ to an explicit
+finite-dimensional feature map by Monte Carlo sampling of characters from the
+heat measure. The construction is the usual cosine-sine lift of complex
+exponentials, but here the sampling law is the heat law on the dual torus and
+the domain is the virtual diagram group $K(X,A)$.
+
+\begin{definition}\label{def:heat-rff}
+Fix $t>0$ and $R\in\mathbb N$. Let
+$\theta^{(1)},\dots,\theta^{(R)}$ be independent samples from the probability
+measure on $\mathbb T^{|X\setminus A|}$ with density
+\[
+  \theta\ \longmapsto\ \frac{e^{-t\lambda(\theta)}}{\nu_t(\mathbb T^{|X\setminus A|})}
+  \quad\text{with respect to }\mu,
+\]
+that is, from the normalized heat measure $\nu_t/\nu_t(\mathbb T^{|X\setminus A|})$. Define
+the feature map
+\[
+  \Phi_{t,R}:K(X,A)\longrightarrow\mathbb R^{2R},
+  \qquad
+  \Phi_{t,R}(\alpha)
+  :=\sqrt{\frac{\nu_t(\mathbb T^{|X\setminus A|})}{R}}\,
+    \bigl(\cos\langle\alpha,\theta^{(r)}\rangle,\
+          \sin\langle\alpha,\theta^{(r)}\rangle\bigr)_{r=1}^R.
+\]
+\end{definition}
+
+Each coordinate of $\Phi_{t,R}$ is just a real or imaginary part of a
+character $\chi_{\theta^{(r)}}$ evaluated on $K(X,A)$, scaled so that inner
+products of feature vectors approximate the heat kernel. The underlying
+frequencies $\theta^{(r)}$ are biased toward low Dirichlet energy via
+$e^{-t\lambda(\theta)}$, exactly as in the continuous heat-kernel setting.
+
+\subsection{Kernel approximation and unbiasedness}
+
+The next lemma records the standard unbiasedness property of random Fourier
+features in this heat-weighted setting: the inner product of two feature
+vectors is an unbiased Monte Carlo estimator of $k_t(\alpha,\beta)$.
+
+\begin{lemma}\label{lem:heat-rff-unbiased}
+For all $\alpha,\beta\in K(X,A)$,
+\[
+  \mathbb E\big[\langle\Phi_{t,R}(\alpha),\Phi_{t,R}(\beta)\rangle\big]
+  \ =\ k_t(\alpha,\beta).
+\]
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{def:heat-rff},
+\[
+\begin{aligned}
+\mathbb E\big[\langle\Phi_{t,R}(\alpha),\Phi_{t,R}(\beta)\rangle\big]
+&=\frac{\nu_t(\mathbb T^{|X\setminus A|})}{R}\sum_{r=1}^R
+  \mathbb E\Big[\cos\langle\alpha,\theta^{(r)}\rangle\,
+                \cos\langle\beta,\theta^{(r)}\rangle\\[-2pt]
+&\hphantom{=\frac{\nu_t(\mathbb T^{|X\setminus A|})}{R}\sum_{r=1}^R
+  \mathbb E\Big[}\quad
+               +\sin\langle\alpha,\theta^{(r)}\rangle\,
+                \sin\langle\beta,\theta^{(r)}\rangle\Big].
+\end{aligned}
+\]
+The $\theta^{(r)}$ are i.i.d., so the sum simplifies to a single expectation,
+and the cosine angle-difference identity gives
+\[
+\begin{aligned}
+\mathbb E\big[\langle\Phi_{t,R}(\alpha),\Phi_{t,R}(\beta)\rangle\big]
+&=\nu_t(\mathbb T^{|X\setminus A|})\,\mathbb E\big[\cos\langle\alpha-\beta,\theta^{(1)}\rangle\big]\\
+&=\nu_t(\mathbb T^{|X\setminus A|})
+  \int_{\mathbb T^{|X\setminus A|}}\cos\langle\alpha-\beta,\theta\rangle\,
+          \frac{e^{-t\lambda(\theta)}}{\nu_t(\mathbb T^{|X\setminus A|})}\,d\mu(\theta)\\
+&=\int_{\mathbb T^{|X\setminus A|}} e^{i\langle\alpha-\beta,\theta\rangle}\,
+                     e^{-t\lambda(\theta)}\,d\mu(\theta)\\
+&=k_t(\alpha,\beta),
+\end{aligned}
+\]
+where we used $\cos(x-y)=\cos x\cos y+\sin x\sin y$ and the Bochner form of
+$k_t$.
+\end{proof}
+
+Thus, at the level of kernels, $(\alpha,\beta)\mapsto\langle
+\Phi_{t,R}(\alpha),\Phi_{t,R}(\beta)\rangle$ is a Monte Carlo approximation to
+$k_t(\alpha,\beta)$ that becomes accurate as $R$ grows, while keeping all
+computations in the finite-dimensional Euclidean space $\mathbb R^{2R}$.
+
+\subsection{Lipschitz control for a fixed draw}
+
+We now link the random features back to the VPD metric $\rho$. For a fixed
+draw of frequencies $\{\theta^{(r)}\}$, the following lemma bounds the
+$\rho$-Lipschitz constant of $\Phi_{t,R}$ in terms of the characterwise
+Lipschitz seminorms from Section \ref{subsec:LCA}. This is the finite-dimensional
+counterpart of the RKHS bound in Lemma~\ref{lem:rkhs-lip} and
+Theorem~\ref{thm:heat-lip}.
+
+\begin{lemma}\label{lem:heat-rff-lip}
+For any fixed sample $\{\theta^{(r)}\}_{r=1}^R$,
+\[
+  \mathrm{Lip}_\rho(\Phi_{t,R})
+  \ \le\
+  \sqrt{2\,\nu_t(\mathbb T^{|X \setminus A|})}\,
+  \Bigg(\frac1R\sum_{r=1}^R
+           \mathrm{Lip}_\rho(\chi_{\theta^{(r)}})^2\Bigg)^{\!1/2}.
+\]
+\end{lemma}
+
+\begin{proof}
+Fix $\theta\in\mathbb T^{|X\setminus A|}$. Then, for all $\alpha,\beta\in K(X,A)$,
+\[
+  |\cos\langle\alpha,\theta\rangle-\cos\langle\beta,\theta\rangle|
+  \le |\chi_\theta(\alpha)-\chi_\theta(\beta)|,
+\]
+and similarly for sine, so each of the two coordinates
+\[
+  \alpha\ \longmapsto\ \cos\langle\alpha,\theta\rangle,\qquad
+  \alpha\ \longmapsto\ \sin\langle\alpha,\theta\rangle
+\]
+is $\mathrm{Lip}_\rho(\chi_\theta)$-Lipschitz on $(K(X,A),\rho)$. For
+$\theta^{(r)}$ as in Definition~\ref{def:heat-rff}, the $2R$ coordinates of
+$\Phi_{t,R}$ are therefore each
+$\sqrt{\nu_t(\mathbb T^{|X \setminus A|})/R}\,\mathrm{Lip}_\rho(\chi_{\theta^{(r)}})$-Lipschitz.
+
+For a Euclidean-valued map $F=(f_i)_i$ one has
+\[
+  |F(\alpha)-F(\beta)|_2^2
+  \ \le\ \rho(\alpha,\beta)^2\sum_i \mathrm{Lip}_\rho(f_i)^2,
+\]
+where the sum runs over coordinates $f_i$. Applying this to
+$\Phi_{t,R}$ gives
+\[
+\begin{aligned}
+\mathrm{Lip}_\rho(\Phi_{t,R})^2
+&\ \le\ \frac{\nu_t(\mathbb T^{|X\setminus A|})}{R}\sum_{r=1}^R
+        \bigl(\mathrm{Lip}_\rho(\chi_{\theta^{(r)}})^2
+             +\mathrm{Lip}_\rho(\chi_{\theta^{(r)}})^2\bigr)\\
+&\ =\ 2\,\nu_t(\mathbb T^{|X\setminus A|})\Bigl(\frac1R\sum_{r=1}^R
+              \mathrm{Lip}_\rho(\chi_{\theta^{(r)}})^2\Bigr),
+\end{aligned}
+\]
+and taking square roots yields the claimed inequality.
+\end{proof}
+
+In particular, a single random draw of frequencies already produces a
+finite-dimensional feature map $\Phi_{t,R}$ whose Lipschitz constant is
+controlled by a simple empirical average of the characterwise seminorms.
+The next step is to show that this empirical average concentrates around the
+heat-weighted integral appearing in Theorem~\ref{thm:heat-lip}.
+
+\subsection{Concentration of the Lipschitz integrand}
+
+We now formalize the intuition that, as $R$ grows, the empirical average of
+$\mathrm{Lip}_\rho(\chi_{\theta^{(r)}})^2$ converges to its expectation under
+the heat law. This is just the law of large numbers, but we state it explicitly
+since it is the bridge between Lemma~\ref{lem:heat-rff-lip} and the spectral
+bounds from Section \ref{subsec:heat-rkhs}.
+
+\begin{lemma}\label{lem:heat-rff-lln}
+With $\{\theta^{(r)}\}_{r=1}^R$ as in Definition~\ref{def:heat-rff}, one has
+\[
+  \frac1R\sum_{r=1}^R \mathrm{Lip}_\rho(\chi_{\theta^{(r)}})^2
+  \xrightarrow{\ \mathbb P\ }
+  \frac{1}{\nu_t(\mathbb T^{|X\setminus A|})}
+  \int_{\mathbb T^{|X\setminus A|}}\mathrm{Lip}_\rho(\chi_\theta)^2\,
+  e^{-t\lambda(\theta)}\,d\mu(\theta)
+\]
+as $R\to\infty$.
+\end{lemma}
+
+\begin{proof}
+The random variables
+$\mathrm{Lip}_\rho(\chi_{\theta^{(r)}})^2$ are i.i.d.\ with finite mean
+\[
+\begin{aligned}
+\mathbb E\big[\mathrm{Lip}_\rho(\chi_{\theta^{(1)}})^2\big]
+&=\int_{\mathbb T^{|X\setminus A|}}\mathrm{Lip}_\rho(\chi_\theta)^2\,
+  \frac{e^{-t\lambda(\theta)}}{\nu_t(\mathbb T^{|X \setminus A|})}\,d\mu(\theta)\\
+&=\frac{1}{\nu_t(\mathbb T^{|X\setminus A|})}
+  \int_{\mathbb T^{|X\setminus A|}}\mathrm{Lip}_\rho(\chi_\theta)^2\,
+  e^{-t\lambda(\theta)}\,d\mu(\theta),
+\end{aligned}
+\]
+which is finite by the uniform bounds from Section \ref{subsec:LCA} and the
+definition of $\nu_t$. By the law of large numbers, the empirical averages
+\[
+  \frac1R\sum_{r=1}^R \mathrm{Lip}_\rho(\chi_{\theta^{(r)}})^2
+\]
+converge in probability to this mean as $R\to\infty$.
+\end{proof}
+
+Combining Lemmas~\ref{lem:heat-rff-lip} and~\ref{lem:heat-rff-lln} shows that,
+for large $R$, the Lipschitz constant of $\Phi_{t,R}$ is controlled (in
+probability) by exactly the same heat-weighted integrals of
+$\mathrm{Lip}_\rho(\chi_\theta)^2$ that appear in Theorem~\ref{thm:heat-lip}.
+The next result refines this using the spectral comparison between
+$\lambda(\theta)$ and $\mathrm{Lip}_\rho(\chi_\theta)$.
+
+\subsection{Spectral asymptotics and comparison with the heat kernel}
+
+We now use Lemma~\ref{lem:lambda-vs-L} to rewrite the Lipschitz bound for
+$\Phi_{t,R}$ purely in terms of the Dirichlet symbol $\lambda(\theta)$. This
+matches the spectral form of Corollary~\ref{cor:heat-lip-spectral} and shows
+that the random Fourier features inherit the same smoothing scale as the full
+heat kernel $k_t$ on $K(X,A)$.
+
+\begin{theorem}\label{thm:heat-rff-spectral}
+Fix $t>0$.  As $R\to\infty$, the Lipschitz constants of the feature maps
+\[
+  \Phi_{t,R}:K(X,A)\longrightarrow\mathbb R^{2R}
+\]
+satisfy the asymptotic upper bound
+\[
+  \mathrm{Lip}_\rho(\Phi_{t,R})
+  \ \le\
+  \frac{\pi^2}{2\,d_{\min}\sqrt{w_{\min}}}\,
+  \Bigg(\int_{\mathbb T^{|X \setminus A|}}\lambda(\theta)\,e^{-t\lambda(\theta)}\,d\mu(\theta)\Bigg)^{1/2}
+\quad\text{in probability,}
+\]
+where $w_{\min}$ and $d_{\min}$ are as in Lemma~\ref{lem:lambda-vs-L}.
+\end{theorem}
+
+\begin{proof}
+From Lemma~\ref{lem:heat-rff-lip} and Lemma~\ref{lem:heat-rff-lln},
+\[
+  \mathrm{Lip}_\rho(\Phi_{t,R})^2
+  \ \le\
+  2\,\nu_t(\mathbb T^{|X\setminus A|})\,
+  \frac{1}{\nu_t(\mathbb T^{|X\setminus A|})}
+  \int_{\mathbb T^{|X\setminus A|}}\mathrm{Lip}_\rho(\chi_\theta)^2\,
+                      e^{-t\lambda(\theta)}\,d\mu(\theta)
+\]
+in probability as $R\to\infty$, so
+\[
+  \mathrm{Lip}_\rho(\Phi_{t,R})^2
+  \ \le\
+  2\int_{\mathbb T^{|X\setminus A|}}\mathrm{Lip}_\rho(\chi_\theta)^2\,
+                      e^{-t\lambda(\theta)}\,d\mu(\theta)
+\quad\text{in probability.}
+\]
+By Lemma~\ref{lem:lambda-vs-L},
+\[
+  \mathrm{Lip}_\rho(\chi_\theta)^2
+  \ \le\
+  \frac{\pi^4}{8\,w_{\min}\,d_{\min}^2}\,\lambda(\theta),
+\]
+so
+\[
+  \mathrm{Lip}_\rho(\Phi_{t,R})^2
+  \ \le\
+  \frac{\pi^4}{4\,w_{\min}\,d_{\min}^2}
+  \int_{\mathbb T^{|X\setminus A|}}\lambda(\theta)\,e^{-t\lambda(\theta)}\,d\mu(\theta)
+\quad\text{in probability.}
+\]
+Taking square roots yields
+\[
+  \mathrm{Lip}_\rho(\Phi_{t,R})
+  \ \le\
+  \frac{\pi^2}{2\,d_{\min}\sqrt{w_{\min}}}\,
+  \Bigg(\int_{\mathbb T^{|X\setminus A|}}\lambda(\theta)\,e^{-t\lambda(\theta)}\,d\mu(\theta)\Bigg)^{1/2},
+\]
+as claimed.
+\end{proof}
+
+In words, Theorem~\ref{thm:heat-rff-spectral} shows that, for large $R$, the random Fourier feature map $\Phi_{t,R}$ is a \emph{uniformly Lipschitz} embedding of $(G,\rho)$ into a Euclidean space, with a Lipschitz constant controlled by the same spectral integral that governs the Lipschitz constants of functions in the heat RKHS $\mathcal H_t$ (compare with Corollary~\ref{cor:heat-lip-spectral}). Thus the random feature layer provides a computable surrogate for the heat kernel map: it preserves the VPD geometry up to an explicit, graph-dependent constant, while reducing the problem to ordinary linear methods on $\mathbb R^{2R}$. This is the form used in our implementation of the topology layer in the experimental section, where $t$ and $R$ are treated as hyperparameters controlling, respectively, the smoothing scale and the feature dimension.
+
+\section{Experiments}\label{sec:experiments}
+
+We define the topological loss on the Grothendieck group $K(X,A)$ associated with the persistence-diagram monoid $D(X,A)$ (Section~\ref{subsec:LCA}).  For a ground-truth mask $y$ and prediction $\hat y$, let $D_y,D_{\hat y}\in D(X,A)$ denote their $H_0\oplus H_1$ persistence diagrams under the fixed cubical filtration, regarded as elements of $K(X,A)$ via the canonical inclusion of $D(X,A)$ into its group completion, and set $\gamma := D_{\hat y}-D_y\in K(X,A)$.  Let $k_t$ be the translation-invariant heat kernel on $K(X,A)$ with reproducing kernel Hilbert space $\mathcal H_t$ (Section~\ref{subsec:heat-rkhs}).  The ideal topological loss is the squared RKHS distance
+\begin{equation}\label{eq:Ltopo-ideal}
+\begin{aligned}
+\mathcal L_{\mathrm{topo}}(\gamma)
+&:= \bigl\|k_t(\gamma,\cdot)-k_t(0,\cdot)\bigr\|_{\mathcal H_t}^2 \\
+&= k_t(\gamma,\gamma)+k_t(0,0)-2k_t(\gamma,0) \\
+&= 2\bigl(k_t(0,0)-k_t(\gamma,0)\bigr),
+\end{aligned}
+\end{equation}
+where the last equality uses translation invariance of $k_t$ on $K(X,A)$.  In the finite-dimensional implementation we replace $k_t$ by its random Fourier feature approximation $\Phi_{t,R}:K(X,A)\to\mathbb R^{2R}$ from Section~\ref{subsec:heat-rff}, so that $k_t(\gamma,0)\approx \langle\Phi_{t,R}(\gamma),\Phi_{t,R}(0)\rangle = \|\Phi_{t,R}(\gamma)\|_2^2$.  Substituting this into~\eqref{eq:Ltopo-ideal} gives
+\[
+\mathcal L_{\mathrm{topo}}(\gamma)
+\;\approx\;
+2k_t(0,0)-2\|\Phi_{t,R}(\gamma)\|_2^2,
+\]
+and for optimization we use the equivalent expression obtained by dropping the additive constant,
+\[
+\mathcal L_{\mathrm{topo}}(\gamma)
+\;\approx\;
+\|\Phi_{t,R}(\gamma)\|_2^2.
+\]
+
+The pixelwise term is the soft Dice loss
+\[
+\mathcal L_{\mathrm{Dice}}(y,\hat y)
+=
+1 - \frac{2\langle y,\hat y\rangle + 1}{\|y\|_1+\|\hat y\|_1+1},
+\]
+and the combined objective is
+\[
+\mathcal L_{\mathrm{total}}
+=
+\mathcal L_{\mathrm{Dice}}
++
+w_{\mathrm{topo}}\,
+\mathcal L_{\mathrm{topo}}
+\quad\text{with } w_{\mathrm{topo}}>0.
+\]
+
+\subsection{Experimental setup}
+
+We evaluate on a synthetic \(64\times64\) binary-segmentation dataset constructed by superposing rings, spirals, line segments, and blob clusters, with ground-truth masks taken as the indicator of positive pixels in the noiseless image. The dataset consists of 200 samples split into 100/50/50 train-validation-test sets shared across all runs. Each input is perturbed by a heavy composite noise model (Gaussian, Poisson, speckle, and salt-and-pepper noise, plus uniform jitter), resampled independently each epoch and applied only to inputs. All methods use the same UNet architecture, and we compare Dice loss, Dice plus 2-Wasserstein loss on persistence diagrams, and Dice plus the RKHS loss, with both topological terms using the same cubical filtration and weight \(w_{\mathrm{topo}}=500\), and the RKHS loss using \(t=10\) and \(R=256\). Training uses Adam (learning rate \(10^{-3}\)), batch size 8, and twenty epochs with early-stopping based on validation Dice, and at test time we threshold predictions at 0.5 and report mean IoU and Dice over the 50-image test set.
+
+\subsection{Results}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{figures/comparison_figure.png}
+    \caption{Synthetic testing data showing the original image, noisy network input, ground--truth mask, and the corresponding predictions from the Dice baseline, Wasserstein loss, and RKHS loss.}
+    \label{fig:synthetic-qualitative}
+\end{figure}
+
+Figure~\ref{fig:synthetic-qualitative} shows an unseen test instance in which the Dice baseline fails to recover the correct global topology, the Wasserstein loss partially corrects these structural errors but still distorts the underlying shape, and the RKHS loss yields the most faithful reconstruction, in line with the quantitative trends in Table~\ref{tab:three-way-results}.  
+
+\begin{table}[t]
+  \centering
+  \caption{Three--way comparison on the high--noise synthetic test set.}
+  \label{tab:three-way-results}
+  \begin{tabular}{lcccc}
+    \toprule
+    Model        & IoU    & Dice   & vs.\ Baseline & vs.\ Wasserstein \\
+    \midrule
+    Baseline     & 0.8485 & 0.9176 &         &       \\
+    Wasserstein  & 0.8636 & 0.9264 & +1.79\% &       \\
+    RKHS         & 0.8831 & 0.9377 & +4.08\% & +2.25\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wasserstein improves mean IoU by $+0.0236$ relative to the baseline, while the RKHS loss improves mean IoU by $+0.0376$ and exceeds Wasserstein by an additional $+0.0141$.  Improvements are most pronounced on the lowest $10\%$ of baseline cases, where Wasserstein and RKHS respectively gain $+10.7$ and $+11.8$ percentage points over baseline, with RKHS providing a further $+7.7$ points over Wasserstein.
+
+\section{Conclusion}\label{sec:conclusion}
+
+We have developed a heat-kernel RKHS on the virtual persistence diagram group $K(X,A)$ associated to a finite metric pair $(X,d,A)$, and shown that the resulting feature map is globally $W_1$-Lipschitz.  The construction is organized spectrally by the Laplacian symbol $\lambda(\theta)$ on the dual torus, with heat multipliers $e^{-t\lambda(\theta)}$ providing an explicit stability scale in the parameter $t$.  This yields a family of Wasserstein-stable kernels together with finite-dimensional random Fourier feature approximations that preserve the Lipschitz control (in probability), so that the heat-kernel geometry of virtual diagrams is realized as a computable Euclidean feature map.  In this sense, the paper supplies an explicit, harmonically derived and spectrally interpretable kernel framework for learning on virtual persistence diagrams.
+
+In a noisy, topology-rich segmentation setting, the RKHS loss outperforms a Wasserstein topological loss: it more reliably recovers the global topology of the target and yields the largest gains precisely on images where the Dice baseline is most topologically distorted.  This is consistent with the analytic picture: when the error diagram $\gamma$ has large $W_1$-mass, the heat-kernel embedding produces a well-conditioned, globally Lipschitz gradient that corrects large topological discrepancies, whereas the Wasserstein loss provides a less regularized training signal, so the experiment is used as a concrete illustration of this mechanism.
+
+The main limitations are that the theory is developed for finite-rank virtual diagrams and that the Monte Carlo implementation of the heat kernel introduces stochastic variability.  The stability-discriminativity tradeoff is governed by the heat parameter \(t\), and the empirical study is deliberately narrow, intended only to demonstrate the analytic mechanism rather than to serve as a broad benchmark.
+
+Future directions include extending the harmonic analysis to infinite-rank virtual diagrams and their Cauchy completions, identifying the Sobolev-scale regularity of the heat embedding on the Pontryagin dual torus, and applying symmetric group actions on the Grothendieck group.
+
+\section*{Declarations}
+
+\begin{itemize}
+
+\item \textbf{Competing Interests} The authors declare that they have no competing interests.
+
+\item \textbf{Funding} This research received no external funding.
+
+\item \textbf{Data Availability} Not applicable.
+
+\item \textbf{Code Availability} The implementation used in this work is available at \url{https://github.com/cfanning8/Virtual_Persistence_RKHS}.
+
+\item \textbf{Authors' Contributions}
+C.F. developed the theoretical framework, conducted the experiments, and wrote the manuscript. M.E.A. supervised the project and provided critical feedback on the framework, experiments, and manuscript.
+
+\end{itemize}
+
+%%===========================================================================================%%
+%% If you are submitting to one of the Nature Portfolio journals, using the eJP submission   %%
+%% system, please include the references within the manuscript file itself. You may do this  %%
+%% by copying the reference list from your .bbl file, paste it into the main manuscript .tex %%
+%% file, and delete the associated \verb+\bibliography+ commands.                            %%
+%%===========================================================================================%%
+
+\bibliography{sn-bibliography}% common bib file
+%% if required, the content of .bbl file can be included here once bbl is generated
+% \input sn-article.bbl
+
+\end{document}

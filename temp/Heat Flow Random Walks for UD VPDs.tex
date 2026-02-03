@@ -1,0 +1,3190 @@
+%Version 3.1 December 2024
+% See section 11 of the User Manual for version history
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                 %%
+%% Please do not use \input{...} to include other tex files.       %%
+%% Submit your LaTeX manuscript as one .tex document.              %%
+%%                                                                 %%
+%% All additional figures and files should be attached             %%
+%% separately and not embedded in the \TeX\ document itself.       %%
+%%                                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%\documentclass[referee,sn-basic]{sn-jnl}% referee option is meant for double line spacing
+
+%%=======================================================%%
+%% to print line numbers in the margin use lineno option %%
+%%=======================================================%%
+
+%%\documentclass[lineno,pdflatex,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+%%=========================================================================================%%
+%% the documentclass is set to pdflatex as default. You can delete it if not appropriate.  %%
+%%=========================================================================================%%
+
+%%\documentclass[sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+
+%%Note: the following reference styles support Namedate and Numbered referencing. By default the style follows the most common style. To switch between the options you can add or remove Numbered in the optional parenthesis. 
+%%The option is available for: sn-basic.bst, sn-chicago.bst%  
+ 
+%%\documentclass[pdflatex,sn-nature]{sn-jnl}% Style for submissions to Nature Portfolio journals
+%%\documentclass[pdflatex,sn-basic]{sn-jnl}% Basic Springer Nature Reference Style/Chemistry Reference Style
+\documentclass[pdflatex,sn-mathphys-num]{sn-jnl}% Math and Physical Sciences Numbered Reference Style
+%%\documentclass[pdflatex,sn-mathphys-ay]{sn-jnl}% Math and Physical Sciences Author Year Reference Style
+%%\documentclass[pdflatex,sn-aps]{sn-jnl}% American Physical Society (APS) Reference Style
+%%\documentclass[pdflatex,sn-vancouver-num]{sn-jnl}% Vancouver Numbered Reference Style
+%%\documentclass[pdflatex,sn-vancouver-ay]{sn-jnl}% Vancouver Author Year Reference Style
+%%\documentclass[pdflatex,sn-apa]{sn-jnl}% APA Reference Style
+%%\documentclass[pdflatex,sn-chicago]{sn-jnl}% Chicago-based Humanities Reference Style
+
+%%%% Standard Packages
+%%<additional latex packages if required can be included here>
+
+\usepackage{graphicx}%
+\usepackage{multirow}%
+\usepackage{amsmath,amssymb,amsfonts}%
+\usepackage{amsthm}%
+\usepackage{mathrsfs}%
+\usepackage[title]{appendix}%
+\usepackage{xcolor}%
+\usepackage{textcomp}%
+\usepackage{manyfoot}%
+\usepackage{booktabs}%
+\usepackage{algorithm}%
+\usepackage{algorithmicx}%
+\usepackage{algpseudocode}%
+\usepackage{listings}%
+%%%%
+
+%%%%%=============================================================================%%%%
+%%%%  Remarks: This template is provided to aid authors with the preparation
+%%%%  of original research articles intended for submission to journals published 
+%%%%  by Springer Nature. The guidance has been prepared in partnership with 
+%%%%  production teams to conform to Springer Nature technical requirements. 
+%%%%  Editorial and presentation requirements differ among journal portfolios and 
+%%%%  research disciplines. You may find sections in this template are irrelevant 
+%%%%  to your work and are empowered to omit any such section if allowed by the 
+%%%%  journal you intend to submit to. The submission guidelines and policies 
+%%%%  of the journal take precedence. A detailed User Manual is available in the 
+%%%%  template package for technical guidance.
+%%%%%=============================================================================%%%%
+
+%% as per the requirement new theorem styles can be included as shown below
+\theoremstyle{thmstyleone}%
+\newtheorem{theorem}{Theorem}%  meant for continuous numbers
+%%\newtheorem{theorem}{Theorem}[section]% meant for sectionwise numbers
+%% optional argument [theorem] produces theorem numbering sequence instead of independent numbers for Proposition
+\newtheorem{proposition}[theorem]{Proposition}% 
+%%\newtheorem{proposition}{Proposition}% to get separate numbers for theorem and proposition etc.
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{thmstyletwo}%
+\newtheorem{example}{Example}%
+\newtheorem{remark}{Remark}%
+
+\theoremstyle{thmstylethree}%
+\newtheorem{definition}{Definition}%
+
+\raggedbottom
+%%\unnumbered% uncomment this for unnumbered level heads
+
+\begin{document}
+
+\title[Heat Flows on Virtual Persistence Diagrams]{Heat Flows on Virtual Persistence Diagrams}
+
+%%=============================================================%%
+%% GivenName	-> \fnm{Joergen W.}
+%% Particle	-> \spfx{van der} -> surname prefix
+%% FamilyName	-> \sur{Ploeg}
+%% Suffix	-> \sfx{IV}
+%% \author*[1,2]{\fnm{Joergen W.} \spfx{van der} \sur{Ploeg} 
+%%  \sfx{IV}}\email{iauthor@gmail.com}
+%%=============================================================%%
+
+\author{\fnm{Charles} \sur{Fanning}}\email{cfannin8@students.kennesaw.edu}
+
+\author{\fnm{Mehmet} \sur{Aktas}}\email{maktas1@kennesaw.edu}
+% \equalcont{These authors contributed equally to this work.}
+
+\affil{\orgdiv{School of Data Science and Analytics}, \orgname{Kennesaw State University}, \orgaddress{\street{1000 Chastain Rd NW}, \city{Kennesaw}, \postcode{30144}, \state{Georgia}, \country{United States}}}
+
+%%==================================%%
+%% Sample for unstructured abstract %%
+%%==================================%%
+
+\abstract{
+Persistence diagrams encode the interval decomposition of persistence modules arising from filtered topological data and are equipped with bottleneck and Wasserstein matching metrics. Algebraically, finite persistence diagrams form a commutative monoid with nonnegative multiplicities, supporting addition but not cancellation, which restricts the arithmetic available for translation invariant constructions compatible with the matching geometry. Virtual persistence diagrams extend this arithmetic by Grothendieck completion, allowing signed multiplicities and yielding a translation invariant metric group $(K(X,A),\rho)$ that preserves the Wasserstein--1 geometry. When the pointed metric space $(X/A,\overline d_1,[A])$ is uniformly discrete, $(K(X,A),\rho)$ is a discrete locally compact abelian group, but may be uncountable. We construct translation invariant heat and jump dynamics on $K(X,A)$ using convolution semigroups with $\ell^1(K(X,A))$ kernels, so that all operators and observables are defined by countable absolutely convergent series. Every symmetric $\ell^1$ continuous subprobability convolution semigroup $(p_t)_{t \ge 0}$ admits a unique Levy--Khintchine type exponent representation $\widehat p_t(\chi)=e^{-t\lambda(\chi)}$, with $\lambda$ obtained by pullback from a continuous conditionally negative definite function on the Pontryagin dual of a canonical countable subgroup $H \le K(X,A)$ generated by the kernel supports. Convolution preserves cosets of $H$, and all trajectories and observables are therefore supported on $H$ or its translates, where Fourier transforms, exponent representations, and Dirichlet forms are well defined without further topological assumptions. Under a finite total jump rate assumption, the translation invariant generators on $H$ are explicitly identified as weighted difference operators, and the associated symmetric Dirichlet forms are closed on $\ell^2(H)$. In this regime, the heat kernels admit exact compound Poisson representations with killing, allowing analytic spectral quantities governing heat regularization to be expressed in terms of return, collision, and occupation probabilities. In particular, the spectral integrals controlling Lipschitz and smoothing bounds for the heat flow are identified with derivatives and transforms of the heat kernel return probability. These identities reduce the evaluation of the analytic quantities appearing in the theory to probabilistic observables of a countable continuous time random walk, which can be approximated by unbiased Monte Carlo methods with explicit variance and cost control. Infinite activity cases are handled by truncation and subordination, yielding monotone convergent approximations to the same analytic quantities.
+}
+
+\keywords{persistent homology, virtual persistence diagrams, Dirichlet forms,
+heat semigroups, Lipschitz stability}
+
+\pacs[MSC Classification]{60J27, 60B15, 46E22, 68T07, 55N31}
+
+\maketitle
+
+\section{Introduction}
+
+Persistent homology assigns to a filtered topological space a persistence module
+and encodes its interval decomposition by a persistence diagram.  Stability of
+persistence diagrams with respect to perturbations of the input is governed by
+matching metrics, most prominently the bottleneck and Wasserstein distances.
+From an algebraic viewpoint, the collection of finite persistence diagrams forms
+a commutative monoid with nonnegative multiplicities: addition is defined, but
+cancellation is not.  This arithmetic restriction limits the expressivity of
+translation--invariant constructions that are intrinsically compatible with the
+matching geometry, since signed superpositions of diagrammatic features cannot
+be represented within the monoid itself.
+
+Virtual persistence diagrams resolve this limitation by passing to the
+Grothendieck completion of the diagram monoid.  Given a metric pair $(X,d,A)$,
+\cite{bubenik2022virtualpd} constructs the Grothendieck group $K(X,A)$ of finite
+diagrams relative to $A$ and equips it with a canonical translation--invariant
+metric $\rho$ extending the $1$--Wasserstein distance induced by the strengthened
+ground metric $\overline d_1$ on the pointed quotient $(X/A,\overline d_1,[A])$.
+Throughout this paper we work in the uniformly discrete regime, meaning that
+distinct points in $(X/A,\overline d_1)$ have a positive minimal separation.
+Under this hypothesis, the virtual persistence diagram group $(K(X,A),\rho)$ is a
+discrete locally compact abelian group
+(Proposition~\ref{prop:uniformly-discrete-discrete-K}), algebraically
+isomorphic to the free abelian group on $X\setminus A$, possibly of infinite
+rank.
+
+Although $(K(X,A),\rho)$ is locally compact in this regime, it may be
+uncountable.  A central design constraint of this paper is therefore to avoid
+any reliance on global Plancherel theory or Fourier inversion on $K(X,A)$ itself.
+Instead, all translation--invariant dynamics are constructed at the level of
+$\ell^1(K(X,A))$ convolution kernels.  Since every $\ell^1$ function on a
+discrete set has countable support, all operators and observables appearing in
+the paper are defined by countable absolutely convergent series
+(Lemma~\ref{lem:countable-support-stoch}).  This constraint ensures that the
+analytic and probabilistic constructions remain meaningful even when $K(X,A)$
+is uncountable.
+
+\subsection{Our contributions}
+
+Our first contribution is an $\ell^1$--based formulation of translation--invariant
+subprobability convolution semigroups on the discrete group $K(X,A)$.  We
+formalize symmetric $\ell^1$--continuous convolution semigroups
+$(p_t)_{t\ge0}\subset\ell^1(K)$ and their associated operators $P_t f=p_t*f$
+(Section~\ref{sec:ti-classification}).  The $\ell^1$ setting guarantees that all
+convolution formulas and semigroup identities are expressed as countable
+absolutely convergent series (Lemma~\ref{lem:countable-support-stoch}).
+
+Our second contribution is the identification of a canonical effective state
+space for every such semigroup.  From $(p_t)$ we define the subgroup
+\[
+H:=\Bigl\langle \bigcup_{t\in\mathbb Q_{\ge0}}\mathrm{supp}(p_t)\Bigr\rangle \le K,
+\]
+which is countable by construction.  We prove that $\mathrm{supp}(p_t)\subseteq H$
+for all $t\ge0$ (Proposition~\ref{prop:supp-in-H}) and that convolution preserves
+cosets of $H$ (Proposition~\ref{prop:coset-invariance}).  Consequently, any
+trajectory started at $0$ evolves entirely within $H$, while a trajectory
+started at $x\in K$ evolves within the coset $x+H$
+(Remark~\ref{rem:effective-cosets}).  All effective dynamics therefore occur on
+the countable group $H$, without loss of generality.
+
+Our third contribution is the precise exponent representation of translation--invariant
+convolution dynamics obtained by applying Levy--Khintchine--Hunt theory on the
+countable group $H$.  The restriction map $r:\widehat K\to\widehat H$ is
+continuous and surjective (Lemma~\ref{lem:restriction-surjective}), and the
+Fourier multipliers of $(p_t)$ factor through $r$
+(Proposition~\ref{prop:factorization}).  Since $H$ is discrete and $\sigma$--compact,
+Levy--Khintchine--Hunt theory on locally compact abelian groups applies; see
+\cite{BergForst1975}.  We obtain a unique continuous conditionally negative
+definite function $\lambda_H:\widehat H\to[0,\infty)$ such that
+\[
+\widehat p_t^{\,H}(\theta)=\exp(-t\lambda_H(\theta)),
+\qquad \theta\in\widehat H,\ t\ge0,
+\]
+(Theorem~\ref{thm:exponent}).  Pullback along $r$ yields the symbol
+$\lambda=\lambda_H\circ r$ on $\widehat K$, providing an exponent representation
+for $\widehat p_t$ without invoking global Fourier inversion on $K(X,A)$.
+
+Our fourth contribution concerns the finite total jump rate regime, in which the
+semigroup admits an explicit stochastic realization.  Under the finite--rate
+hypothesis (Definition~\ref{def:finite-rate}), the generator is a weighted
+difference operator on $H$, and the semigroup is realized as a continuous--time
+compound Poisson jump process with killing
+(Proposition~\ref{prop:compound-poisson}).  The corresponding exponent
+$\lambda_H$ admits an explicit Levy--Khintchine series representation
+(Theorem~\ref{thm:LK-finite}), and the associated symmetric form is bounded and
+closed on $\ell^2(H)$ and defines a Dirichlet form in the sense of
+\cite{FukushimaOshimaTakeda1994} (Propositions~\ref{prop:closedness-finite} and
+\ref{prop:dirichlet-finite}).  Standard pure--jump continuous--time Markov chain
+facts used in the generator analysis follow \cite{liggett2010ctmp}.
+
+Our final contribution is the identification of analytic spectral quantities with
+probabilistic observables of the jump process on $H$.  We define the heat trace
+$Z_H(t)$ and energy trace $E_H(t)$ in terms of $\lambda_H$
+(Definition~\ref{def:Z-on-H}) and prove the identities
+$Z_H(t)=p_t(0)$ (Proposition~\ref{prop:return-id-H}) and, in the finite--rate case,
+$E_H(t)=-Z'_{H,+}(t)$ (Proposition~\ref{prop:energy-derivative-H}).  Thus, the
+spectral integrals governing the semigroup are reduced to scalar return
+probabilities and their time derivatives.  Under an additional finite--range
+assumption, this reduction yields exact return identities
+(Proposition~\ref{prop:return-identity-energy}), enabling unbiased Monte Carlo
+evaluation of the analytic quantities of interest.  Infinite--activity regimes
+are treated by truncation and subordination.
+
+\subsection{Organization of the paper}
+
+Section~\ref{sec:background} reviews virtual persistence diagrams and the
+Grothendieck--Wasserstein metric and establishes discreteness of $(K(X,A),\rho)$
+under uniform discreteness.  Section~\ref{sec:ti-classification} develops the
+$\ell^1$--based theory of translation--invariant convolution semigroups on $K$,
+introduces the canonical effective subgroup $H$, and proves the exponent
+representation.  Section~\ref{subsec:finite-rate} treats the finite--rate
+jump--killing regime and the associated generator and Dirichlet form.  Finally,
+Section~\ref{sec:stoch-mc} establishes the probabilistic identities for spectral
+observables and analyzes the resulting Monte Carlo estimators.
+
+\section{Background and Notation}
+\label{sec:background}
+
+Throughout this paper, $(X,d,A)$ denotes a metric pair, where
+$d\colon X\times X\to[0,\infty]$ is an extended metric and $A\subseteq X$ is a
+distinguished subset, referred to as the diagonal. Let $X/A$ denote the quotient
+space obtained by collapsing $A$ to a single point, and write $[A]\in X/A$ for the
+resulting basepoint. We freely identify $(X,d,A)$ with the pointed metric space
+$(X/A,\overline d,[A])$, where $\overline d$ is the quotient metric induced by $d$,
+following \cite{bubenik2022virtualpd}.
+
+\subsection{Virtual Persistence Diagrams}
+
+Assume that $A\neq\varnothing$. For $x\in X$, define
+$d(x,A):=\inf_{a\in A} d(x,a)$ and define the $1$--strengthened metric on $X$ by
+\[
+d_1(x,y):=\min\bigl(d(x,y),\, d(x,A)+d(y,A)\bigr).
+\]
+As shown in \cite{bubenik2022virtualpd}, $d_1$ descends to a genuine metric
+$\overline d_1$ on $X/A$, which is fixed throughout as the ground metric for all
+Wasserstein and analytic constructions.
+
+Let $D(X)$ denote the free commutative monoid on $X$, realized as the set of
+finitely supported functions $f\colon X\to\mathbb N$ with pointwise addition, and
+let $D(A)\subseteq D(X)$ be the submonoid of functions supported on $A$. The
+quotient commutative monoid
+\[
+D(X,A):=D(X)/D(A)
+\]
+is the monoid of finite persistence diagrams on $(X,d,A)$, with neutral element
+denoted by $0$. Its Grothendieck group completion is denoted by $K(X,A)$.
+
+Let $W_1$ denote the $1$--Wasserstein metric on $D(X,A)$ induced by the ground
+metric $\overline d_1$ on $X/A$, as defined in \cite{bubenik2022virtualpd}. In the
+$p=1$ setting, $W_1$ is translation invariant with respect to the monoid
+operation. This invariance implies that the formula
+\[
+\rho(\alpha-\beta,\gamma-\delta)
+:=
+W_1(\alpha+\delta,\gamma+\beta),
+\qquad
+\alpha,\beta,\gamma,\delta\in D(X,A),
+\]
+is well defined and defines a translation--invariant metric on $K(X,A)$ extending
+$W_1$ along the canonical embedding $D(X,A)\hookrightarrow K(X,A)$. We refer to
+$(K(X,A),\rho)$ as the virtual persistence diagram group equipped with its
+$1$--Wasserstein metric \cite{bubenik2022virtualpd}.
+
+\subsection{Reproducing Kernel Hilbert Spaces for Virtual Persistence Diagrams}
+
+\subsubsection{Finite virtual persistence diagrams}
+
+Assume that $X\setminus A$ is finite. Then $K(X,A)$ is the free abelian group on
+$X\setminus A$, which we identify with $\mathbb Z^{|X\setminus A|}$ after fixing an
+ordering of $X\setminus A$. The Pontryagin dual of $K(X,A)$ is therefore
+$\widehat K\cong\mathbb T^{|X\setminus A|}$, equipped with normalized Haar
+probability measure $\mu$, and for $\theta\in\widehat K$ and $\gamma\in K(X,A)$ we
+write the corresponding character as $\chi_\theta(\gamma):=e^{i\langle
+\gamma,\theta\rangle}$.
+
+\begin{lemma}[{\cite[Lemma~3]{fanning2025reproducingkernelhilbertspaces}}]
+\label{lem:phase-vs-lip}
+For every $\theta\in\mathbb T^{|X\setminus A|}$, the $\rho$--Lipschitz seminorm of
+the character $\chi_\theta$ is finite and is controlled, up to universal
+constants, by the corresponding phase increments on $(X/A,\overline d_1)$.
+\end{lemma}
+
+Let $w_{\min}$ and $w_{\max}$ denote the minimal and maximal nonzero edge weights,
+and let $d_{\min}$ and $d_{\max}$ denote the minimal and maximal nonzero edge
+lengths, in the weighted graph model of $(X/A,\overline d_1)$ used in
+\cite{fanning2025reproducingkernelhilbertspaces}. Let $\lambda(\theta)$ denote the
+corresponding Laplacian symbol on $\mathbb T^{|X\setminus A|}$.
+
+\begin{lemma}[{\cite[Lemma~4]{fanning2025reproducingkernelhilbertspaces}}]
+\label{lem:lambda-vs-L}
+For every $\theta\in\mathbb T^{|X\setminus A|}$,
+\[
+\frac{2\,w_{\min}\,d_{\min}^2}{\pi^2}\,
+\mathrm{Lip}_\rho(\chi_\theta)^2
+\ \le\
+\lambda(\theta)
+\ \le\
+\frac{\pi^2}{4}\,w_{\max}\,|X\setminus A|\,d_{\max}^2\,
+\mathrm{Lip}_\rho(\chi_\theta)^2.
+\]
+\end{lemma}
+
+\begin{corollary}[Spectral form {\cite[Corollary~2]{fanning2025reproducingkernelhilbertspaces}}]
+\label{cor:heat-lip-spectral}
+For every $t>0$ and every $f\in\mathcal H_t$,
+\[
+  \mathrm{Lip}_\rho(f)\ \le\ \frac{\pi}{d_{\min}\sqrt{2\,w_{\min}}}\,
+  \|f\|_{\mathcal H_t}\,
+  \Bigg(
+  \int_{\mathbb T^{|X\setminus A|}}
+  \lambda(\theta)\,e^{-t\lambda(\theta)}\,d\mu(\theta)
+  \Bigg)^{1/2},
+\]
+with $w_{\min}$ and $d_{\min}$ as in Lemma~\ref{lem:lambda-vs-L}.
+\end{corollary}
+
+\medskip
+
+\subsubsection{Discrete virtual persistence diagrams}
+
+Assume that the pointed metric space $(X/A,\overline d_1,[A])$ is uniformly
+discrete. Then the virtual persistence diagram group $(K(X,A),\rho)$ is a
+discrete topological abelian group; in particular, it is locally compact and
+admits Pontryagin duality at the level of topological groups. Algebraically,
+$K(X,A)$ is the free abelian group on $X\setminus A$, canonically identified with
+the direct sum $\bigoplus_{x\in X\setminus A}\mathbb Z$, possibly of infinite
+rank, and its Pontryagin dual is the compact group $\widehat K$ canonically
+identified with the direct product $\prod_{x\in X\setminus A}\mathbb T$,
+equipped with normalized Haar probability measure $\mu$.
+
+\begin{proposition}\label{prop:uniformly-discrete-discrete-K}
+If $(X/A,\overline d_1)$ is uniformly discrete, then $(K(X,A),\rho)$ is discrete.
+\end{proposition}
+
+\begin{proof}
+Translation invariance of $\rho$ implies that $K(X,A)$ is a Hausdorff topological
+group. Let $g\in K(X,A)\setminus\{0\}$ and write $g=\alpha-\beta$ with
+$\alpha,\beta\in D(X,A)$. Since $\alpha\neq\beta$ in $D(X,A)$, any matching
+admissible in the definition of $W_1$ between $\alpha$ and $\beta$ must include
+at least one pair of distinct points in $X/A$. Uniform discreteness of
+$(X/A,\overline d_1)$ therefore implies the existence of $\varepsilon>0$ such that
+every such matching has total cost at least $\varepsilon$. Taking the infimum
+over matchings yields $W_1(\alpha,\beta)\ge\varepsilon$, and hence
+$\rho(g,0)\ge\varepsilon$. Thus $0$ is isolated and $(K(X,A),\rho)$ is discrete.
+\end{proof}
+
+\subsection{Markov semigroups}\label{subsec:background-markov}
+
+Let $K$ be a discrete abelian group.  A family $(P_t)_{t\ge 0}$ of
+bounded linear operators on $\ell^2(K)$ is called a \emph{Markov
+semigroup} if the following conditions hold:
+\begin{enumerate}
+  \item $P_0=\mathrm{Id}$ and $P_{s+t}=P_sP_t$ for all $s,t\ge 0$;
+  \item each $P_t$ is a contraction on $\ell^2(K)$, preserves
+        nonnegativity (that is, $f\ge 0$ implies $P_t f\ge 0$), and
+        preserves constants (that is, $P_t\mathbf 1=\mathbf 1$);
+  \item the semigroup is \emph{strongly continuous} on $\ell^2(K)$, i.e.,
+        for every $f\in\ell^2(K)$ the map
+        $t\mapsto P_t f$ is continuous from $[0,\infty)$ into $\ell^2(K)$.
+\end{enumerate}
+The semigroup is called \emph{symmetric} if each $P_t$ is self--adjoint
+on $\ell^2(K)$.
+
+For $\alpha\in K$, define the translation operator
+\[
+  (\tau_\alpha f)(\beta) := f(\beta-\alpha),
+  \qquad \beta\in K.
+\]
+A Markov semigroup $(P_t)$ on $\ell^2(K)$ is called
+\emph{translation invariant} if
+\[
+  P_t\tau_\alpha = \tau_\alpha P_t
+  \qquad\text{for all } t\ge 0 \text{ and } \alpha\in K.
+\]
+
+If $(P_t)_{t\ge 0}$ is a symmetric, strongly continuous Markov semigroup
+on $\ell^2(K)$, then there exists a densely defined, nonnegative,
+self--adjoint operator $L$ on $\ell^2(K)$ such that
+\[
+  P_t = e^{-tL},
+  \qquad t\ge 0,
+\]
+in the sense of the spectral functional calculus.  Following standard
+convention, the operator $-L$ is called the (infinitesimal) generator of
+the semigroup.  General background on Markov semigroups and their
+generators on countable state spaces may be found in
+\cite{liggett2010ctmp}.
+
+\medskip
+
+A fundamental class of Markov semigroups on discrete state spaces is
+provided by continuous--time random walks.  Such a process is specified
+by a \emph{jump kernel} $q\colon K\times K\to[0,\infty)$ satisfying
+\[
+  q(\alpha,\alpha)=0
+  \quad\text{and}\quad
+  \sum_{\beta\in K} q(\alpha,\beta)<\infty
+  \qquad\text{for all }\alpha\in K.
+\]
+The associated generator $L$ acts on finitely supported functions
+$f\colon K\to\mathbb C$ by
+\begin{equation}\label{eq:background-generator}
+  (Lf)(\alpha)
+  \;=\;
+  \sum_{\beta\in K}
+  q(\alpha,\beta)\bigl(f(\alpha)-f(\beta)\bigr),
+  \qquad \alpha\in K.
+\end{equation}
+Under the above assumptions, $L$ is closable and its closure defines a
+nonnegative self--adjoint operator on $\ell^2(K)$, generating a
+symmetric Markov semigroup via $P_t=e^{-tL}$.
+
+The jump kernel $q$ is called \emph{symmetric} if
+\[
+  q(\alpha,\beta)=q(\beta,\alpha)
+  \qquad\text{for all }\alpha,\beta\in K.
+\]
+In this case, the associated Dirichlet form
+$\mathcal E\colon \ell^2(K)\times\ell^2(K)\to\mathbb R$ is given by
+\[
+  \mathcal E(f,g)
+  \;:=\;
+  \langle f,-Lg\rangle_{\ell^2(K)}
+  \;=\;
+  \frac12
+  \sum_{\alpha,\beta\in K}
+  \bigl(f(\alpha)-f(\beta)\bigr)
+  \bigl(g(\alpha)-g(\beta)\bigr)
+  q(\alpha,\beta),
+\]
+and satisfies $\mathcal E(f,f)\ge 0$ for all $f\in\ell^2(K)$.
+
+On a discrete abelian group $K$, translation invariance of the Markov
+semigroup is equivalent to the existence of a function
+$j\colon K\to[0,\infty)$ with $j(0)=0$ and $\sum_{\gamma\in K} j(\gamma)<\infty$
+such that
+\[
+  q(\alpha,\beta)=j(\beta-\alpha),
+  \qquad \alpha,\beta\in K.
+\]
+In this situation, both the generator~\eqref{eq:background-generator}
+and the Dirichlet form $\mathcal E$ are completely determined by the
+jump intensity $j$ and the group structure of $K$.
+
+\section{Infinite-dimensional heat-kernel RKHS on discrete VPD groups}
+
+\begin{definition}\label{def:standing-hypothesis}
+The standing hypothesis for this section is:
+\begin{enumerate}
+\item[(H)] The pointed metric space $(X/A,\overline d_1,[A])$ is uniformly discrete.
+\end{enumerate}
+Under hypothesis \emph{(H)}, the virtual persistence diagram group
+$(K(X,A),\rho)$ is a locally compact abelian group.
+\end{definition}
+
+\begin{lemma}[Finite-volume heat kernels]\label{lem:finite-volume-heat}
+Assume \emph{(H)}. For every finite subset $F\Subset X\setminus A$ there exists a
+symmetric, translation--invariant, strongly continuous Markov semigroup
+$(\widetilde P_t^F)_{t\ge0}$ on
+$\ell^2\bigl(\bigoplus_{x\in F}\mathbb Z e_x\bigr)$, and these semigroups are
+consistent under restriction: whenever $F\subset G\Subset X\setminus A$, every
+$t\ge0$, every $f\in\ell^2\bigl(\bigoplus_{x\in F}\mathbb Z e_x\bigr)$, and every
+$\gamma\in\bigoplus_{x\in F}\mathbb Z e_x$, we have
+\[
+  \widetilde P_t^G f(\gamma)
+  \;=\;
+  \widetilde P_t^F f(\gamma),
+\]
+where $f$ is extended by zero to
+$\ell^2\bigl(\bigoplus_{x\in G}\mathbb Z e_x\bigr)$.
+\end{lemma}
+
+\begin{proof}
+Fix a finite subset $F\Subset X\setminus A$ and set $X_F:=A\cup F$. Then
+$(X_F,d,A)$ is a metric pair with $X_F\setminus A=F$ finite, so all of the finite
+machinery of \cite{fanning2025reproducingkernelhilbertspaces} applies to it. In
+particular,
+\[
+  K(X_F,A)\;\cong\;\bigoplus_{x\in F}\mathbb Z e_x,
+\]
+and there is a finite weighted graph $H_F$ on the vertex set $X_F/A$ whose
+shortest-path metric is $\overline d_1$ restricted to $X_F/A$, with edge weights
+chosen canonically from $\overline d_1$ as in
+\cite[Section~\ref{sec:heat-flow}]{fanning2025reproducingkernelhilbertspaces}. The
+graph Laplacian $L_F$ associated to $H_F$ is a nonnegative self--adjoint operator
+on $\ell^2\bigl(K(X_F,A)\bigr)$, and its heat semigroup
+$(e^{-tL_F})_{t\ge0}$ is symmetric, translation--invariant, strongly continuous,
+and Markov on $\ell^2\bigl(K(X_F,A)\bigr)$; see
+\cite[Section~\ref{sec:heat-flow}]{fanning2025reproducingkernelhilbertspaces}.
+Transporting $(e^{-tL_F})_{t\ge0}$ along the identification
+$K(X_F,A)\cong\bigoplus_{x\in F}\mathbb Z e_x$ yields a symmetric,
+translation--invariant, strongly continuous Markov semigroup
+$(\widetilde P_t^F)_{t\ge0}$ on
+$\ell^2\bigl(\bigoplus_{x\in F}\mathbb Z e_x\bigr)$.
+
+We now check restriction consistency. Let $F\subset G\Subset X\setminus A$ and set
+$X_G:=A\cup G$. Applying the same finite construction to $X_G$ gives a finite
+weighted graph $H_G$ on $X_G/A$ with shortest-path metric equal to
+$\overline d_1$ on $X_G/A$ and graph Laplacian $L_G$ on
+$\ell^2\bigl(K(X_G,A)\bigr)$. Since both $H_F$ and $H_G$ are obtained from
+$\overline d_1$ by the same local rule on finite vertex sets, the graph $H_F$ is
+exactly the induced subgraph of $H_G$ on the vertex set $X_F/A\subset X_G/A$.
+Consequently, the associated Dirichlet forms and Laplacians satisfy
+\[
+  L_G f = L_F f
+  \quad\text{on }K(X_F,A),
+\]
+for every $f\in\ell^2\bigl(K(X_F,A)\bigr)$ viewed as a function on $K(X_G,A)$ by
+extension by zero off the subgroup corresponding to $K(X_F,A)$. Since $L_G$ and
+$L_F$ agree on this invariant subspace, their heat semigroups coincide there:
+\[
+  e^{-tL_G} f(\gamma)
+  =
+  e^{-tL_F} f(\gamma),
+  \qquad \gamma\in K(X_F,A),\ t\ge0.
+\]
+
+Translating this identity via the identifications
+\[
+  K(X_F,A)\cong\bigoplus_{x\in F}\mathbb Z e_x,
+  \qquad
+  K(X_G,A)\cong\bigoplus_{x\in G}\mathbb Z e_x,
+\]
+and writing $\widetilde P_t^F$ and $\widetilde P_t^G$ for the corresponding
+semigroups on the diagram groups, we obtain
+\[
+  \widetilde P_t^G f(\gamma)
+  \;=\;
+  \widetilde P_t^F f(\gamma),
+  \qquad
+  \gamma\in\bigoplus_{x\in F}\mathbb Z e_x,\ t\ge0,
+\]
+for every $f\in\ell^2\bigl(\bigoplus_{x\in F}\mathbb Z e_x\bigr)$ extended by zero
+to $\ell^2\bigl(\bigoplus_{x\in G}\mathbb Z e_x\bigr)$. This is exactly the
+restriction property asserted in the statement.
+\end{proof}
+
+\begin{theorem}[Global heat semigroup from finite instructions]
+\label{thm:kolmogorov-heat}
+There exists a unique symmetric, translation--invariant, strongly continuous
+Markov semigroup $(P_t)_{t\ge0}$ on $\ell^2\bigl(K(X,A)\bigr)$ such that, for every
+finite $F\Subset X\setminus A$ and every $t\ge0$, the restriction of $P_t$ to
+$\ell^2\bigl(\bigoplus_{x\in F}\mathbb Z e_x\bigr)$ coincides with
+$\widetilde P_t^F$.
+\end{theorem}
+
+\begin{proof}
+Let $K:=K(X,A)$ and let $\mathcal S\subset\ell^2(K)$ denote the subspace of finitely
+supported functions.
+
+\emph{Existence.}
+For $f\in\mathcal S$ and $t\ge0$, choose a finite subset $F\Subset X\setminus A$
+such that
+\[
+  \mathrm{supp}(f)\ \subset\ \bigoplus_{x\in F}\mathbb Z e_x,
+\]
+and define $P_t f\colon K\to\mathbb R$ by
+\[
+  P_t f(\gamma)
+  :=
+  \begin{cases}
+    \widetilde P_t^F\bigl(f|_{\oplus_{x\in F}\mathbb Z e_x}\bigr)(\gamma),
+      & \gamma\in\bigoplus_{x\in F}\mathbb Z e_x,\\[0.25em]
+    0, & \gamma\notin\bigoplus_{x\in F}\mathbb Z e_x.
+  \end{cases}
+\]
+We first check that this definition does not depend on the choice of $F$. Suppose
+$F_1$ and $F_2$ are finite subsets of $X\setminus A$ with
+\[
+  \mathrm{supp}(f)
+  \;\subset\;
+  \bigoplus_{x\in F_1}\mathbb Z e_x
+  \;\cap\;
+  \bigoplus_{x\in F_2}\mathbb Z e_x,
+\]
+and set $G:=F_1\cup F_2$. Then $F_1\subset G$ and $F_2\subset G$, and extending $f$
+by zero to $\ell^2\bigl(\bigoplus_{x\in G}\mathbb Z e_x\bigr)$, consistency gives
+\[
+  \widetilde P_t^{F_1} f(\gamma)
+  =
+  \widetilde P_t^{G} f(\gamma)
+  =
+  \widetilde P_t^{F_2} f(\gamma),
+  \qquad
+  \gamma\in
+  \bigoplus_{x\in F_1}\mathbb Z e_x
+  \cap
+  \bigoplus_{x\in F_2}\mathbb Z e_x.
+\]
+Hence $P_t f$ is well defined on $K$.
+
+Linearity of $P_t$ on $\mathcal S$ follows from linearity of each
+$\widetilde P_t^F$. Since each $\widetilde P_t^F$ is a symmetric Markov operator on
+the finite counting space $\bigoplus_{x\in F}\mathbb Z e_x$, it is represented by a
+symmetric stochastic matrix and therefore satisfies
+\[
+  \bigl\|\widetilde P_t^F\bigr\|_{\ell^2(\oplus_{x\in F}\mathbb Z e_x)\to
+  \ell^2(\oplus_{x\in F}\mathbb Z e_x)}\le1.
+\]
+Consequently,
+\[
+  \|P_t f\|_{\ell^2(K)}
+  =
+  \bigl\|\widetilde P_t^F\bigl(f|_{\oplus_{x\in F}\mathbb Z e_x}\bigr)\bigr\|_{\ell^2(\oplus_{x\in F}\mathbb Z e_x)}
+  \le
+  \|f\|_{\ell^2(K)},
+\]
+so $P_t$ is a contraction on $\mathcal S$ for each $t\ge0$.
+
+\emph{Extension and semigroup properties.}
+Since $\mathcal S$ is dense in $\ell^2(K)$ and $P_t$ is a contraction on
+$\mathcal S$, it extends uniquely by continuity to a bounded linear operator on
+$\ell^2(K)$, still denoted $P_t$. The identities $P_0=\mathrm{Id}$ and
+$P_{s+t}=P_sP_t$ hold on $\mathcal S$ by construction and therefore extend to all
+of $\ell^2(K)$. Preservation of nonnegativity and constants also extends, so
+$(P_t)_{t\ge0}$ is a Markov semigroup on $\ell^2(K)$.
+
+For strong continuity, let $f\in\ell^2(K)$ and choose $f_n\in\mathcal S$ with
+$f_n\to f$ in $\ell^2(K)$. Using contractivity of $P_t$ and strong continuity of
+each $\widetilde P_t^F$ on the finite-dimensional space
+$\ell^2\bigl(\bigoplus_{x\in F}\mathbb Z e_x\bigr)$, a standard
+$\varepsilon$--$\delta$ argument gives
+\[
+  \|P_t f - f\|_{\ell^2(K)}\;\longrightarrow\;0
+  \quad\text{as }t\to0.
+\]
+
+\emph{Symmetry and translation invariance.}
+For $f,g\in\mathcal S$, choose $F$ such that
+\[
+  \mathrm{supp}(f)\cup\mathrm{supp}(g)
+  \;\subset\;
+  \bigoplus_{x\in F}\mathbb Z e_x.
+\]
+Since $\widetilde P_t^F$ is self--adjoint on
+$\ell^2\bigl(\bigoplus_{x\in F}\mathbb Z e_x\bigr)$,
+\[
+  \langle P_t f,g\rangle_{\ell^2(K)}
+  =
+  \Big\langle
+    \widetilde P_t^F f,\,
+    g
+  \Big\rangle_{\ell^2(\oplus_{x\in F}\mathbb Z e_x)}
+  =
+  \Big\langle
+    f,\,
+    \widetilde P_t^F g
+  \Big\rangle_{\ell^2(\oplus_{x\in F}\mathbb Z e_x)}
+  =
+  \langle f,P_t g\rangle_{\ell^2(K)}.
+\]
+Thus $P_t$ is symmetric on $\mathcal S$ and hence on $\ell^2(K)$.
+
+For translation invariance, let $\tau_\alpha f(\beta):=f(\beta-\alpha)$ for
+$\alpha\in K$. Given $f\in\mathcal S$, the support $\mathrm{supp}(f)$ is a finite
+subset of $K$. Since
+\[
+  K \cong \bigoplus_{x\in X\setminus A}\mathbb Z e_x
+\]
+is a direct sum, each $\gamma\in\mathrm{supp}(f)$ and the element $\alpha$ depend
+on only finitely many coordinates in $X\setminus A$. Hence there exists a finite
+subset $F\Subset X\setminus A$ such that
+\[
+  \mathrm{supp}(f)\cup\{\alpha\}
+  \;\subset\;
+  \bigoplus_{x\in F}\mathbb Z e_x.
+\]
+Then $\tau_\alpha$ maps
+$\ell^2\bigl(\bigoplus_{x\in F}\mathbb Z e_x\bigr)$ to itself, and
+$\widetilde P_t^F$ commutes with translations on $\bigoplus_{x\in F}\mathbb Z e_x$.
+Hence, for $\gamma\in\bigoplus_{x\in F}\mathbb Z e_x$,
+\[
+  P_t(\tau_\alpha f)(\gamma)
+  =
+  \widetilde P_t^F(\tau_\alpha f)(\gamma)
+  =
+  \tau_\alpha\bigl(\widetilde P_t^F f\bigr)(\gamma)
+  =
+  \tau_\alpha(P_t f)(\gamma).
+\]
+If $\gamma\notin\bigoplus_{x\in F}\mathbb Z e_x$, then by construction
+$P_t(\tau_\alpha f)(\gamma)=0$. Moreover, since $\alpha$ is supported in
+$\bigoplus_{x\in F}\mathbb Z e_x$, the element $\gamma-\alpha$ also lies outside
+$\bigoplus_{x\in F}\mathbb Z e_x$, so $P_t f(\gamma-\alpha)=0$ and therefore
+$\tau_\alpha(P_t f)(\gamma)=0$. Thus $P_t(\tau_\alpha f)=\tau_\alpha(P_t f)$ for all
+$f\in\mathcal S$, and by density $P_t\tau_\alpha=\tau_\alpha P_t$ on $\ell^2(K)$.
+
+\emph{Uniqueness.}
+Let $(Q_t)_{t\ge0}$ be another symmetric, translation--invariant, strongly continuous
+Markov semigroup on $\ell^2(K)$ whose restriction to each
+$\ell^2\bigl(\bigoplus_{x\in F}\mathbb Z e_x\bigr)$ coincides with
+$(\widetilde P_t^F)_{t\ge0}$. For $f\in\mathcal S$, choose $F$ such that
+\[
+  \mathrm{supp}(f)\ \subset\ \bigoplus_{x\in F}\mathbb Z e_x.
+\]
+Then $P_t f = \widetilde P_t^F f = Q_t f$ on
+$\bigoplus_{x\in F}\mathbb Z e_x$, and both sides vanish outside this subgroup.
+Thus $P_t f=Q_t f$ for all $f\in\mathcal S$, and by continuity $P_t=Q_t$ on
+$\ell^2(K)$ for every $t\ge0$.
+\end{proof}
+
+Using Theorem~\ref{thm:kolmogorov-heat}, we now record the associated heat kernel
+on $K(X,A)$. For $t\ge0$ define
+\[
+  p_t := P_t\delta_0,
+\]
+where $\delta_0$ denotes the Dirac mass at $0\in K(X,A)$. Since $(P_t)$ is a Markov
+semigroup, each $p_t$ is a probability mass function on $K(X,A)$, hence belongs to
+$\ell^1\bigl(K(X,A)\bigr)$. Translation invariance implies
+$P_t\delta_\gamma = \tau_\gamma p_t$ for every $\gamma\in K(X,A)$, so for every
+finitely supported $f$,
+\[
+  P_t f
+  =
+  \sum_{\gamma\in K(X,A)} f(\gamma)\,P_t\delta_\gamma
+  =
+  \sum_{\gamma\in K(X,A)} f(\gamma)\,\tau_\gamma p_t
+  =
+  p_t * f,
+\]
+and by density this identity holds for all $f\in\ell^2\bigl(K(X,A)\bigr)$. Thus
+$(p_t)_{t\ge0}$ is a convolution semigroup of probability mass functions on
+$K(X,A)$.
+
+Finally, on each finite counting space $\bigoplus_{x\in F}\mathbb Z e_x$, every
+symmetric Markov operator is a stochastic matrix that leaves counting measure
+invariant and is therefore a contraction on
+$\ell^1\bigl(\bigoplus_{x\in F}\mathbb Z e_x\bigr)$. Since
+$\ell^1\bigl(\bigoplus_{x\in F}\mathbb Z e_x\bigr)$ is finite dimensional, strong
+continuity in $\ell^2\bigl(\bigoplus_{x\in F}\mathbb Z e_x\bigr)$ implies strong
+continuity in $\ell^1\bigl(\bigoplus_{x\in F}\mathbb Z e_x\bigr)$. Repeating the
+above extension argument with $\ell^1$ in place of $\ell^2$ yields a strongly
+continuous contraction semigroup on $\ell^1\bigl(K(X,A)\bigr)$ whose kernel is
+again $(p_t)_{t\ge0}$. In particular,
+\[
+  \|p_t-p_s\|_{\ell^1(K(X,A))}
+  =
+  \|(P_t-P_s)\delta_0\|_{\ell^1(K(X,A))}
+  \;\longrightarrow\;
+  0
+  \quad\text{as }t\to s,
+\]
+so the map $t\mapsto p_t$ is continuous as a function
+$[0,\infty)\to\ell^1\bigl(K(X,A)\bigr)$.
+
+\begin{theorem}[Finite-time reachability]
+\label{thm:effective-support}
+Let $(p_t)_{t\ge0}$ be the convolution semigroup on $K(X,A)$ constructed above.
+There exists a countable subgroup $H\le K(X,A)$ such that
+\[
+  \operatorname{supp}(p_t)\ \subset\ H
+  \quad\text{for all } t\ge0.
+\]
+More precisely, if
+\[
+  S := \bigcup_{q\in\mathbb Q_{\ge0}} \operatorname{supp}(p_q),
+\]
+then the subgroup $H:=\langle S\rangle$ is countable and satisfies
+$\operatorname{supp}(p_t)\subset H$ for every $t\ge0$.
+\end{theorem}
+
+\begin{proof}
+Since each $p_q$ is a probability mass function on the discrete group $K(X,A)$,
+its support $\operatorname{supp}(p_q)$ is countable. As $\mathbb Q_{\ge0}$ is
+countable, the union $S$ is countable, and hence the subgroup
+$H:=\langle S\rangle$ is countable.
+
+It remains to show that $\operatorname{supp}(p_t)\subset H$ for all $t\ge0$.
+Fix $\gamma\in K(X,A)$ and consider the scalar-valued function
+\[
+  f_\gamma\colon[0,\infty)\to\mathbb R,
+  \qquad
+  f_\gamma(t):=p_t(\gamma).
+\]
+By construction, the map $t\mapsto p_t$ is continuous as a function
+$[0,\infty)\to\ell^1\bigl(K(X,A)\bigr)$, and evaluation at $\gamma$ is a bounded
+linear functional on $\ell^1\bigl(K(X,A)\bigr)$. Hence $f_\gamma$ is continuous.
+
+Suppose that $p_t(\gamma)>0$ for some $t\ge0$. By continuity of $f_\gamma$, there
+exists $\varepsilon>0$ such that $p_s(\gamma)>0$ for all
+$s\in(t-\varepsilon,t+\varepsilon)\cap[0,\infty)$. Since $\mathbb Q_{\ge0}$ is
+dense in $[0,\infty)$, we may choose $q\in\mathbb Q_{\ge0}$ with
+$q\in(t-\varepsilon,t+\varepsilon)$. Then $p_q(\gamma)>0$, so
+$\gamma\in\operatorname{supp}(p_q)\subset S\subset H$.
+
+Thus $\operatorname{supp}(p_t)\subset H$ for all $t\ge0$, as claimed.
+\end{proof}
+
+\begin{theorem}[Exponent and L\'evy--Khintchine representation on $H$]
+\label{thm:lk-H}
+Let $(p_t)_{t\ge0}$ be the symmetric convolution semigroup of probability measures
+on the countable discrete abelian group $H$ constructed above. Then there exists
+a unique continuous conditionally negative definite function
+$\lambda_H\colon\widehat H\to[0,\infty)$ such that
+\[
+  \widehat p_t(\theta)
+  :=
+  \sum_{h\in H} p_t(h)\,\overline{\theta(h)}
+  =
+  e^{-t\lambda_H(\theta)},
+  \qquad
+  \theta\in\widehat H,\ t\ge0.
+\]
+Moreover, there exists a unique symmetric function
+$\nu\colon H\setminus\{0\}\to[0,\infty)$ such that for every
+$\theta\in\widehat H$,
+\begin{equation}
+\label{eq:lk-series}
+  \lambda_H(\theta)
+  =
+  \sup_{J\Subset H\setminus\{0\}}
+  \sum_{\kappa\in J}
+  \bigl(1-\Re\,\theta(\kappa)\bigr)\,\nu(\kappa),
+\end{equation}
+where the supremum is taken over all finite subsets
+$J\subset H\setminus\{0\}$.
+\end{theorem}
+
+\begin{proof}
+Since $H$ is a countable discrete abelian group, it is a locally compact abelian
+group with respect to the discrete topology, and its Pontryagin dual
+$\widehat H$ is a compact metrizable abelian group. For each $t\ge0$, the function
+$p_t$ is a probability mass function on $H$, hence an element of $\ell^1(H)$.
+
+By construction in the previous section, the map
+\[
+  [0,\infty)\ni t \longmapsto p_t \in \ell^1(H)
+\]
+is continuous, and $(p_t)_{t\ge0}$ satisfies the convolution semigroup relations
+$p_0=\delta_0$ and $p_{s+t}=p_s*p_t$ for all $s,t\ge0$. Let $C_c(H)$ denote the
+space of finitely supported complex-valued functions on $H$. For
+$f\in C_c(H)$, define
+\[
+  \langle f,p_t\rangle
+  :=
+  \sum_{h\in H} f(h)\,p_t(h).
+\]
+Since $f$ is bounded and $t\mapsto p_t$ is continuous in $\ell^1(H)$, the map
+$t\mapsto\langle f,p_t\rangle$ is continuous. Thus $(p_t)_{t\ge0}$ is a weakly
+(vaguely) continuous convolution semigroup of probability measures on the
+locally compact abelian group $H$.
+
+For each $\theta\in\widehat H$, define the Fourier transform
+\[
+  \widehat p_t(\theta)
+  :=
+  \sum_{h\in H} p_t(h)\,\overline{\theta(h)}.
+\]
+The sum converges absolutely since $p_t\in\ell^1(H)$ and
+$|\theta(h)|=1$ for all $h\in H$. The map $\theta\mapsto\widehat p_t(\theta)$ is
+continuous on $\widehat H$, and the convolution property of $(p_t)$ implies
+\[
+  \widehat p_{s+t}(\theta)
+  =
+  \widehat p_s(\theta)\,\widehat p_t(\theta),
+  \qquad
+  s,t\ge0,\ \theta\in\widehat H.
+\]
+Moreover, $\widehat p_t$ is positive definite on $\widehat H$ for each $t\ge0$,
+since it is the Fourier transform of a probability measure, and
+$\widehat p_0(\theta)=1$ for all $\theta\in\widehat H$. Continuity of
+$t\mapsto p_t$ in $\ell^1(H)$ implies continuity of
+$t\mapsto\widehat p_t(\theta)$ for each fixed $\theta\in\widehat H$.
+
+We now apply the L\'evy--Khintchine theory for convolution semigroups on locally
+compact abelian groups as developed in
+Berg--Forst~\cite[Chapters~II.7--II.8]{BergForst1975}. In this framework,
+weakly continuous convolution semigroups of probability measures on $H$ are in
+one-to-one correspondence with continuous conditionally negative definite
+functions $\lambda_H\colon\widehat H\to[0,\infty)$ such that
+\[
+  \widehat p_t(\theta) = e^{-t\lambda_H(\theta)},
+  \qquad
+  \theta\in\widehat H,\ t\ge0,
+\]
+and each such $\lambda_H$ admits a L\'evy--Khintchine representation.
+
+In full generality, the L\'evy--Khintchine representation on an LCA group
+contains a Gaussian part, a drift term, and a jump (L\'evy measure) term. In the
+present setting, both the Gaussian and drift terms vanish. First, since $H$ is
+discrete, it admits no nontrivial continuous one-parameter subgroups, and hence
+no nontrivial Gaussian component can appear in the exponent; see, for example,
+\cite[II.8]{BergForst1975}. Second, since the semigroup $(p_t)$ is symmetric,
+the exponent $\lambda_H$ is real-valued and the drift term vanishes; this
+specialization of the general formula to the symmetric case is explained in
+\cite[II.8]{BergForst1975}.
+
+Consequently, the L\'evy--Khintchine representation reduces to a purely jump-type
+formula: there exists a unique symmetric Borel measure $\nu$ on
+$H\setminus\{0\}$ such that
+\begin{equation}
+\label{eq:lk-integral}
+  \lambda_H(\theta)
+  =
+  \int_{H\setminus\{0\}}
+  \bigl(1-\Re\,\theta(\kappa)\bigr)\,d\nu(\kappa),
+  \qquad
+  \theta\in\widehat H.
+\end{equation}
+
+Since $H$ is discrete, every Borel measure on $H\setminus\{0\}$ is atomic. We may
+therefore write
+\[
+  \nu(\kappa) := \nu(\{\kappa\}) \in [0,\infty),
+  \qquad
+  \kappa\in H\setminus\{0\},
+\]
+and the integral in \eqref{eq:lk-integral} becomes the series
+\[
+  \lambda_H(\theta)
+  =
+  \sum_{\kappa\in H\setminus\{0\}}
+  \bigl(1-\Re\,\theta(\kappa)\bigr)\,\nu(\kappa),
+  \qquad
+  \theta\in\widehat H.
+\]
+The summands are nonnegative, and for each fixed $\theta$ the series converges
+(possibly with infinitely many nonzero terms). Thus the partial sums over finite
+subsets $J\Subset H\setminus\{0\}$ form an increasing net whose supremum equals
+the value of the series, yielding exactly \eqref{eq:lk-series}.
+
+Symmetry of $\nu$ follows from symmetry of $(p_t)$, and uniqueness of $\nu$
+follows from uniqueness of the L\'evy--Khintchine representation in
+\cite[II.8]{BergForst1975}. This completes the proof.
+\end{proof}
+
+\begin{lemma}[Compatibility of the global exponent with finite symbols]
+\label{lem:lambdaH-restricts-lambdaF}
+For every finite subset $F\subset X\setminus A$, let
+$H_F:=\bigoplus_{x\in F}\mathbb Z e_x\le H$ and let $\lambda_F$ denote the
+finite symbol associated to the finite semigroup on $H_F$ constructed in
+\cite{fanning2025reproducingkernelhilbertspaces}. Under the natural
+identification of $\widehat H_F$ with the closed subgroup of $\widehat H$
+consisting of characters that depend only on the coordinates in $F$, we have
+\[
+  \lambda_H\big|_{\widehat H_F} = \lambda_F
+\]
+pointwise.
+\end{lemma}
+
+\begin{proof}
+Fix a finite subset $F\subset X\setminus A$ and write
+$H_F:=\bigoplus_{x\in F}\mathbb Z e_x\le H$. Since $H$ is the direct sum of the
+cyclic groups $\mathbb Z e_x$, we have a direct sum decomposition
+\[
+  H \;=\; H_F \oplus H_{F^\mathrm{c}},
+\]
+where $H_{F^\mathrm{c}}:=\bigoplus_{x\in (X\setminus A)\setminus F}\mathbb Z e_x$.
+The canonical projection $\pi_F\colon H\to H_F$ is the coordinate projection
+with kernel $H_{F^\mathrm{c}}$, and every character $\vartheta\in\widehat H_F$
+has a canonical extension $\theta\in\widehat H$ given by
+\[
+  \theta(h_F+h_{F^\mathrm{c}})
+  :=
+  \vartheta(h_F),
+  \qquad h_F\in H_F,\ h_{F^\mathrm{c}}\in H_{F^\mathrm{c}}.
+\]
+Equivalently, $\theta$ is trivial on $H_{F^\mathrm{c}}$ and satisfies
+$\theta\big|_{H_F}=\vartheta$. This identifies $\widehat H_F$ with the closed
+subgroup of $\widehat H$ consisting of characters that depend only on the
+coordinates in $F$.
+
+For $\theta\in\widehat H$, let $\chi_\theta\colon H\to\mathbb T$ denote the
+corresponding character, $\chi_\theta(h):=\theta(h)$. By the convolution
+representation of $P_t$,
+\[
+  (P_t f)(x)
+  =
+  \sum_{h\in H} p_t(h)\,f(x-h),
+  \qquad f\in\ell^2(H),\ x\in H,
+\]
+and Theorem~\ref{thm:lk-H}, the character $\chi_\theta$ is an eigenfunction of
+$(P_t)_{t\ge0}$:
+\[
+  (P_t\chi_\theta)(x)
+  =
+  \sum_{h\in H} p_t(h)\,\chi_\theta(x-h)
+  =
+  \chi_\theta(x)
+  \sum_{h\in H} p_t(h)\,\overline{\chi_\theta(h)}
+  =
+  e^{-t\lambda_H(\theta)}\,\chi_\theta(x),
+  \qquad x\in H,\ t\ge0.
+\]
+
+Now fix a finite $F\subset X\setminus A$ and $\vartheta\in\widehat H_F$, and
+let $\theta\in\widehat H$ be its canonical extension as above. On the subgroup
+$H_F$, we have $\chi_\theta\big|_{H_F}=\chi_\vartheta$, where
+$\chi_\vartheta(h_F):=\vartheta(h_F)$ for $h_F\in H_F$.
+
+By Lemma~\ref{lem:finite-volume-heat} and Theorem~\ref{thm:kolmogorov-heat}, the
+restriction of $(P_t)$ to $\ell^2(H_F)$ coincides with the finite semigroup
+$(P_t^F)_{t\ge0}$ constructed in
+\cite{fanning2025reproducingkernelhilbertspaces}. In particular,
+\[
+  (P_t\chi_\theta)(x)
+  =
+  (P_t^F\chi_\vartheta)(x),
+  \qquad x\in H_F,\ t\ge0.
+\]
+On the other hand, by the finite L\'evy--Khintchine theorem in
+\cite{fanning2025reproducingkernelhilbertspaces}, the character $\chi_\vartheta$
+is an eigenfunction of $(P_t^F)$ with eigenvalue $e^{-t\lambda_F(\vartheta)}$:
+\[
+  (P_t^F\chi_\vartheta)(x)
+  =
+  e^{-t\lambda_F(\vartheta)}\,\chi_\vartheta(x),
+  \qquad x\in H_F,\ t\ge0.
+\]
+
+Combining the two eigen-relations and using $\chi_\theta\big|_{H_F}=\chi_\vartheta$
+yields, for all $x\in H_F$ and $t\ge0$,
+\[
+  e^{-t\lambda_H(\theta)}\,\chi_\vartheta(x)
+  =
+  (P_t\chi_\theta)(x)
+  =
+  (P_t^F\chi_\vartheta)(x)
+  =
+  e^{-t\lambda_F(\vartheta)}\,\chi_\vartheta(x).
+\]
+Characters never vanish, so $\chi_\vartheta(x)\neq0$ for all $x\in H_F$, and we
+may cancel to obtain
+\[
+  e^{-t\lambda_H(\theta)} = e^{-t\lambda_F(\vartheta)}
+  \qquad\text{for all }t\ge0.
+\]
+Therefore $\lambda_H(\theta)=\lambda_F(\vartheta)$. Under the above
+identification of $\widehat H_F$ with its canonical closed subgroup in
+$\widehat H$, this is exactly the pointwise equality
+$\lambda_H\big|_{\widehat H_F}=\lambda_F$.
+\end{proof}
+
+\begin{definition}[Metric truncations of the L\'evy measure]
+\label{def:truncation-nuR}
+For $R>0$ and $\kappa\in H\setminus\{0\}$ define the truncated L\'evy measure
+\[
+  \nu_R(\kappa)
+  :=
+  \nu(\kappa)\,\mathbf 1_{\{\rho(\kappa,0)\le R\}}.
+\]
+For $\theta\in\widehat H$, define the corresponding truncated L\'evy exponent by
+\[
+  \lambda_{H,R}(\theta)
+  :=
+  \sum_{\kappa\in H\setminus\{0\}}
+  \bigl(1-\Re\,\theta(\kappa)\bigr)\,\nu_R(\kappa).
+\]
+\end{definition}
+
+\begin{lemma}[Monotone convergence of \(\lambda_{H,R}\)]
+\label{lem:lambdaHR-monotone}
+For every \(\theta\in\widehat H\),
+\[
+  \lambda_{H,R}(\theta)\uparrow \lambda_H(\theta)
+  \quad\text{as }R\to\infty.
+\]
+\end{lemma}
+
+\begin{proof}
+Fix \(\theta\in\widehat H\) and abbreviate
+\[
+  a_\kappa(\theta)
+  :=
+  \bigl(1-\Re\,\theta(\kappa)\bigr)\,\nu(\kappa)
+  \in [0,\infty),
+  \qquad
+  \kappa\in H\setminus\{0\}.
+\]
+For \(R>0\), let
+\[
+  A_R := \{\kappa\in H\setminus\{0\} : \rho(\kappa,0)\le R\}.
+\]
+By Definition~\ref{def:truncation-nuR},
+\[
+  \nu_R(\kappa)
+  =
+  \nu(\kappa)\,\mathbf 1_{A_R}(\kappa),
+  \qquad
+  \kappa\in H\setminus\{0\},
+\]
+and therefore
+\[
+  \lambda_{H,R}(\theta)
+  =
+  \sum_{\kappa\in H\setminus\{0\}}
+    \bigl(1-\Re\,\theta(\kappa)\bigr)\,\nu_R(\kappa)
+  =
+  \sum_{\kappa\in A_R} a_\kappa(\theta).
+\]
+The sets \(A_R\) are increasing in \(R\) and satisfy
+\(\bigcup_{R>0} A_R = H\setminus\{0\}\). Since every \(a_\kappa(\theta)\) is
+nonnegative, the family \(\bigl(\lambda_{H,R}(\theta)\bigr)_{R>0}\) is
+nondecreasing in \(R\).
+
+By Theorem~\ref{thm:lk-H} and \eqref{eq:lk-series},
+\[
+  \lambda_H(\theta)
+  =
+  \sup_{J\Subset H\setminus\{0\}}
+  \sum_{\kappa\in J} a_\kappa(\theta),
+\]
+where the supremum is taken over all finite subsets
+\(J\subset H\setminus\{0\}\). For each fixed \(R>0\), the series
+\(\sum_{\kappa\in A_R} a_\kappa(\theta)\) has nonnegative terms. Hence its value
+is the supremum of its finite partial sums:
+\[
+  \lambda_{H,R}(\theta)
+  =
+  \sup_{\substack{J\Subset A_R}}
+  \sum_{\kappa\in J} a_\kappa(\theta),
+\]
+where the supremum is now over all finite subsets
+\(J\subset A_R\). Since every such \(J\) is also a finite subset of
+\(H\setminus\{0\}\), we have
+\[
+  \lambda_{H,R}(\theta)
+  \le
+  \sup_{J\Subset H\setminus\{0\}}
+  \sum_{\kappa\in J} a_\kappa(\theta)
+  =
+  \lambda_H(\theta),
+\]
+and therefore
+\[
+  \sup_{R>0} \lambda_{H,R}(\theta)
+  \le
+  \lambda_H(\theta).
+\]
+
+Conversely, let \(J\Subset H\setminus\{0\}\) be finite. For each
+\(\kappa\in J\), the distance \(\rho(\kappa,0)\) is finite, so there exists
+\(R_J>0\) such that \(J\subset A_{R_J}\). Then
+\[
+  \sum_{\kappa\in J} a_\kappa(\theta)
+  \le
+  \sum_{\kappa\in A_{R_J}} a_\kappa(\theta)
+  =
+  \lambda_{H,R_J}(\theta)
+  \le
+  \sup_{R>0} \lambda_{H,R}(\theta).
+\]
+Taking the supremum over all finite subsets
+\(J\subset H\setminus\{0\}\) yields
+\[
+  \lambda_H(\theta)
+  =
+  \sup_{J\Subset H\setminus\{0\}}
+  \sum_{\kappa\in J} a_\kappa(\theta)
+  \le
+  \sup_{R>0} \lambda_{H,R}(\theta).
+\]
+
+Combining the two inequalities shows that
+\[
+  \sup_{R>0} \lambda_{H,R}(\theta)
+  =
+  \lambda_H(\theta).
+\]
+Since \(\lambda_{H,R}(\theta)\) is nondecreasing in \(R\) and bounded above by
+\(\lambda_H(\theta)\), the limit \(\lim_{R\to\infty}\lambda_{H,R}(\theta)\) exists
+and equals this supremum. Thus \(\lambda_{H,R}(\theta)\uparrow\lambda_H(\theta)\)
+as \(R\to\infty\).
+\end{proof}
+
+\begin{corollary}[Finite activity and compound Poisson representation]
+\label{cor:finite-activity-compound-poisson}
+Let \((p_t)_{t\ge0}\) be the symmetric convolution semigroup of probability mass
+functions on the countable discrete abelian group \(H\) constructed above, with
+L\'evy--Khintchine exponent
+\[
+  \lambda_H(\theta)
+  =
+  \sum_{\kappa\in H\setminus\{0\}}
+    \bigl(1-\Re\,\theta(\kappa)\bigr)\,\nu(\kappa),
+  \qquad \theta\in\widehat H.
+\]
+The following are equivalent:
+\begin{itemize}
+\item[(i)]
+\(\displaystyle \sum_{\kappa\in H\setminus\{0\}} \nu(\kappa)<\infty.\)
+
+\item[(ii)]
+There exist \(q\ge0\) and a probability measure \(\pi\) on \(H\setminus\{0\}\)
+such that, for every \(t\ge0\),
+\[
+  p_t(\gamma)
+  =
+  \mathbb P\!\left(
+    \sum_{j=1}^{N_t}\xi_j = \gamma
+  \right),
+  \qquad \gamma\in H,
+\]
+where \(N_t\sim\mathrm{Pois}(qt)\), \((\xi_j)_{j\ge1}\) are i.i.d.\ random variables
+with law \(\pi\), and \(N_t\) is independent of \((\xi_j)_{j\ge1}\).
+\end{itemize}
+In this case the probability measure \(\pi\) is symmetric,
+\(\pi(\kappa)=\pi(-\kappa)\), and the L\'evy measure is given by
+\(\nu(\kappa)=q\,\pi(\kappa)\) for all \(\kappa\in H\setminus\{0\}\).
+\end{corollary}
+
+\begin{proof}
+Assume \emph{(i)} and set
+\[
+  q := \sum_{\kappa\in H\setminus\{0\}} \nu(\kappa).
+\]
+If \(q=0\), then \(\nu\equiv 0\), and \eqref{eq:lk-series} implies
+\(\lambda_H\equiv 0\). Hence \(\widehat p_t\equiv 1\) for all \(t\ge0\), and
+therefore \(p_t=\delta_0\) for all \(t\ge0\). This coincides with the law of the
+trivial compound Poisson process with \(N_t\equiv 0\), so \emph{(ii)} holds.
+
+Assume now that \(q>0\), and define
+\[
+  \pi(\kappa) := \frac{\nu(\kappa)}{q},
+  \qquad \kappa\in H\setminus\{0\}.
+\]
+Then \(\pi\) is a probability measure on \(H\setminus\{0\}\). Let
+\(N_t\sim\mathrm{Pois}(qt)\), let \((\xi_j)_{j\ge1}\) be i.i.d.\ with law \(\pi\),
+independent of \(N_t\), and define
+\[
+  S_t := \sum_{j=1}^{N_t}\xi_j.
+\]
+Let \(\mu_t\) denote the law of \(S_t\). For \(\theta\in\widehat H\), writing
+\(\chi_\theta(h):=\theta(h)\) for \(h\in H\), we compute the Fourier transform
+\[
+  \widehat\mu_t(\theta)
+  :=
+  \mathbb E\bigl[\overline{\chi_\theta(S_t)}\bigr].
+\]
+Conditioning on \(N_t=n\) yields
+\[
+  \mathbb E\bigl[\overline{\chi_\theta(S_t)} \mid N_t=n\bigr]
+  =
+  \Bigl(\mathbb E\bigl[\overline{\chi_\theta(\xi_1)}\bigr]\Bigr)^n
+  =
+  \Bigl(
+    \sum_{\kappa\in H\setminus\{0\}}
+      \pi(\kappa)\,\overline{\theta(\kappa)}
+  \Bigr)^n.
+\]
+Since \(N_t\) is Poisson with parameter \(qt\),
+\[
+  \widehat\mu_t(\theta)
+  =
+  \sum_{n=0}^\infty
+    e^{-qt}\frac{(qt)^n}{n!}
+    \Bigl(
+      \sum_{\kappa\in H\setminus\{0\}}
+        \pi(\kappa)\,\overline{\theta(\kappa)}
+    \Bigr)^n
+  =
+  \exp\!\left(
+    qt\Bigl(
+      \sum_{\kappa\in H\setminus\{0\}}
+        \pi(\kappa)\,\overline{\theta(\kappa)}
+      -1
+    \Bigr)
+  \right).
+\]
+Using \(\nu(\kappa)=q\,\pi(\kappa)\), this can be rewritten as
+\[
+  \widehat\mu_t(\theta)
+  =
+  \exp\!\left(
+    -t
+    \sum_{\kappa\in H\setminus\{0\}}
+      \nu(\kappa)\bigl(1-\overline{\theta(\kappa)}\bigr)
+  \right).
+\]
+Since \(\nu\) is symmetric and \(|\theta(\kappa)|=1\), the imaginary parts cancel,
+and the exponent reduces to \(\lambda_H(\theta)\). Hence
+\[
+  \widehat\mu_t(\theta)
+  =
+  e^{-t\lambda_H(\theta)}
+  =
+  \widehat p_t(\theta),
+  \qquad \theta\in\widehat H,\ t\ge0.
+\]
+By uniqueness of the L\'evy--Khintchine exponent
+(Theorem~\ref{thm:lk-H}), we conclude that \(\mu_t=p_t\) for all \(t\ge0\), and
+\emph{(ii)} holds.
+
+Conversely, assume \emph{(ii)}. Let \(\mu_t\) denote the law of \(S_t\). The above
+calculation shows that
+\[
+  \widehat\mu_t(\theta)
+  =
+  \exp\!\left(
+    -t
+    \sum_{\kappa\in H\setminus\{0\}}
+      q\,\pi(\kappa)\bigl(1-\overline{\theta(\kappa)}\bigr)
+  \right).
+\]
+Since \((p_t)\) is symmetric and conservative, its exponent admits a
+L\'evy--Khintchine representation of the form \eqref{eq:lk-series} with a unique
+symmetric L\'evy measure \(\nu\). Comparing the two representations and using
+uniqueness yields \(\nu(\kappa)=q\,\pi(\kappa)\) for all
+\(\kappa\in H\setminus\{0\}\). In particular,
+\[
+  \sum_{\kappa\in H\setminus\{0\}} \nu(\kappa)
+  =
+  q
+  <
+  \infty,
+\]
+so \emph{(i)} holds. Symmetry of \(\pi\) follows from symmetry of \(\nu\).
+\end{proof}
+
+For \(t>0\), define the translation-invariant kernel on \(H\) by
+\[
+  k_t(x,y) := p_t(x-y),
+  \qquad x,y\in H.
+\]
+Since \(p_t\) is symmetric and positive definite, \(k_t\) is a real,
+positive-definite kernel on \(H\). We denote by \(\mathcal H_t\) the associated
+(real) reproducing kernel Hilbert space of functions on \(H\).
+
+For each finite subset \(F\subset X\setminus A\), let \(\mathcal H_t^F\) denote
+the finite-dimensional reproducing kernel Hilbert space on
+\(H_F:=\bigoplus_{x\in F}\mathbb Z e_x\) with reproducing kernel \(k_t^F\)
+constructed in \cite{fanning2025reproducingkernelhilbertspaces}. When convenient,
+we regard functions \(f\in\mathcal H_t^F\) as functions on \(H\) by extension by
+zero outside \(H_F\).
+
+\begin{theorem}[Canonical heat-kernel RKHS on the VPD group]
+\label{thm:heat-kernel-field}
+For each \(t>0\) there exists a unique separable Hilbert space
+\(\mathcal H_t\) of real-valued functions on \(H\) with the following
+properties.
+\begin{itemize}
+\item[(a)]
+\(\mathcal H_t\) is the reproducing kernel Hilbert space with reproducing
+kernel
+\[
+  k_t(x,y)=p_t(x-y),
+  \qquad x,y\in H.
+\]
+
+\item[(b)]
+For every finitely generated subgroup \(G\le H\), let
+\(k_t^G:=k_t\big|_{G\times G}\) and let \(\mathcal H_t^G\) denote the
+reproducing kernel Hilbert space on \(G\) with reproducing kernel \(k_t^G\).
+Then the assignment
+\[
+  k_t^G(\cdot,x)\ \longmapsto\ k_t(\cdot,x),
+  \qquad x\in G,
+\]
+extends uniquely to an isometric linear embedding of \(\mathcal H_t^G\) as a
+closed subspace of \(\mathcal H_t\). Moreover,
+\[
+  \overline{\bigcup_{\substack{G\le H\\ G\ \text{finitely generated}}}
+             \mathcal H_t^G}
+  \;=\;
+  \mathcal H_t,
+\]
+where each \(\mathcal H_t^G\) is identified with its image under this
+embedding.
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+\emph{Existence and uniqueness.}
+Fix \(t>0\). Since \((p_t)_{t\ge0}\) is a symmetric convolution semigroup of
+probability mass functions on the abelian group \(H\), the function
+\[
+  k_t(x,y):=p_t(x-y),
+  \qquad x,y\in H,
+\]
+is symmetric and positive definite on \(H\times H\). By the Moore--Aronszajn
+theorem, there exists a unique real reproducing kernel Hilbert space
+\(\mathcal H_t\) of functions on \(H\) with reproducing kernel \(k_t\).
+Separability follows from countability of \(H\), since the linear span of the
+kernel sections \(\{k_t(\cdot,x):x\in H\}\) is dense in \(\mathcal H_t\).
+
+\emph{Canonical embeddings of finitely generated RKHSs.}
+Let \(G\le H\) be a finitely generated subgroup, and define
+\(k_t^G:=k_t\big|_{G\times G}\). Since \(k_t\) is positive definite on \(H\),
+its restriction \(k_t^G\) is positive definite on \(G\), and hence there exists
+a reproducing kernel Hilbert space \(\mathcal H_t^G\) of functions on \(G\)
+with reproducing kernel \(k_t^G\).
+
+By construction, \(\mathcal H_t^G\) is the completion of the linear span of the
+kernel sections \(\{k_t^G(\cdot,x):x\in G\}\) with respect to the inner product
+satisfying
+\[
+  \big\langle k_t^G(\cdot,x),k_t^G(\cdot,y)\big\rangle_{\mathcal H_t^G}
+  =
+  k_t^G(x,y)
+  =
+  k_t(x,y),
+  \qquad x,y\in G.
+\]
+On the other hand, \(\mathcal H_t\) is the completion of the linear span of
+\(\{k_t(\cdot,x):x\in H\}\) with
+\[
+  \big\langle k_t(\cdot,x),k_t(\cdot,y)\big\rangle_{\mathcal H_t}
+  =
+  k_t(x,y),
+  \qquad x,y\in H.
+\]
+Therefore the map
+\[
+  T_G\colon \mathrm{span}\{k_t^G(\cdot,x):x\in G\}
+  \longrightarrow
+  \mathrm{span}\{k_t(\cdot,x):x\in G\}\subset\mathcal H_t,
+\]
+defined by
+\[
+  T_G\bigl(k_t^G(\cdot,x)\bigr) := k_t(\cdot,x),
+  \qquad x\in G,
+\]
+is well defined and isometric on the dense subspace
+\(\mathrm{span}\{k_t^G(\cdot,x):x\in G\}\subset\mathcal H_t^G\). Hence it
+extends uniquely by continuity to an isometric linear embedding
+\[
+  \widetilde T_G\colon \mathcal H_t^G \longrightarrow \mathcal H_t.
+\]
+The range \(\widetilde T_G(\mathcal H_t^G)\) is a closed subspace of
+\(\mathcal H_t\), and we identify \(\mathcal H_t^G\) with this closed subspace.
+
+\emph{Density of finitely generated RKHSs.}
+Let
+\[
+  \mathcal K
+  :=
+  \overline{
+    \bigcup_{\substack{G\le H\\ G\ \text{finitely generated}}}
+    \mathcal H_t^G
+  }
+  \ \subset\ \mathcal H_t.
+\]
+To show that \(\mathcal K=\mathcal H_t\), it suffices to prove that
+\(k_t(\cdot,x)\in\mathcal K\) for every \(x\in H\), since the linear span of
+\(\{k_t(\cdot,x):x\in H\}\) is dense in \(\mathcal H_t\).
+
+Fix \(x\in H\), and let \(G:=\langle x\rangle\) be the cyclic subgroup of
+\(H\) generated by \(x\). Then \(G\le H\) is finitely generated, and by the
+construction of \(\mathcal H_t^G\) and the embedding \(\widetilde T_G\), the
+kernel section \(k_t(\cdot,x)\) lies in the image of \(\mathcal H_t^G\). Hence
+\(k_t(\cdot,x)\in\mathcal K\).
+
+Since this holds for every \(x\in H\), and the linear span of
+\(\{k_t(\cdot,x):x\in H\}\) is dense in \(\mathcal H_t\), we conclude that
+\(\mathcal K=\mathcal H_t\). This proves
+\[
+  \overline{\bigcup_{\substack{G\le H\\ G\ \text{finitely generated}}}
+             \mathcal H_t^G}
+  =
+  \mathcal H_t,
+\]
+and completes the proof.
+\end{proof}
+
+\begin{theorem}[Spectral characterization of the heat-kernel RKHS]
+\label{thm:spectral-Ht}
+Let $\mu_{\widehat H}$ be normalized Haar probability measure on $\widehat H$,
+and let $\lambda_H\colon\widehat H\to[0,\infty)$ be the L\'evy--Khintchine exponent
+from Theorem~\ref{thm:lk-H}. For each $t>0$ and each $f\in\mathcal H_t$, there is
+a unique function $\widehat f\in L^2(\widehat H,\mu_{\widehat H})$ such that
+\begin{equation}
+\label{eq:Ht-norm-spectral}
+  \|f\|_{\mathcal H_t}^2
+  =
+  \int_{\widehat H}
+    |\widehat f(\theta)|^2\,e^{t\lambda_H(\theta)}\,
+  d\mu_{\widehat H}(\theta).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Fix $t>0$. Since $H$ is a countable discrete abelian group, Pontryagin duality
+identifies $\widehat H$ as a compact abelian group with normalized Haar probability
+measure $\mu_{\widehat H}$, and the Fourier transform
+\[
+  \mathcal F\colon \ell^2(H)\longrightarrow L^2(\widehat H,\mu_{\widehat H}),
+  \qquad
+  (\mathcal F f)(\theta) = \widehat f(\theta),
+\]
+is a unitary isomorphism. In particular,
+\[
+  \langle f,g\rangle_{\ell^2(H)}
+  =
+  \int_{\widehat H}
+    \widehat f(\theta)\,\overline{\widehat g(\theta)}\,
+  d\mu_{\widehat H}(\theta),
+  \qquad f,g\in\ell^2(H).
+\]
+
+Let $(P_t)_{t\ge0}$ be the symmetric Markov semigroup on $\ell^2(H)$ obtained in
+Theorem~\ref{thm:kolmogorov-heat}. By construction, $P_t$ acts by convolution with
+$p_t$,
+\[
+  (P_t f)(x) = (p_t * f)(x)
+  =
+  \sum_{h\in H} p_t(h)\,f(x-h),
+  \qquad f\in\ell^2(H),\ x\in H,
+\]
+and the reproducing kernel of $\mathcal H_t$ is
+\[
+  k_t(x,y) = p_t(x-y),
+  \qquad x,y\in H.
+\]
+Moreover, Theorem~\ref{thm:lk-H} yields
+\[
+  \widehat p_t(\theta) = e^{-t\lambda_H(\theta)},
+  \qquad \theta\in\widehat H,\ t\ge0.
+\]
+
+\emph{Step 1: Operator representation of the kernel.}
+Since $(P_t)$ is a strongly continuous symmetric semigroup on $\ell^2(H)$, there
+exists a nonnegative self--adjoint operator $L$ on $\ell^2(H)$ such that
+$P_t = e^{-tL}$ in the sense of functional calculus. In particular,
+$P_{t/2} = e^{-(t/2)L}$ is a bounded, self--adjoint, injective operator on
+$\ell^2(H)$.
+
+For $x,y\in H$, we compute
+\[
+  k_t(x,y)
+  =
+  p_t(x-y)
+  =
+  (P_t\delta_y)(x)
+  =
+  \big\langle \delta_x, P_t\delta_y\big\rangle_{\ell^2(H)}
+  =
+  \big\langle P_{t/2}\delta_x, P_{t/2}\delta_y\big\rangle_{\ell^2(H)}.
+\]
+Thus the kernel $k_t$ is the Gram kernel of the family
+$\{P_{t/2}\delta_x : x\in H\}\subset\ell^2(H)$.
+
+\emph{Step 2: Identification of $\mathcal H_t$ with a subspace of $\ell^2(H)$.}
+Consider the linear map
+\[
+  A_t\colon \mathrm{span}\{\delta_x : x\in H\}
+  \longrightarrow \ell^2(H),
+  \qquad
+  A_t(\delta_x) := P_{t/2}\delta_x.
+\]
+Let $\mathcal R_t$ denote the closure of $A_t\bigl(\mathrm{span}\{\delta_x\}\bigr)$
+in $\ell^2(H)$. On $A_t\bigl(\mathrm{span}\{\delta_x\}\bigr)$ define
+\[
+  \big\langle A_t u, A_t v\big\rangle_{\mathcal R_t}
+  :=
+  \langle u,v\rangle_{\ell^2(H)},
+  \qquad
+  u,v\in\mathrm{span}\{\delta_x\}.
+\]
+This is well defined because $P_{t/2}$ is injective, so $A_t u = A_t v$ implies
+$u=v$. Completing with respect to this inner product yields a Hilbert space
+structure on $\mathcal R_t$.
+
+The identity
+\[
+  k_t(x,y)
+  =
+  \big\langle A_t\delta_x, A_t\delta_y\big\rangle_{\mathcal R_t},
+  \qquad x,y\in H,
+\]
+shows that $\mathcal R_t$, with this inner product, is a reproducing kernel
+Hilbert space on $H$ with reproducing kernel $k_t$. By uniqueness in the
+Moore--Aronszajn theorem, there exists a canonical isometric isomorphism
+\[
+  J_t\colon \mathcal H_t \longrightarrow \mathcal R_t
+\]
+intertwining the kernel sections:
+\[
+  J_t\bigl(k_t(\cdot,x)\bigr) = A_t\delta_x = P_{t/2}\delta_x,
+  \qquad x\in H.
+\]
+We henceforth identify $\mathcal H_t$ with $\mathcal R_t$ via $J_t$. In particular,
+every $f\in\mathcal H_t$ is represented by a unique element of $\mathcal R_t\subset
+\ell^2(H)$.
+
+Moreover, for $u\in\mathrm{span}\{\delta_x\}$ and $f:=A_t u$ we have
+\[
+  \|f\|_{\mathcal H_t}^2
+  =
+  \|f\|_{\mathcal R_t}^2
+  =
+  \|u\|_{\ell^2(H)}^2.
+\]
+
+\emph{Step 3: Spectral formula on a dense subspace.}
+Let
+\[
+  D_t := A_t\bigl(\mathrm{span}\{\delta_x : x\in H\}\bigr)
+  \subset \mathcal H_t.
+\]
+Then $D_t$ is dense in $\mathcal H_t$ by definition of $\mathcal R_t$. For
+$f\in D_t$ there exists $u\in\mathrm{span}\{\delta_x\}$ such that $f=A_t u$.
+Applying the Fourier transform and using the spectral representation of $P_{t/2}$
+gives
+\[
+  \widehat f(\theta)
+  =
+  \widehat{P_{t/2}u}(\theta)
+  =
+  e^{-(t/2)\lambda_H(\theta)}\,\widehat u(\theta),
+  \qquad \theta\in\widehat H.
+\]
+Hence
+\[
+  \widehat u(\theta)
+  =
+  e^{(t/2)\lambda_H(\theta)}\,\widehat f(\theta),
+  \qquad \theta\in\widehat H,
+\]
+and Plancherel's identity yields
+\[
+  \|u\|_{\ell^2(H)}^2
+  =
+  \int_{\widehat H}
+    |\widehat u(\theta)|^2\,
+  d\mu_{\widehat H}(\theta)
+  =
+  \int_{\widehat H}
+    |\widehat f(\theta)|^2\,e^{t\lambda_H(\theta)}\,
+  d\mu_{\widehat H}(\theta).
+\]
+Combining this with $\|f\|_{\mathcal H_t}^2=\|u\|_{\ell^2(H)}^2$ gives
+\[
+  \|f\|_{\mathcal H_t}^2
+  =
+  \int_{\widehat H}
+    |\widehat f(\theta)|^2\,e^{t\lambda_H(\theta)}\,
+  d\mu_{\widehat H}(\theta),
+  \qquad f\in D_t.
+\]
+
+\emph{Step 4: Extension by completion and uniqueness.}
+Define a map
+\[
+  T_t\colon D_t \longrightarrow L^2(\widehat H,\mu_{\widehat H}),
+  \qquad
+  T_t(f) := \widehat f.
+\]
+The identity just proved shows that
+\[
+  \|f\|_{\mathcal H_t}^2
+  =
+  \int_{\widehat H}
+    |T_t(f)(\theta)|^2\,e^{t\lambda_H(\theta)}\,
+  d\mu_{\widehat H}(\theta),
+  \qquad f\in D_t.
+\]
+Thus $T_t$ is an isometry from $(D_t,\|\cdot\|_{\mathcal H_t})$ into the weighted
+Hilbert space $L^2\bigl(\widehat H,e^{t\lambda_H}\,d\mu_{\widehat H}\bigr)$. Since
+$D_t$ is dense in $\mathcal H_t$, $T_t$ extends uniquely by continuity to an
+isometric linear embedding (still denoted $T_t$)
+\[
+  T_t\colon \mathcal H_t \longrightarrow
+  L^2\bigl(\widehat H,e^{t\lambda_H}\,d\mu_{\widehat H}\bigr).
+\]
+
+For each $f\in\mathcal H_t$, set
+\[
+  \widehat f := T_t(f)\in
+  L^2\bigl(\widehat H,e^{t\lambda_H}\,d\mu_{\widehat H}\bigr)
+  \subset L^2(\widehat H,\mu_{\widehat H}).
+\]
+By construction,
+\[
+  \|f\|_{\mathcal H_t}^2
+  =
+  \int_{\widehat H}
+    |\widehat f(\theta)|^2\,e^{t\lambda_H(\theta)}\,
+  d\mu_{\widehat H}(\theta),
+\]
+so \eqref{eq:Ht-norm-spectral} holds for all $f\in\mathcal H_t$. Uniqueness of
+$\widehat f$ follows from the isometry property of $T_t$.
+\end{proof}
+
+Using the convolution semigroup $(p_t)_{t\ge0}$ and the spectral description
+from Theorem~\ref{thm:spectral-Ht}, we record two immediate consequences.
+
+First, for all $s,t>0$ and $x,y\in H$,
+\[
+  k_{s+t}(x,y)
+  =
+  \sum_{z\in H} k_s(x,z)\,k_t(z,y),
+\]
+where the series converges absolutely. This identity is simply the semigroup
+property $P_{s+t}=P_sP_t$ expressed at the level of kernels, using that each
+$p_t$ belongs to $\ell^1(H)$.
+
+Second, if $0<s<t$, then for every $\theta\in\widehat H$ we have
+$e^{s\lambda_H(\theta)}\le e^{t\lambda_H(\theta)}$. Therefore, for any
+$f\in\mathcal H_t$, the spectral representation
+\eqref{eq:Ht-norm-spectral} implies
+\[
+  \|f\|_{\mathcal H_s}^2
+  =
+  \int_{\widehat H}
+    |\widehat f(\theta)|^2\,e^{s\lambda_H(\theta)}\,
+  d\mu_{\widehat H}(\theta)
+  \le
+  \int_{\widehat H}
+    |\widehat f(\theta)|^2\,e^{t\lambda_H(\theta)}\,
+  d\mu_{\widehat H}(\theta)
+  =
+  \|f\|_{\mathcal H_t}^2.
+\]
+In particular, the inclusion $\mathcal H_t\hookrightarrow\mathcal H_s$ is
+continuous whenever $0<s<t$.
+
+\begin{definition}[Truncated kernels and truncated RKHSs]
+\label{def:truncated-kernel}
+For $t>0$ and $R>0$ define
+\[
+  k_{t,R}(x,y)
+  :=
+  \int_{\widehat H}
+    \theta(x-y)\,e^{-t\lambda_{H,R}(\theta)}\,
+  d\mu_{\widehat H}(\theta),
+  \qquad x,y\in H.
+\]
+The truncated exponent $\lambda_{H,R}$ is conditionally negative definite, since it
+is a finite truncation of the L\'evy--Khintchine series
+\eqref{eq:lk-series}, and satisfies
+$\lambda_{H,R}(\theta)=\lambda_{H,R}(\overline{\theta})$ for all
+$\theta\in\widehat H$ because the truncated L\'evy measure $\nu_R$ is symmetric.
+Consequently,
+\[
+  \overline{\theta(x-y)}\,e^{-t\lambda_{H,R}(\theta)}
+  =
+  \theta(x-y)\,e^{-t\lambda_{H,R}(\overline{\theta})},
+\]
+and invariance of Haar measure under $\theta\mapsto\overline{\theta}$ implies that
+$k_{t,R}(x,y)\in\mathbb R$ and $k_{t,R}(x,y)=k_{t,R}(y,x)$.
+Moreover, since $\theta\mapsto e^{-t\lambda_{H,R}(\theta)}$ is positive definite on
+$\widehat H$, the kernel $k_{t,R}$ is positive definite on $H$.
+We denote by $\mathcal H_{t,R}$ the associated real reproducing kernel Hilbert space
+of functions on $H$ with reproducing kernel $k_{t,R}$.
+\end{definition}
+
+\begin{lemma}[Convergence of truncated norms]
+\label{lem:trunc-norm}
+Fix $t>0$. For every $f\in c_{00}(H)\subset\mathcal H_t$ and every $R>0$, we have
+$f\in\mathcal H_{t,R}$ and
+\begin{equation}
+\label{eq:trunc-norm}
+  \|f\|_{\mathcal H_{t,R}}^2
+  =
+  \int_{\widehat H}
+    |\widehat f(\theta)|^2\,e^{t\lambda_{H,R}(\theta)}\,
+  d\mu_{\widehat H}(\theta).
+\end{equation}
+Moreover,
+\[
+  \|f\|_{\mathcal H_{t,R}}^2
+  \;\uparrow\;
+  \|f\|_{\mathcal H_t}^2
+  \quad\text{as }R\to\infty.
+\]
+\end{lemma}
+
+\begin{proof}
+Fix $t>0$ and $f\in c_{00}(H)$. Since $f$ has finite support, its Fourier
+transform
+\[
+  \widehat f(\theta)
+  :=
+  \sum_{h\in H} f(h)\,\overline{\theta(h)},
+  \qquad \theta\in\widehat H,
+\]
+is a continuous function on the compact group $\widehat H$, and hence bounded.
+
+By Theorem~\ref{thm:spectral-Ht}, the norm in $\mathcal H_t$ is given by
+\begin{equation}
+\label{eq:Ht-norm-used}
+  \|f\|_{\mathcal H_t}^2
+  =
+  \int_{\widehat H}
+    |\widehat f(\theta)|^2\,e^{t\lambda_H(\theta)}\,
+  d\mu_{\widehat H}(\theta)
+  < \infty.
+\end{equation}
+
+For each $R>0$, the truncated exponent $\lambda_{H,R}$ is finite-valued and
+satisfies $\lambda_{H,R}(\theta)\le\lambda_H(\theta)$ for all
+$\theta\in\widehat H$. Consequently,
+\[
+  e^{t\lambda_{H,R}(\theta)}
+  \le
+  e^{t\lambda_H(\theta)},
+  \qquad \theta\in\widehat H.
+\]
+Since $|\widehat f|^2$ is bounded and
+$|\widehat f(\theta)|^2 e^{t\lambda_H(\theta)}$ is integrable by
+\eqref{eq:Ht-norm-used}, it follows that
+\[
+  |\widehat f(\theta)|^2 e^{t\lambda_{H,R}(\theta)}
+  \in L^1(\widehat H,\mu_{\widehat H})
+\]
+for every $R>0$. Applying the spectral characterization of the truncated RKHS
+$\mathcal H_{t,R}$ therefore yields \eqref{eq:trunc-norm}, and in particular
+$f\in\mathcal H_{t,R}$.
+
+Finally, Lemma~\ref{lem:lambdaHR-monotone} implies that
+$\lambda_{H,R}(\theta)\uparrow\lambda_H(\theta)$ pointwise on $\widehat H$ as
+$R\to\infty$, and hence
+\[
+  |\widehat f(\theta)|^2 e^{t\lambda_{H,R}(\theta)}
+  \uparrow
+  |\widehat f(\theta)|^2 e^{t\lambda_H(\theta)},
+  \qquad \theta\in\widehat H.
+\]
+The integrands are nonnegative, and the limit function is integrable by
+\eqref{eq:Ht-norm-used}. The monotone convergence theorem therefore gives
+\[
+  \lim_{R\to\infty}
+  \int_{\widehat H}
+    |\widehat f(\theta)|^2 e^{t\lambda_{H,R}(\theta)}\,
+  d\mu_{\widehat H}(\theta)
+  =
+  \int_{\widehat H}
+    |\widehat f(\theta)|^2 e^{t\lambda_H(\theta)}\,
+  d\mu_{\widehat H}(\theta),
+\]
+which is exactly the claimed convergence of norms.
+\end{proof}
+
+\begin{theorem}[Approximation of $\mathcal H_t$ by truncated spaces]
+\label{thm:truncation-density}
+For each $t>0$, the union
+\[
+  \bigcup_{R>0} \mathcal H_{t,R}
+\]
+is dense in $\mathcal H_t$.
+\end{theorem}
+
+\begin{proof}
+Fix $t>0$. We first show that $c_{00}(H)$ is contained in $\mathcal H_t$ and is
+dense in $\mathcal H_t$.
+
+\emph{Step 1: $c_{00}(H)\subset\mathcal H_t$.}
+Let $f\in c_{00}(H)$. Its Fourier transform
+\[
+  \widehat f(\theta)
+  :=
+  \sum_{h\in H} f(h)\,\overline{\theta(h)},
+  \qquad \theta\in\widehat H,
+\]
+is a continuous function on the compact group $\widehat H$, hence bounded. By
+Theorem~\ref{thm:lk-H}, the L\'evy--Khintchine exponent
+$\lambda_H\colon\widehat H\to[0,\infty)$ is continuous and therefore bounded on
+$\widehat H$. Thus there exists $M\ge0$ such that
+$\lambda_H(\theta)\le M$ for all $\theta\in\widehat H$, and hence
+$e^{t\lambda_H(\theta)}\le e^{tM}$ for all $\theta\in\widehat H$.
+
+Using the spectral characterization of $\mathcal H_t$ from
+Theorem~\ref{thm:spectral-Ht}, we obtain
+\[
+  \int_{\widehat H}
+    |\widehat f(\theta)|^2 e^{t\lambda_H(\theta)}\,
+  d\mu_{\widehat H}(\theta)
+  \le
+  e^{tM}
+  \int_{\widehat H}
+    |\widehat f(\theta)|^2\,
+  d\mu_{\widehat H}(\theta)
+  < \infty.
+\]
+Therefore $f\in\mathcal H_t$, and $c_{00}(H)\subset\mathcal H_t$.
+
+\emph{Step 2: Density of $c_{00}(H)$ in $\mathcal H_t$.}
+Define
+\[
+  w_t(\theta) := e^{t\lambda_H(\theta)},
+  \qquad \theta\in\widehat H,
+\]
+and consider the weighted Hilbert space
+$L^2(\widehat H,w_t\,d\mu_{\widehat H})$ with norm
+\[
+  \|g\|_{L^2(w_t)}^2
+  :=
+  \int_{\widehat H}
+    |g(\theta)|^2 w_t(\theta)\,
+  d\mu_{\widehat H}(\theta).
+\]
+By Theorem~\ref{thm:spectral-Ht}, for each $f\in\mathcal H_t$ there is a unique
+$\widehat f\in L^2(\widehat H,w_t\,d\mu_{\widehat H})$ such that
+\[
+  \|f\|_{\mathcal H_t}^2
+  =
+  \int_{\widehat H}
+    |\widehat f(\theta)|^2 w_t(\theta)\,
+  d\mu_{\widehat H}(\theta),
+\]
+and the map
+\[
+  T_t\colon \mathcal H_t\longrightarrow L^2(\widehat H,w_t\,d\mu_{\widehat H}),
+  \qquad
+  T_t(f):=\widehat f,
+\]
+is an isometric linear embedding.
+
+Since $\lambda_H$ is continuous on the compact group $\widehat H$, there exist
+constants $0<m_t\le M_t<\infty$ such that
+\[
+  m_t \le w_t(\theta)\le M_t,
+  \qquad \theta\in\widehat H.
+\]
+Thus $L^2(\widehat H,w_t\,d\mu_{\widehat H})$ and
+$L^2(\widehat H,\mu_{\widehat H})$ have the same underlying space of functions,
+and their norms are equivalent:
+\[
+  m_t \|g\|_{L^2}^2
+  \le
+  \|g\|_{L^2(w_t)}^2
+  \le
+  M_t \|g\|_{L^2}^2,
+  \qquad g\in L^2(\widehat H,\mu_{\widehat H}).
+\]
+
+For $f\in c_{00}(H)$, the Fourier transform $\widehat f$ is a trigonometric
+polynomial on $\widehat H$, that is, a finite linear combination of characters.
+Hence
+\[
+  T_t\bigl(c_{00}(H)\bigr)
+  =
+  \bigl\{
+    \text{trigonometric polynomials on }\widehat H
+  \bigr\}.
+\]
+On a compact abelian group, trigonometric polynomials are dense in
+$L^2(\widehat H,\mu_{\widehat H})$, and therefore also dense in
+$L^2(\widehat H,w_t\,d\mu_{\widehat H})$ by equivalence of norms. Thus
+$T_t\bigl(c_{00}(H)\bigr)$ is dense in $L^2(\widehat H,w_t\,d\mu_{\widehat H})$.
+
+Since $T_t(\mathcal H_t)$ is a closed subspace of
+$L^2(\widehat H,w_t\,d\mu_{\widehat H})$ and contains the dense subset
+$T_t\bigl(c_{00}(H)\bigr)$, we must have
+\[
+  T_t(\mathcal H_t)
+  =
+  L^2(\widehat H,w_t\,d\mu_{\widehat H}).
+\]
+In particular, $T_t$ is surjective, and $T_t\bigl(c_{00}(H)\bigr)$ is dense in
+$T_t(\mathcal H_t)$. Since $T_t$ is an isometry, it follows that
+$c_{00}(H)$ is dense in $\mathcal H_t$:
+\[
+  \overline{c_{00}(H)}^{\,\mathcal H_t}
+  =
+  \mathcal H_t.
+\]
+
+\emph{Step 3: Density of the union of truncated spaces.}
+By Lemma~\ref{lem:trunc-norm}, every $f\in c_{00}(H)$ belongs to $\mathcal H_{t,R}$
+for every $R>0$, so
+\[
+  c_{00}(H)
+  \subset
+  \bigcup_{R>0} \mathcal H_{t,R}.
+\]
+Taking closures in $\mathcal H_t$ and using Step~2 yields
+\[
+  \mathcal H_t
+  =
+  \overline{c_{00}(H)}^{\,\mathcal H_t}
+  \subset
+  \overline{\bigcup_{R>0} \mathcal H_{t,R}}^{\,\mathcal H_t}
+  \subset
+  \mathcal H_t.
+\]
+Therefore
+\[
+  \overline{\bigcup_{R>0} \mathcal H_{t,R}}^{\,\mathcal H_t}
+  =
+  \mathcal H_t,
+\]
+which is the desired density.
+\end{proof}
+
+Fix \(t>0\). The heat kernel \(k_t(x,y)=p_t(x-y)\) induces a canonical embedding of
+the group \(H\) into the reproducing kernel Hilbert space \(\mathcal H_t\) by
+sending each \(x\in H\) to the corresponding kernel section
+\[
+  \Phi_t(x) := k_t(\cdot,x)\in\mathcal H_t.
+\]
+We refer to \(\Phi_t\) as the heat-kernel embedding at time \(t\).
+By translation invariance of the convolution semigroup \((p_t)_{t\ge0}\), the map
+\(\Phi_t\) is equivariant with respect to the group action: for all
+\(x,\kappa\in H\),
+\[
+  \Phi_t(x+\kappa)
+  =
+  \tau_\kappa \Phi_t(x),
+\]
+where \(\tau_\kappa\) denotes the translation operator on functions on \(H\),
+defined by \((\tau_\kappa f)(y):=f(y-\kappa)\).
+
+\begin{corollary}[Density of the heat-kernel embedding]
+\label{cor:phi-density}
+For each \(t>0\), the linear span of \(\{\Phi_t(x):x\in H\}\) is dense in
+\(\mathcal H_t\).
+\end{corollary}
+
+\begin{proof}
+Fix \(t>0\). By Theorem~\ref{thm:heat-kernel-field}(a), \(\mathcal H_t\) is the
+reproducing kernel Hilbert space with reproducing kernel
+\(k_t(x,y)=p_t(x-y)\). By construction of an RKHS via the Moore--Aronszajn theorem,
+\(\mathcal H_t\) is the completion of the linear span of its kernel sections
+\(\{k_t(\cdot,x):x\in H\}\). Since \(\Phi_t(x)=k_t(\cdot,x)\) for each \(x\in H\),
+the linear span of \(\{\Phi_t(x):x\in H\}\) is dense in \(\mathcal H_t\).
+\end{proof}
+
+Collecting Theorems~\ref{thm:kolmogorov-heat}, \ref{thm:lk-H},
+\ref{thm:heat-kernel-field}, \ref{thm:spectral-Ht}, and
+\ref{thm:truncation-density}, together with
+Corollary~\ref{cor:phi-density}, we obtain a unique symmetric
+translation--invariant heat kernel on the effective VPD group
+\(H\), whose restrictions to every finite diagram subgroup
+\(H_F\) coincide with the finite heat kernels from
+\cite{fanning2025reproducingkernelhilbertspaces}. The associated
+reproducing kernel Hilbert spaces \((\mathcal H_t)_{t>0}\) form a
+canonical heat-kernel field on \(H\), admit a complete spectral
+description in terms of the global exponent \(\lambda_H\), and are
+generated by the heat-kernel embedding \(\Phi_t\) with finite and
+metrically truncated subspaces dense. In particular, the infinite
+construction introduces no additional choices beyond the finite
+model and provides the analytic and approximation framework that
+underpins the spectral observables and Monte Carlo schemes of the
+next section.
+
+\section{Random--walk invariants and regularity bounds for virtual persistence diagrams}
+\label{sec:stoch-mc}
+
+Throughout this section we work under the standing hypothesis~\emph{(H)} of
+Definition~\ref{def:standing-hypothesis} and with the objects constructed in
+Section~\ref{sec:ti-classification}. In particular, the virtual persistence
+diagram group $K(X,A)$ is equipped with its translation--invariant VPD metric
+$\rho$, and admits the symmetric, translation--invariant, strongly continuous
+Markov semigroup $(P_t)_{t\ge0}$ on $\ell^2\bigl(K(X,A)\bigr)$ constructed in
+Theorem~\ref{thm:kolmogorov-heat}. As in that theorem, for $t\ge0$ we define
+\[
+  p_t := P_t\delta_0 \in \ell^2\bigl(K(X,A)\bigr),
+\]
+so that $(p_t)_{t\ge0}$ is a convolution semigroup of probability mass functions
+on $K(X,A)$ and
+\[
+  (P_t f)(\gamma)
+  =
+  (p_t * f)(\gamma)
+  =
+  \sum_{\kappa\in K(X,A)} p_t(\kappa)\,f(\gamma-\kappa),
+  \qquad f\in\ell^2\bigl(K(X,A)\bigr),\ \gamma\in K(X,A).
+\]
+By construction at the end of Section~\ref{sec:ti-classification}, the map
+$t\mapsto p_t$ is continuous as a function
+$[0,\infty)\to\ell^1\bigl(K(X,A)\bigr)$.
+
+The purpose of this section is threefold. First, we identify intrinsic
+\emph{random--walk invariants} of the VPD geometry encoded by the heat kernel
+$(p_t)_{t\ge0}$ and its L\'evy--Khintchine exponent. Second, we show how these
+invariants govern global regularity properties of diagram functionals, including
+Lipschitz bounds, ultracontractivity, and Sobolev--type estimates. Third, we
+explain how all such invariants admit coherent finite--activity approximations
+via metric truncation of the L\'evy measure and exact compound Poisson
+representations, without altering their geometric meaning.
+
+%===========================================================
+\subsection{Effective geometry and jump structure}
+\label{subsec:effective-geometry}
+
+By Theorem~\ref{thm:effective-support}, there exists a countable subgroup
+\[
+  H
+  :=
+  \Big\langle
+    \bigcup_{q\in\mathbb Q_{\ge0}} \operatorname{supp}(p_q)
+  \Big\rangle
+  \;\le\; K(X,A)
+\]
+such that $\operatorname{supp}(p_t)\subseteq H$ for every $t\ge0$. Moreover,
+each operator $P_t$ preserves cosets of $H$. Consequently, for any initial
+state $x\in K(X,A)$, the effective dynamics evolve on the countable state space
+$x+H$, and all harmonic analysis may be carried out on $H$ equipped with the
+restriction of the VPD metric $\rho$, which remains proper and
+translation--invariant.
+
+Since $\operatorname{supp}(p_t)\subseteq H$ and $\sum_{h\in H}p_t(h)=1$, the
+family $(p_t)_{t\ge0}$ defines a symmetric convolution semigroup of probability
+measures on the countable discrete abelian group $H$. For $\theta\in\widehat H$
+we write
+\[
+  \widehat p_t^{\,H}(\theta)
+  :=
+  \sum_{h\in H} p_t(h)\,\overline{\theta(h)}.
+\]
+By Theorem~\ref{thm:lk-H} applied to this semigroup on $H$, there exists a
+unique continuous conditionally negative definite function
+$\lambda_H\colon\widehat H\to[0,\infty)$ and a unique symmetric L\'evy measure
+$\nu\colon H\setminus\{0\}\to[0,\infty)$ such that
+\[
+  \widehat p_t^{\,H}(\theta)
+  =
+  e^{-t\lambda_H(\theta)},
+  \qquad \theta\in\widehat H,\ t\ge0,
+\]
+and
+\begin{equation}
+\label{eq:lk-series-H}
+  \lambda_H(\theta)
+  =
+  \sum_{\kappa\in H\setminus\{0\}}
+    \nu(\kappa)\bigl(1-\Re\,\theta(\kappa)\bigr),
+\end{equation}
+where the sum is taken in $[0,\infty]$ as the supremum over finite subsets, as
+in~\eqref{eq:lk-series}. The L\'evy measure $\nu$ encodes the jump structure of
+the VPD random walk on $H$: its mass far from the origin in the VPD metric
+quantifies how frequently the dynamics attempt large virtual-diagram moves.
+
+The associated Dirichlet form on $\ell^2(H)$ is
+\begin{equation}
+\label{eq:dirichlet-form-H}
+  \mathcal E_H(f,f)
+  :=
+  \int_{\widehat H} \lambda_H(\theta)\,|\widehat f(\theta)|^2\,
+  d\mu_{\widehat H}(\theta),
+\end{equation}
+where $\mu_{\widehat H}$ denotes normalized Haar probability measure on
+$\widehat H$. This form measures the energy of $f$ with respect to the intrinsic
+random--walk geometry induced by $\nu$.
+
+%===========================================================
+\subsection{Heat--kernel invariants of VPD geometry}
+\label{subsec:heat-invariants}
+
+We now isolate the scalar invariants extracted from $(p_t)_{t\ge0}$ and
+$\lambda_H$ that encode quantitative geometric information about the VPD group.
+
+\subsubsection{Return and energy profiles}
+
+For $t>0$ define the \emph{return profile} and \emph{energy profile} by
+\begin{equation}
+\label{eq:ZH-EH}
+  Z_H(t)
+  :=
+  \int_{\widehat H} e^{-t\lambda_H(\theta)}\,d\mu_{\widehat H}(\theta),
+  \qquad
+  E_H(t)
+  :=
+  \int_{\widehat H}
+    \lambda_H(\theta)\,e^{-t\lambda_H(\theta)}\,
+  d\mu_{\widehat H}(\theta).
+\end{equation}
+
+\begin{lemma}[Return profile and its derivative]
+\label{lem:return-energy}
+For every $t>0$,
+\[
+  Z_H(t) = p_t(0),
+  \qquad
+  E_H(t) = -Z'_{H,+}(t),
+\]
+where $Z'_{H,+}$ denotes the right derivative of $Z_H$.
+\end{lemma}
+
+\begin{proof}
+Fourier inversion on the countable group $H$ yields
+\[
+  Z_H(t)
+  =
+  \int_{\widehat H} \widehat p_t^{\,H}(\theta)\,d\mu_{\widehat H}(\theta)
+  =
+  p_t(0),
+\]
+so $Z_H(t)$ is the on-diagonal heat kernel.
+
+For the derivative, fix $t>0$ and $h>0$. For each $\lambda\ge0$,
+\[
+  \frac{e^{-(t+h)\lambda}-e^{-t\lambda}}{h}
+  =
+  -\lambda e^{-(t+\xi_h)\lambda}
+\]
+for some $\xi_h\in(0,h)$, by the mean-value theorem. Since
+$\lambda e^{-s\lambda}\le (es)^{-1}$ for all $\lambda\ge0$ and $s>0$, the
+difference quotients are bounded in absolute value by $(et)^{-1}$ for all
+$h\in(0,t)$, uniformly in $\lambda$. Thus
+\[
+  \Bigg|
+    \frac{e^{-(t+h)\lambda_H(\theta)}-e^{-t\lambda_H(\theta)}}{h}
+  \Bigg|
+  \le \frac{1}{et},
+  \qquad \theta\in\widehat H,\ 0<h<t.
+\]
+The dominating function $(et)^{-1}$ is integrable with respect to
+$\mu_{\widehat H}$, and the pointwise limit of the difference quotient as
+$h\downarrow0$ is $-\lambda_H(\theta)e^{-t\lambda_H(\theta)}$. The dominated
+convergence theorem therefore justifies right differentiation under the integral
+in~\eqref{eq:ZH-EH}, giving
+\[
+  Z'_{H,+}(t)
+  =
+  \int_{\widehat H}
+    \frac{d}{dt}\bigl(e^{-t\lambda_H(\theta)}\bigr)\,
+  d\mu_{\widehat H}(\theta)
+  =
+  -\int_{\widehat H}
+     \lambda_H(\theta)\,e^{-t\lambda_H(\theta)}\,
+   d\mu_{\widehat H}(\theta)
+  =
+  -E_H(t).
+\]
+\end{proof}
+
+It is convenient to introduce the normalized spectral energy scale
+\[
+  m_H(t)
+  :=
+  \frac{E_H(t)}{Z_H(t)}
+  =
+  \frac
+    {\displaystyle\int_{\widehat H}\lambda_H(\theta)\,e^{-t\lambda_H(\theta)}\,d\mu_{\widehat H}(\theta)}
+    {\displaystyle\int_{\widehat H}e^{-t\lambda_H(\theta)}\,d\mu_{\widehat H}(\theta)},
+\]
+whenever $Z_H(t)>0$. Writing
+\[
+  d\mu_t(\theta)
+  :=
+  \frac{e^{-t\lambda_H(\theta)}}{Z_H(t)}\,d\mu_{\widehat H}(\theta),
+\]
+we have $m_H(t)=\int\lambda_H(\theta)\,d\mu_t(\theta)$, the mean Dirichlet
+energy of spectral modes under the heat--kernel weight at time $t$. It
+represents a canonical roughness scale of the VPD geometry at time $t$.
+
+\subsubsection{Collision profile and smoothing scale}
+
+Define the \emph{collision profile}
+\[
+  C_H(t)
+  :=
+  \sum_{h\in H} p_t(h)^2,
+  \qquad t>0.
+\]
+This quantity measures the $\ell^2$-self-overlap of the heat kernel and will
+govern both ultracontractivity and a collision probability for the random walk.
+
+\begin{proposition}[Collision profile and spectral representation]
+\label{prop:collision-profile}
+For every $t>0$,
+\[
+  C_H(t)
+  =
+  \sum_{h\in H} p_t(h)^2
+  =
+  \int_{\widehat H} e^{-2t\lambda_H(\theta)}\,d\mu_{\widehat H}(\theta),
+\]
+and
+\[
+  \|P_t\|_{2\to\infty}^2 = C_H(t).
+\]
+\end{proposition}
+
+\begin{proof}
+Plancherel's theorem holds on the countable discrete group $H$, so
+\[
+  \sum_{h\in H} p_t(h)^2
+  = \int_{\widehat H} \bigl|\widehat p_t^{\,H}(\theta)\bigr|^2\,
+    d\mu_{\widehat H}(\theta),
+\]
+where $\widehat p_t^{\,H}(\theta)=\sum_{h\in H}p_t(h)\,\overline{\theta(h)}$.
+Since $\widehat p_t^{\,H}(\theta)=e^{-t\lambda_H(\theta)}$ for all
+$\theta\in\widehat H$ and $t\ge0$, this gives the spectral representation for
+$C_H(t)$.
+
+For the operator norm, fix $t>0$ and $f\in\ell^2(H)$. For each $x\in H$,
+Cauchy--Schwarz yields
+\[
+  |(P_t f)(x)|
+  = \Big|\sum_{h\in H} p_t(h)\,f(x-h)\Big|
+  \le \Big(\sum_{h\in H}p_t(h)^2\Big)^{1/2}
+      \Big(\sum_{h\in H} |f(x-h)|^2\Big)^{1/2}
+  = C_H(t)^{1/2}\,\|f\|_2,
+\]
+where we used translation invariance of counting measure in the last equality.
+Taking the supremum over $x$ shows that
+\[
+  \|P_t f\|_\infty \le C_H(t)^{1/2}\,\|f\|_2,
+\]
+so $\|P_t\|_{2\to\infty}\le C_H(t)^{1/2}$.
+
+To see that equality holds, set $f:=p_t\in\ell^2(H)$. Then
+\[
+  (P_t f)(x)
+  = (p_t * p_t)(x)
+  = \sum_{h\in H} p_t(h)\,p_t(x-h),
+  \qquad x\in H.
+\]
+Since $(P_t)$ is symmetric, we have $p_t(h)=p_t(-h)$ for all $h\in H$, and hence
+\[
+  (P_t f)(0)
+  = \sum_{h\in H} p_t(h)\,p_t(-h)
+  = \sum_{h\in H} p_t(h)^2
+  = C_H(t).
+\]
+Thus $\|P_t f\|_\infty\ge (P_t f)(0)=C_H(t)$, while $\|f\|_2=C_H(t)^{1/2}$. It
+follows that
+\[
+  \|P_t\|_{2\to\infty}
+  \ge \frac{\|P_t f\|_\infty}{\|f\|_2}
+  \ge \frac{C_H(t)}{C_H(t)^{1/2}}
+  = C_H(t)^{1/2}.
+\]
+Combining this with the upper bound gives $\|P_t\|_{2\to\infty}^2=C_H(t)$.
+\end{proof}
+
+Probabilistically,
+\[
+  C_H(t)
+  = \sum_{h\in H} p_t(h)^2
+  = \mathbb P\bigl(X_t = X'_t\bigr),
+\]
+where $X_t$ and $X'_t$ are two independent copies of the Markov process on $H$
+with transition probabilities $(p_t)_{t\ge0}$ started at the identity. Thus
+$C_H(t)$ quantifies how widely the diffusion has spread in the VPD geometry by
+time $t$: small $C_H(t)$ means that two independent diffusing diagrams are
+unlikely to collide.
+
+\subsubsection{Resolvent and occupation invariant}
+
+For $s>0$ define the diagonal resolvent (Green function) at the origin by
+\begin{equation}
+\label{eq:resolvent-def}
+  R_{s,H}(0)
+  :=
+  \int_{\widehat H} \frac{1}{s+\lambda_H(\theta)}\,d\mu_{\widehat H}(\theta)
+  \ \in\ (0,\infty).
+\end{equation}
+
+\begin{proposition}[Laplace representation of the resolvent]
+\label{prop:resolvent-laplace}
+For every $s>0$,
+\[
+  R_{s,H}(0)
+  =
+  \int_0^\infty e^{-st}\,Z_H(t)\,dt
+  =
+  \int_0^\infty e^{-st}\,p_t(0)\,dt.
+\]
+\end{proposition}
+
+\begin{proof}
+For $\lambda\ge0$ one has
+\[
+  \frac{1}{s+\lambda}
+  =
+  \int_0^\infty e^{-t(s+\lambda)}\,dt.
+\]
+Since all integrands are nonnegative, Tonelli's theorem yields
+\[
+  R_{s,H}(0)
+  =
+  \int_{\widehat H}\int_0^\infty e^{-t(s+\lambda_H(\theta))}\,dt\,d\mu_{\widehat H}(\theta)
+  =
+  \int_0^\infty e^{-st}
+  \int_{\widehat H} e^{-t\lambda_H(\theta)}\,d\mu_{\widehat H}(\theta)\,dt
+  =
+  \int_0^\infty e^{-st} Z_H(t)\,dt.
+\]
+By Lemma~\ref{lem:return-energy}, $Z_H(t)=p_t(0)$, so the second equality
+follows.
+\end{proof}
+
+In probabilistic terms, $R_{s,H}(0)$ is a Laplace--regularized expected
+occupation time at the empty diagram. It will appear as the sharp constant in a
+Sobolev--type inequality below.
+
+\subsection{Mass and covering inequalities}
+\label{subsec:mass-covering}
+
+Throughout this subsection we work under the standing hypothesis~\emph{(H)} of
+Definition~\ref{def:standing-hypothesis} and with the effective subgroup
+$H\le K(X,A)$ and convolution semigroup $(p_t)_{t\ge0}$ constructed in
+Theorem~\ref{thm:effective-support}. The associated L\'evy measure on
+$H\setminus\{0\}$ is denoted by $\nu$, as in Theorem~\ref{thm:lk-H}.
+
+\begin{definition}[Mass functional]\label{def:mass}
+For $g\in K(X,A)$, write
+\[
+  g=\sum_{u\in X/A\setminus\{[A]\}} n_u\,e_u
+\]
+with $n_u\in\mathbb Z$ and only finitely many nonzero coefficients. The
+\emph{mass} of $g$ is defined by
+\[
+  \mathcal M(g)
+  :=
+  \sum_{u\in X/A\setminus\{[A]\}} |n_u|\,\overline d_1(u,[A]).
+\]
+For $\alpha\in D(X,A)$, this agrees with
+$\mathcal M(\alpha)=\sum_{x\in\alpha} \overline d_1(x,[A])$.
+\end{definition}
+
+\begin{theorem}[Mass tail inequality]\label{thm:mass-tail}
+Let $(X_t)_{t\ge0}$ be the L\'evy process on $H$ with convolution semigroup
+$(p_t)_{t\ge0}$ and L\'evy measure $\nu$, started at $X_0=0$. Then for every
+$t>0$ and $R>0$,
+\[
+  \mathbb P\bigl(\mathcal M(X_t)>R\bigr)
+  \;\le\;
+  t\,\nu\{\kappa\in H\setminus\{0\} : \mathcal M(\kappa)>R\}
+  \;+\;
+  \frac{t}{R}
+  \int_{\{\kappa\in H\setminus\{0\} : \mathcal M(\kappa)\le R\}}
+    \mathcal M(\kappa)\,d\nu(\kappa).
+\]
+\end{theorem}
+
+\begin{proof}
+Fix $R>0$. Decompose the jumps of $X_t$ into \emph{large} and \emph{small}
+jumps according to the mass threshold $R$. That is, call a jump large if
+$\mathcal M(\kappa)>R$ and small if $\mathcal M(\kappa)\le R$.
+
+Let $N_t^{>R}$ denote the number of large jumps up to time $t$. By the
+L\'evy--Khintchine construction, $N_t^{>R}$ is a Poisson random variable with
+mean
+\[
+  t\,\nu\{\kappa\in H\setminus\{0\} : \mathcal M(\kappa)>R\}.
+\]
+Therefore,
+\[
+  \mathbb P\bigl(N_t^{>R}\ge1\bigr)
+  = 1 - \exp\bigl(-t\,\nu\{\mathcal M>R\}\bigr)
+  \le t\,\nu\{\mathcal M>R\}.
+\]
+
+Next, let $X_t^{\le R}$ denote the process obtained from $X_t$ by removing all
+large jumps, that is, by retaining only jumps $\kappa$ with $\mathcal M(\kappa)
+\le R$. Then $X_t^{\le R}$ is again a L\'evy process on $H$, with L\'evy measure
+$\nu^{\le R}:=\nu\big|_{\{\mathcal M\le R\}}$. If no large jumps occur up to
+time $t$, then $X_t=X_t^{\le R}$.
+
+By the canonical jump decomposition of L\'evy processes and subadditivity of
+$\mathcal M$,
+\[
+  \mathcal M(X_t^{\le R})
+  \;\le\;
+  \sum_{j=1}^{N_t^{\le R}} \mathcal M(J_j),
+\]
+where $\{J_j\}_{j\ge1}$ are the small jumps and $N_t^{\le R}$ is their (finite)
+number up to time $t$. Taking expectations and using independence of jumps,
+\[
+  \mathbb E\bigl[\mathcal M(X_t^{\le R})\bigr]
+  =
+  t\int_{\{\mathcal M\le R\}} \mathcal M(\kappa)\,d\nu(\kappa).
+\]
+By Markov's inequality,
+\[
+  \mathbb P\bigl(\mathcal M(X_t^{\le R})>R\bigr)
+  \le
+  \frac{1}{R}\,\mathbb E\bigl[\mathcal M(X_t^{\le R})\bigr]
+  =
+  \frac{t}{R}
+  \int_{\{\mathcal M\le R\}} \mathcal M(\kappa)\,d\nu(\kappa).
+\]
+
+The event $\{\mathcal M(X_t)>R\}$ can occur only if at least one large jump
+occurs or if the accumulated contribution of small jumps exceeds $R$. Hence
+\[
+  \{\mathcal M(X_t)>R\}
+  \subset
+  \{N_t^{>R}\ge1\}
+  \;\cup\;
+  \{\mathcal M(X_t^{\le R})>R\},
+\]
+and therefore
+\[
+  \mathbb P\bigl(\mathcal M(X_t)>R\bigr)
+  \le
+  \mathbb P\bigl(N_t^{>R}\ge1\bigr)
+  +
+  \mathbb P\bigl(\mathcal M(X_t^{\le R})>R\bigr).
+\]
+Combining the bounds obtained above yields the stated inequality.
+\end{proof}
+
+\begin{definition}[Covering number]\label{def:covering-number}
+For a subset $S\subset K(X,A)$ and $\varepsilon>0$, the \emph{covering number}
+$N(S,\varepsilon)\in\mathbb N\cup\{\infty\}$ is the smallest integer $m$ such
+that $S$ can be covered by $m$ open $\rho$-balls of radius $\varepsilon$.
+\end{definition}
+
+By Definition~\ref{def:standing-hypothesis}, the restriction of $\rho$ to $H$ is
+a proper translation--invariant metric on a countable set. In particular, $H$ is
+uniformly discrete, so there exists $\varepsilon_0>0$ such that every open
+$\rho$-ball of radius $\varepsilon<\varepsilon_0$ contains at most one point of
+$H$.
+
+For $t>0$ and $\alpha>0$, define the \emph{high-density set}
+\[
+  S_t(\alpha)
+  :=
+  \{h\in H : p_t(h)\ge\alpha\}.
+\]
+
+\begin{theorem}[Covering inequality for high-density sets]\label{thm:covering-high-density}
+Let $t>0$ and $\alpha>0$, and let $S_t(\alpha)$ be as above. For sufficiently
+small $\varepsilon>0$,
+\[
+  N\bigl(S_t(\alpha),\varepsilon\bigr)
+  \;\le\;
+  \min\!\left\{\frac{1}{\alpha},\,\frac{C_H(t)}{\alpha^2}\right\},
+\]
+where
+\[
+  C_H(t)
+  :=
+  \sum_{h\in H} p_t(h)^2
+\]
+is the collision profile from Proposition~\ref{prop:collision-spectral}.
+\end{theorem}
+
+\begin{proof}
+Since $(p_t)_{t\ge0}$ is a family of probability mass functions on $H$,
+\[
+  1
+  =
+  \sum_{h\in H} p_t(h)
+  \ge
+  \sum_{h\in S_t(\alpha)} p_t(h)
+  \ge
+  \sum_{h\in S_t(\alpha)} \alpha
+  =
+  \alpha\,|S_t(\alpha)|.
+\]
+Hence
+\[
+  |S_t(\alpha)| \le \frac{1}{\alpha}.
+\]
+
+On the other hand,
+\[
+  C_H(t)
+  =
+  \sum_{h\in H} p_t(h)^2
+  \ge
+  \sum_{h\in S_t(\alpha)} p_t(h)^2
+  \ge
+  \sum_{h\in S_t(\alpha)} \alpha^2
+  =
+  \alpha^2\,|S_t(\alpha)|,
+\]
+so
+\[
+  |S_t(\alpha)| \le \frac{C_H(t)}{\alpha^2}.
+\]
+
+Combining these two estimates yields
+\[
+  |S_t(\alpha)|
+  \le
+  \min\!\left\{\frac{1}{\alpha},\,\frac{C_H(t)}{\alpha^2}\right\}.
+\]
+
+Finally, by uniform discreteness there exists $\varepsilon_0>0$ such that every
+open $\rho$-ball of radius $\varepsilon<\varepsilon_0$ contains at most one
+point of $H$. For such $\varepsilon$, any covering of $S_t(\alpha)$ by open
+balls of radius $\varepsilon$ must use at least one ball per point, so
+$N(S_t(\alpha),\varepsilon)\ge |S_t(\alpha)|$, while the trivial covering by
+singletons shows that $N(S_t(\alpha),\varepsilon)\le |S_t(\alpha)|$. Thus
+$N(S_t(\alpha),\varepsilon)=|S_t(\alpha)|$ for all $\varepsilon\in(0,\varepsilon_0)$,
+and the claimed inequality follows from the bound on $|S_t(\alpha)|$.
+\end{proof}
+
+%===========================================================
+\subsection{Lipschitz regularity of heat-kernel RKHS functionals}
+\label{subsec:lipschitz-rkhs}
+
+We now turn to global Lipschitz bounds for functions in the heat-kernel RKHS
+on $H$. The key input is a comparison between Lipschitz seminorms of characters
+on $K(X,A)$ and their phase variation on the birth--death space $X/A$.
+
+\subsubsection{Characters and Lipschitz seminorms}
+
+For each $x\in X\setminus A$, let $e_x\in K(X,A)$ denote the class of the
+one--point diagram at $x$, and set $e_{[A]}:=0$. Given a character
+$\chi\in\widehat K(X,A)$, define the associated phase map
+\[
+  \phi_\chi\colon X/A \longrightarrow \mathbb R/2\pi\mathbb Z,
+  \qquad
+  \phi_\chi([A])=0,
+  \quad
+  \phi_\chi(x)=\arg(\chi(e_x)).
+\]
+Equip $\mathbb R/2\pi\mathbb Z$ with its geodesic distance
+$\operatorname{dist}\in[0,\pi]$, and define the Lipschitz seminorm
+\[
+  \mathrm{Lip}_{\overline d_1}(\phi_\chi)
+  :=
+  \sup_{u\neq v}
+  \frac{\operatorname{dist}(\phi_\chi(u),\phi_\chi(v))}
+       {\overline d_1(u,v)}
+  \in [0,\infty].
+\]
+
+\begin{lemma}[Character Lipschitz comparison]
+\label{lem:char-lip-comparison-uniform}
+For every character $\chi\in\widehat K(X,A)$,
+\[
+  \frac{2}{\pi}\,\mathrm{Lip}_{\overline d_1}(\phi_\chi)
+  \;\le\;
+  \mathrm{Lip}_\rho(\chi)
+  \;\le\;
+  \mathrm{Lip}_{\overline d_1}(\phi_\chi),
+\]
+with the convention that the inequalities are trivial if
+$\mathrm{Lip}_{\overline d_1}(\phi_\chi)=\infty$.
+\end{lemma}
+
+\begin{proof}
+Translation invariance of $\rho$ gives
+\[
+  \mathrm{Lip}_\rho(\chi)
+  =
+  \sup_{\gamma\neq0}
+  \frac{|\chi(\gamma)-1|}{\rho(\gamma,0)}.
+\]
+
+\emph{Upper bound.}
+Assume $\mathrm{Lip}_{\overline d_1}(\phi_\chi)<\infty$ and fix
+$\gamma\in K(X,A)\setminus\{0\}$. Write $\gamma=\alpha-\beta$ with
+$\alpha,\beta\in D(X,A)$ finite diagrams, and let $\sigma$ be an optimal
+matching for $W_1(\alpha,\beta)$, written with multiplicities $m_{x,y}\ge0$.
+Then
+\[
+  \rho(\gamma,0)
+  =
+  W_1(\alpha,\beta)
+  =
+  \sum_{x,y} m_{x,y}\,\overline d_1(x,y).
+\]
+Choosing phase increments $\delta_{x,y}\in[-\pi,\pi]$ satisfying
+\(
+  e^{i\delta_{x,y}} = e^{i(\phi_\chi(x)-\phi_\chi(y))}
+\)
+and
+\(
+  |\delta_{x,y}|=\operatorname{dist}(\phi_\chi(x),\phi_\chi(y))
+\),
+we obtain
+\[
+  |\chi(\gamma)-1|
+  \le
+  \sum_{x,y} m_{x,y}|\delta_{x,y}|
+  \le
+  \mathrm{Lip}_{\overline d_1}(\phi_\chi)\,\rho(\gamma,0).
+\]
+
+\emph{Lower bound.}
+If $\mathrm{Lip}_{\overline d_1}(\phi_\chi)=0$ then $\chi$ is constant and the
+claim is trivial. Otherwise fix $\varepsilon>0$ and choose $u\neq v$ such that
+\[
+  \frac{\operatorname{dist}(\phi_\chi(u),\phi_\chi(v))}
+       {\overline d_1(u,v)}
+  \ge
+  \mathrm{Lip}_{\overline d_1}(\phi_\chi)-\varepsilon.
+\]
+Set $\gamma:=e_u-e_v$ and
+$\delta:=\operatorname{dist}(\phi_\chi(u),\phi_\chi(v))\in(0,\pi]$. Then
+$\rho(\gamma,0)=\overline d_1(u,v)$ and
+\[
+  |\chi(\gamma)-1|
+  = |e^{i\delta}-1|
+  = 2\sin(\delta/2).
+\]
+Since $\sin t\ge (2/\pi)t$ for $t\in[0,\pi/2]$, we have
+\[
+  |\chi(\gamma)-1|
+  \ge \frac{2}{\pi}\,\delta
+  \ge \frac{2}{\pi}\,
+      \bigl(\mathrm{Lip}_{\overline d_1}(\phi_\chi)-\varepsilon\bigr)\,
+      \rho(\gamma,0),
+\]
+and letting $\varepsilon\downarrow0$ gives
+\[
+  \mathrm{Lip}_\rho(\chi)
+  \ge
+  \frac{2}{\pi}\,\mathrm{Lip}_{\overline d_1}(\phi_\chi).
+\]
+\end{proof}
+
+\subsubsection{A Poincar\'e constant and a spectral Lipschitz bound}
+
+Define the Poincar\'e constant
+\begin{equation}
+\label{def:poincare-constant}
+  \Lambda
+  :=
+  \inf_{\theta\in\widehat H\setminus\{1\}}
+  \frac{\lambda_H(\theta)}{\mathrm{Lip}_\rho(\theta)^2}
+  \in (0,\infty].
+\end{equation}
+By definition, for every $\theta\in\widehat H$,
+\begin{equation}
+\label{eq:poincare-ineq}
+  \mathrm{Lip}_\rho(\theta)^2
+  \le
+  \Lambda^{-1}\lambda_H(\theta),
+\end{equation}
+with the convention that $\Lambda^{-1}=0$ if $\Lambda=\infty$. Thus
+$\Lambda^{-1/2}$ is the minimal Dirichlet-energy cost required to realize a
+$1$--Lipschitz character on the effective VPD group.
+
+For $t>0$, let $\mathcal H_t$ denote the heat-kernel reproducing kernel Hilbert
+space on $H$ constructed in Theorem~\ref{thm:heat-kernel-field}, with
+reproducing kernel
+\[
+  k_t(x,y)
+  :=
+  \int_{\widehat H}
+    \theta(x-y)\,e^{-t\lambda_H(\theta)}\,
+  d\mu_{\widehat H}(\theta)
+  =
+  p_t(x-y).
+\]
+
+\begin{theorem}[Spectral Lipschitz bound on the effective subgroup]
+\label{thm:spectral-lip-H}
+For every $t>0$ and every $f\in\mathcal H_t$,
+\[
+  \mathrm{Lip}_\rho(f)
+  \le
+  \Lambda^{-1/2}
+  \|f\|_{\mathcal H_t}
+  \Bigg(
+    \int_{\widehat H}
+      \lambda_H(\theta)\,e^{-t\lambda_H(\theta)}\,
+    d\mu_{\widehat H}(\theta)
+  \Bigg)^{1/2}
+  =
+  \Lambda^{-1/2}\,\|f\|_{\mathcal H_t}\,E_H(t)^{1/2}.
+\]
+\end{theorem}
+
+\begin{proof}
+For $x,y\in H$, the reproducing property and Cauchy--Schwarz yield
+\[
+  |f(x)-f(y)|
+  =
+  |\langle f, k_t(\cdot,x)-k_t(\cdot,y)\rangle_{\mathcal H_t}|
+  \le
+  \|f\|_{\mathcal H_t}\,
+  \|k_t(\cdot,x)-k_t(\cdot,y)\|_{\mathcal H_t}.
+\]
+A direct computation (using the spectral characterization of $\mathcal H_t$ in
+Theorem~\ref{thm:spectral-Ht}) gives
+\[
+  \|k_t(\cdot,x)-k_t(\cdot,y)\|_{\mathcal H_t}^2
+  =
+  \int_{\widehat H}
+    |\theta(x-y)-1|^2\,e^{-t\lambda_H(\theta)}\,
+  d\mu_{\widehat H}(\theta).
+\]
+Using
+\(
+  |\theta(x-y)-1|
+  \le
+  \mathrm{Lip}_\rho(\theta)\,\rho(x,y)
+\)
+and \eqref{eq:poincare-ineq}, we obtain
+\[
+  \|k_t(\cdot,x)-k_t(\cdot,y)\|_{\mathcal H_t}^2
+  \le
+  \rho(x,y)^2
+  \int_{\widehat H}
+    \Lambda^{-1}\lambda_H(\theta)\,e^{-t\lambda_H(\theta)}\,
+  d\mu_{\widehat H}(\theta).
+\]
+Combining these estimates yields
+\[
+  |f(x)-f(y)|
+  \le
+  \Lambda^{-1/2}
+  \|f\|_{\mathcal H_t}
+  \Bigg(
+    \int_{\widehat H}
+      \lambda_H(\theta)\,e^{-t\lambda_H(\theta)}\,
+    d\mu_{\widehat H}(\theta)
+  \Bigg)^{1/2}
+  \rho(x,y),
+\]
+and taking the supremum over $x\neq y$ gives the desired bound.
+\end{proof}
+
+Thus every heat-kernel feature $f\in\mathcal H_t$ defines a globally Lipschitz
+functional on the effective VPD group, with Lipschitz constant controlled by
+three geometric quantities:
+\begin{itemize}
+  \item the Poincar\'e constant $\Lambda$, encoding the cost of Lipschitz
+    characters in the VPD metric;
+  \item the return profile $Z_H(t)=p_t(0)$, through its role in the heat-kernel
+    weighting of spectral modes;
+  \item the mean spectral energy $m_H(t)$ via the relation
+    $E_H(t)=m_H(t)\,Z_H(t)$.
+\end{itemize}
+
+\subsubsection{Monte Carlo evaluation of the spectral factor}
+\label{subsec:mc-spectral-factor}
+
+To obtain a practical numerical handle on $E_H(t)$, we use metric truncations of
+the L\'evy measure from Definition~\ref{def:truncation-nuR}. Fix a proper
+translation--invariant metric $\rho$ on $H$, for instance the restriction of the
+VPD metric from Section~\ref{sec:ti-classification}. For $R>0$ and
+$\kappa\in H\setminus\{0\}$, the truncated L\'evy measure is
+\[
+  \nu_R(\kappa)
+  :=
+  \nu(\kappa)\,\mathbf 1_{\{\rho(\kappa,0)\le R\}},
+\]
+and the corresponding truncated exponent is
+\[
+  \lambda_{H,R}(\theta)
+  :=
+  \sum_{\kappa\in H\setminus\{0\}}
+    \nu_R(\kappa)\bigl(1-\Re\,\theta(\kappa)\bigr),
+  \qquad \theta\in\widehat H.
+\]
+By Lemma~\ref{lem:lambdaHR-monotone},
+\[
+  \lambda_{H,R}(\theta)\uparrow\lambda_H(\theta)
+  \quad\text{for each }\theta\in\widehat H
+  \quad\text{as }R\to\infty.
+\]
+
+For $t>0$ and $R>0$ define the truncated observables
+\begin{equation}
+\label{eq:ZH-EHR-truncated}
+  Z_{H,R}(t)
+  :=
+  \int_{\widehat H} e^{-t\lambda_{H,R}(\theta)}\,d\mu_{\widehat H}(\theta),
+  \qquad
+  E_{H,R}(t)
+  :=
+  \int_{\widehat H}
+    \lambda_{H,R}(\theta)\,e^{-t\lambda_{H,R}(\theta)}\,
+  d\mu_{\widehat H}(\theta).
+\end{equation}
+Since $\lambda_{H,R}(\theta)\uparrow\lambda_H(\theta)$ and
+$0\le e^{-t\lambda_{H,R}(\theta)}\le1$, the functions
+$e^{-t\lambda_{H,R}(\theta)}$ decrease pointwise to
+$e^{-t\lambda_H(\theta)}$. By the dominated convergence theorem,
+\[
+  Z_{H,R}(t)\downarrow Z_H(t)
+  \quad\text{as }R\to\infty.
+\]
+Similarly, the bound
+$\lambda_{H,R}(\theta)e^{-t\lambda_{H,R}(\theta)}\le (et)^{-1}$ and pointwise
+convergence imply, again by dominated convergence, that
+\[
+  E_{H,R}(t)\longrightarrow E_H(t)
+  \quad\text{as }R\to\infty.
+\]
+
+Because $\rho$ is proper, the set
+$\{\kappa\in H:\rho(\kappa,0)\le R\}$ is finite for each $R>0$, and hence
+\[
+  q_R
+  :=
+  \sum_{\kappa\in H\setminus\{0\}} \nu_R(\kappa)
+  < \infty.
+\]
+Applying the L\'evy--Khintchine correspondence (Theorem~\ref{thm:lk-H}) to the
+finite L\'evy measure $\nu_R$ and invoking
+Corollary~\ref{cor:finite-activity-compound-poisson}, the convolution semigroup
+with exponent $\lambda_{H,R}$ has finite activity and admits a compound Poisson
+representation. The associated Markov process on $H$ therefore admits exact
+pathwise simulation.
+
+Monte Carlo estimators constructed from this truncated jump process are unbiased
+for the truncated spectral observables $Z_{H,R}(t)$ and $E_{H,R}(t)$. The
+truncation error for the target quantities $Z_H(t)$ and $E_H(t)$ is
+deterministic, controlled by the tail of the L\'evy measure $\nu$, and vanishes
+as $R\to\infty$ by the convergence results above. In particular, the Lipschitz
+bound of Theorem~\ref{thm:spectral-lip-H} admits a numerically accessible
+right--hand side: for fixed $t>0$ and $f\in\mathcal H_t$, the spectral factor
+$E_H(t)^{1/2}$ can be approximated to any prescribed accuracy by computing
+$E_{H,R}(t)$ via Monte Carlo simulation of the truncated compound Poisson
+processes and taking $R$ large. The inequality itself remains purely analytic;
+stochastic methods serve only to evaluate the spectral factor $E_H(t)$ that
+governs the Lipschitz seminorm of $f$.
+
+%===========================================================
+\subsection{Smoothing and Sobolev--Green inequalities}
+\label{subsec:smoothing-sobolev}
+
+The invariants $C_H(t)$ and $R_{s,H}(0)$ govern two complementary types of
+global control: smoothing from $\ell^2$ to $\ell^\infty$, and pointwise bounds
+from energy.
+
+\subsubsection{Ultracontractivity via the collision profile}
+\label{subsec:collision-ultra}
+
+Combining the operator--norm identity in
+Proposition~\ref{prop:collision-profile} with its spectral representation
+yields the sharp ultracontractive bound
+\begin{equation}
+\label{eq:ultracontractivity-final}
+  \|P_t f\|_\infty
+  \ \le\ C_H(t)^{1/2}\,\|f\|_2
+  =
+  Z_H(2t)^{1/2}\,\|f\|_2,
+  \qquad t>0,\ f\in\ell^2(H),
+\end{equation}
+where
+\[
+  Z_H(2t)
+  = \sum_{h\in H}p_t(h)^2
+  = \int_{\widehat H} e^{-2t\lambda_H(\theta)}\,d\mu_{\widehat H}(\theta).
+\]
+The time it takes for $C_H(t)^{1/2}$ to fall below a prescribed threshold is an
+intrinsic smoothing time scale for the VPD geometry. Probabilistically, $C_H(t)$
+is the collision probability for two independent VPD random walks, so
+\eqref{eq:ultracontractivity-final} ties smoothing of functions on $H$ directly
+to collision behavior of the underlying random walk.
+
+\subsubsection{Sobolev--Green inequality and the resolvent}
+\label{subsec:resolvent-sobolev}
+
+We next record a Sobolev--type inequality that converts Dirichlet energy and
+$\ell^2$ mass into uniform control, with sharp constant $R_{s,H}(0)$.
+
+\begin{proposition}[Sobolev--Green inequality on $H$]
+\label{prop:sobolev-green}
+For every $s>0$ and every $f\in\ell^2(H)$ with finite Dirichlet energy
+$\mathcal E_H(f,f)$,
+\[
+  \|f\|_\infty^2
+  \ \le\ R_{s,H}(0)\,
+        \Bigl(s\,\|f\|_2^2 + \mathcal E_H(f,f)\Bigr),
+\]
+where $\mathcal E_H$ is given by~\eqref{eq:dirichlet-form-H} and
+$R_{s,H}(0)$ by~\eqref{eq:resolvent-def}.
+\end{proposition}
+
+\begin{proof}
+Fourier inversion gives, for each $x\in H$,
+\[
+  f(x)
+  =
+  \int_{\widehat H} \widehat f(\theta)\,\theta(x)\,
+  d\mu_{\widehat H}(\theta).
+\]
+Applying Cauchy--Schwarz with weights $s+\lambda_H(\theta)$ yields
+\[
+  |f(x)|^2
+  \le
+  \Bigg(
+    \int_{\widehat H} (s+\lambda_H(\theta))\,|\widehat f(\theta)|^2\,
+    d\mu_{\widehat H}(\theta)
+  \Bigg)
+  \Bigg(
+    \int_{\widehat H} \frac{1}{s+\lambda_H(\theta)}\,
+    d\mu_{\widehat H}(\theta)
+  \Bigg).
+\]
+The first factor equals $s\|f\|_2^2+\mathcal E_H(f,f)$ by
+\eqref{eq:dirichlet-form-H}, while the second is $R_{s,H}(0)$ by
+\eqref{eq:resolvent-def}. Taking the supremum over $x\in H$ completes the proof.
+\end{proof}
+
+Together with Proposition~\ref{prop:resolvent-laplace}, this shows that the
+resolvent constant $R_{s,H}(0)$ is determined entirely by the return profile
+$Z_H(t)$ and so acts as an occupation--time invariant of the VPD random walk:
+pointwise amplitude of diagram functionals is controlled by how often the
+process revisits the empty diagram, regularized by the Laplace parameter $s$.
+
+%===========================================================
+\subsection{Metric truncation and numerical evaluation regimes}
+\label{subsec:truncation-mc}
+
+We conclude by explaining how the invariants $Z_H(t)$, $E_H(t)$, $C_H(t)$, and
+$R_{s,H}(0)$ can be accessed numerically via metric truncation of the L\'evy
+measure and exact simulation of finite--activity compound Poisson processes on
+$H$. No new assumptions are introduced.
+
+\subsubsection{Truncating the L\'evy measure in the VPD metric}
+
+We continue to work with the proper translation--invariant metric $\rho$ on $H$,
+for instance the restriction of the VPD metric from
+Section~\ref{sec:ti-classification}. For $R>0$ and $\kappa\in H\setminus\{0\}$
+the truncated L\'evy measure $\nu_R$ is given by
+\[
+  \nu_R(\kappa)
+  :=
+  \nu(\kappa)\,\mathbf 1_{\{\rho(\kappa,0)\le R\}},
+\]
+as in Definition~\ref{def:truncation-nuR}, with corresponding truncated exponent
+\[
+  \lambda_{H,R}(\theta)
+  :=
+  \sum_{\kappa\in H\setminus\{0\}}
+    \nu_R(\kappa)\bigl(1-\Re\,\theta(\kappa)\bigr),
+  \qquad \theta\in\widehat H.
+\]
+By Lemma~\ref{lem:lambdaHR-monotone}, for each $\theta\in\widehat H$ we have
+\[
+  \lambda_{H,R}(\theta)\uparrow \lambda_H(\theta)
+  \quad\text{as }R\to\infty.
+\]
+
+Because $\rho$ is proper, the set
+$\{\kappa\in H:\rho(\kappa,0)\le R\}$ is finite for each $R>0$, and hence
+\[
+  q_R
+  :=
+  \sum_{\kappa\in H\setminus\{0\}} \nu_R(\kappa)
+  < \infty.
+\]
+Applying the L\'evy--Khintchine correspondence (Theorem~\ref{thm:lk-H}) to the
+finite L\'evy measure $\nu_R$ and invoking
+Corollary~\ref{cor:finite-activity-compound-poisson}, the convolution semigroup
+with exponent $\lambda_{H,R}$ has finite activity and admits a compound Poisson
+representation. The associated Markov process on $H$ therefore admits exact
+pathwise simulation.
+
+\subsubsection{Truncated invariants and convergence}
+
+For $t>0$ and $R>0$ define the truncated versions of our heat-based invariants
+by
+\[
+  Z_{H,R}(t)
+  :=
+  \int_{\widehat H} e^{-t\lambda_{H,R}(\theta)}\,d\mu_{\widehat H}(\theta),
+  \qquad
+  E_{H,R}(t)
+  :=
+  \int_{\widehat H}
+    \lambda_{H,R}(\theta)\,e^{-t\lambda_{H,R}(\theta)}\,
+  d\mu_{\widehat H}(\theta),
+\]
+\[
+  C_{H,R}(t)
+  :=
+  \int_{\widehat H} e^{-2t\lambda_{H,R}(\theta)}\,d\mu_{\widehat H}(\theta),
+\]
+and, for $s>0$,
+\[
+  R_{s,H,R}(0)
+  :=
+  \int_{\widehat H} \frac{1}{s+\lambda_{H,R}(\theta)}\,d\mu_{\widehat H}(\theta).
+\]
+
+Monotone convergence of $\lambda_{H,R}(\theta)$ and the inequalities
+$0\le e^{-t\lambda_{H,R}(\theta)}\le1$ and
+$0\le e^{-2t\lambda_{H,R}(\theta)}\le1$ imply, by the dominated convergence
+theorem, that for every fixed $t>0$,
+\[
+  Z_{H,R}(t)\downarrow Z_H(t),
+  \qquad
+  C_{H,R}(t)\downarrow C_H(t)
+  \quad\text{as }R\to\infty.
+\]
+Similarly, the bound
+$\lambda_{H,R}(\theta)e^{-t\lambda_{H,R}(\theta)}\le (et)^{-1}$ and pointwise
+convergence show that
+\[
+  E_{H,R}(t)\longrightarrow E_H(t)
+  \quad\text{as }R\to\infty.
+\]
+For the resolvent, monotone convergence $\lambda_{H,R}(\theta)\uparrow\lambda_H(\theta)$
+and the inequality
+\[
+  0 \le \frac{1}{s+\lambda_{H,R}(\theta)} \le \frac{1}{s}
+\]
+yield, again by dominated convergence,
+\[
+  R_{s,H,R}(0)\longrightarrow R_{s,H}(0)
+  \quad\text{as }R\to\infty.
+\]
+
+Thus metric truncation provides coherent finite--activity approximations to all
+of the spectral invariants
+\[
+  Z_H(t),\quad E_H(t),\quad C_H(t),\quad R_{s,H}(0),
+\]
+with deterministic truncation errors that vanish as $R\to\infty$.
+
+\subsubsection{Monte Carlo evaluation of geometric bounds}
+
+Each truncated model with exponent $\lambda_{H,R}$ admits a compound Poisson
+representation with finite total jump rate $q_R<\infty$ and hence supports
+exact pathwise simulation on $H$. Monte Carlo estimators constructed from this
+truncated jump process are unbiased for the truncated observables
+$Z_{H,R}(t)$, $E_{H,R}(t)$, $C_{H,R}(t)$, and $R_{s,H,R}(0)$, with variances
+that can be controlled in terms of $q_R$ and sample size. The truncation error
+for the target quantities $Z_H(t)$, $E_H(t)$, $C_H(t)$, and $R_{s,H}(0)$ is
+deterministic, controlled by the tail of the L\'evy measure $\nu$, and vanishes
+as $R\to\infty$ by the convergence results above.
+
+In particular, the Lipschitz bound from Theorem~\ref{thm:spectral-lip-H}, the
+ultracontractive estimate~\eqref{eq:ultracontractivity-final}, and the
+Sobolev--Green inequality of Proposition~\ref{prop:sobolev-green} all admit
+numerically accessible right--hand sides: for fixed $t>0$, $s>0$, and
+$f\in\mathcal H_t$ or $f\in\ell^2(H)$, the spectral factors $E_H(t)$,
+$C_H(t)$, and $R_{s,H}(0)$ can be approximated to any prescribed accuracy by
+computing their truncated counterparts via Monte Carlo simulation on $H$ and
+taking $R$ large. The inequalities themselves are purely analytic statements
+about the VPD geometry; stochastic methods serve only as a numerical lens
+through which the random--walk invariants governing global regularity of
+diagram functionals may be evaluated.
+
+\section{Example}
+
+\section{Conclusion}
+
+This paper develops a translation--invariant analytic framework for virtual
+persistence diagrams based on the Grothendieck group $(K(X,A),\rho)$ associated
+with a metric pair $(X,d,A)$.  Working throughout in the uniformly discrete
+regime, we impose a single guiding design constraint: all constructions are
+expressed at the level of $\ell^1$ convolution kernels, so that every operator
+and observable is defined by countable absolutely convergent series, even when
+$K(X,A)$ itself is uncountable.  A central theoretical outcome is the
+identification of a canonical \emph{effective subgroup} $H\le K(X,A)$, generated
+by the supports of the convolution semigroup, on which all dynamics,
+Fourier--analytic representations, and spectral identities can be carried out
+without loss of generality.
+
+On this effective subgroup $H$, classical harmonic analysis applies.  We obtain a
+precise exponent representation of translation--invariant convolution semigroups
+via a continuous conditionally negative definite symbol
+$\lambda_H:\widehat H\to[0,\infty)$.  This representation allows a unified
+analysis of several regularity properties of the associated heat flow.  In
+particular, we showed that sharp constants in Lipschitz bounds, ultracontractive
+$\ell^2\to\ell^\infty$ estimates, and Sobolev--type inequalities are all governed
+by explicit scalar spectral integrals involving $\lambda_H$.  These results
+demonstrate that analytic regularity of functions on virtual persistence
+diagrams can be reduced to the study of a small number of canonical spectral
+quantities.
+
+A further contribution is the identification of these spectral integrals with
+probabilistic observables of the induced jump process on $H$.  Heat traces,
+collision integrals, and resolvent constants admit interpretations as return
+probabilities, collision probabilities, and regularized occupation times,
+respectively.  This correspondence implies that the analytic constants appearing
+in the inequalities of this paper are, in principle, numerically accessible via
+stochastic approximation on the countable state space $H$.  Importantly,
+however, all analytic results are exact and independent of any computational
+regime; simulation enters only as an optional tool for evaluation.
+
+The main limitation of the present framework is the reliance on uniform
+discreteness of the ground space $(X/A,\overline d_1)$, which ensures discreteness
+of the virtual persistence diagram group and underlies the reduction to the
+countable subgroup $H$.  This excludes settings in which persistence diagrams may
+exhibit arbitrarily fine accumulation.  In addition, while the spectral
+integrals controlling regularity are canonical, their explicit evaluation may be
+challenging in models where the symbol $\lambda_H$ lacks additional structure.
+
+Several directions for future work emerge naturally.  A primary challenge is to
+extend the present approach beyond the uniformly discrete regime, allowing for
+non--discrete diagram groups or infinite--activity generators while retaining
+metric compatibility.  Further avenues include sharper analytic control of the
+spectral quantities associated with $\lambda_H$, such as asymptotic behavior of
+heat traces and resolvents, and a deeper investigation of how the geometry of the
+underlying diagram space influences spectral regularity.
+
+\bibliography{sn-bibliography}% common bib file
+%% if required, the content of .bbl file can be included here once bbl is generated
+%%\input sn-article.bbl
+
+\end{document}

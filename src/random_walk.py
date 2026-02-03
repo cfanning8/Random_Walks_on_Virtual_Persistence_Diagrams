@@ -30,6 +30,9 @@ def sample_compound_poisson(
     Returns:
         X_t: Final position in Z^m
     """
+    if len(J) == 0:
+        raise ValueError("Cannot sample from empty jump kernel. Effective subgroup H has dimension 0.")
+    
     q = compute_total_rate(rates)
     pi = compute_jump_probabilities(rates)
     
