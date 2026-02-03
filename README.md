@@ -32,7 +32,7 @@ Implementing the full MUTAG pipeline for heat flow random walks on virtual persi
 - Vertex filtration: phi(v) = ell_V(v) in {0,...,6}
 - Lower-star clique filtration: Phi(sigma) = max_{v in sigma} phi(v)
 - Birth-death space: X = {(b,d) in Z^2 : b < d} with l1 metric
-- Diagrams: alpha^A, alpha^B in D(X,A)
+- Diagrams: alpha^A, alpha^B in D(X,A) (H0 persistence)
 - Virtual difference: beta = alpha^A - alpha^B in K(X,A)
 - Effective subgroup: H = <supp(alpha^A) cup supp(alpha^B)> cong Z^m
 - Jump kernel: j(±e_i) = lambda, j(0) = 0 (nearest-neighbor)
