@@ -133,6 +133,9 @@ This structure separates code (src/), execution (scripts/), outputs (results/), 
 - Only create a new file when it is structurally justified
 - If there are multiple valid architectural choices, STOP and ask questions first
 - If the task is obvious and mechanical, do it immediately
+- Scripts must compute ONE thing at a time - never create scripts that compute multiple different outputs
+- Use command-line arguments to specify which single operation a script should perform
+- Each script execution should produce one specific result, not multiple unrelated outputs
 
 ## 7) Operational Discipline – NO BACKGROUND COMMANDS
 - NEVER run commands in the background
