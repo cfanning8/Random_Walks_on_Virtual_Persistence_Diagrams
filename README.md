@@ -2,14 +2,17 @@
 
 ## Current Status
 
-Implementing the full MUTAG pipeline for heat flow random walks on virtual persistence diagrams:
-- MUTAG dataset: two graphs (mutagenic vs non-mutagenic)
+Full MUTAG pipeline implemented and working:
+- MUTAG dataset: two largest graphs (mutagenic vs non-mutagenic)
 - Lower-star clique filtration with integer vertex labels
-- Persistent homology computation (H1)
+- Persistent homology computation (H0)
 - Virtual persistence diagram (VPD) group construction
 - Translation-invariant random walk on effective subgroup H
-- Heat kernel invariants (Z_H, E_H, C_H, R_{s,H})
-- Lipschitz/ultracontractive/resolvent bounds evaluation
+- Heat kernel invariants computed: Z_H(tau), E_H(tau), C_H(tau), R_{s,H}(0)
+- Lipschitz and ultracontractive bounds evaluated
+- Comprehensive figures generated
+
+Results saved in `results/example/bounds/` and `results/example/figures/`
 
 ## Mathematical Framework
 
@@ -61,16 +64,23 @@ Implementing the full MUTAG pipeline for heat flow random walks on virtual persi
    pip install -r requirements.txt
    ```
 
-## Next Actions
+## Usage
 
-- Download MUTAG dataset to `data/`
-- Select two graphs (one mutagenic, one non-mutagenic)
-- Implement lower-star clique filtration with vertex labels
-- Compute persistent homology (H1) using GUDHI
-- Construct VPD group K(X,A) and effective subgroup H
-- Implement jump kernel j and compound Poisson simulation
-- Compute heat kernel invariants via Monte Carlo
-- Evaluate Lipschitz bounds and other regularity estimates
+1. Run the full pipeline:
+   ```
+   python scripts/example/mutag_pipeline.py
+   ```
+
+2. Generate figures:
+   ```
+   python scripts/example/generate_figures.py
+   ```
+
+## Results
+
+- Invariants: `results/example/bounds/invariants.json`
+- Bounds: `results/example/bounds/bounds.json`
+- Figures: `results/example/figures/*.png`
 
 ## Known Issues
 
