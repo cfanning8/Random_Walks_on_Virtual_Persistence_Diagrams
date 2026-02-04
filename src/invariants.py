@@ -82,7 +82,8 @@ def estimate_C_H(
     """
     rng = np.random.default_rng(seed)
     J, rates = build_jump_kernel(m, lambda_val)
-    t = tau / lambda_val
+    # With lambda=1, tau = t directly (no scaling needed)
+    t = tau
     
     count = 0
     for _ in range(N):
@@ -121,7 +122,80 @@ def estimate_E_H(
     for _ in range(N):
         theta = rng.uniform(-np.pi, np.pi, size=m)
         lam = lambda_H(theta, m, lambda_val)
+        # Spectral side: exp(-tau * lambda_H(theta))
         acc += lam * np.exp(-tau * lam)
+    
+    return acc / N
+
+
+def estimate_E_H_2(
+    tau: float,
+    m: int,
+    lambda_val: float = 1.0,
+    N: int = 50000,
+    seed: int = 14
+) -> float:
+    """
+    Estimate E_H^(2)(tau) = energy of kernel section k_t(·,0).
+    
+    E_H^(2)(tau) = int lambda_H(theta) * exp(-2*tau*lambda_H(theta)) dmu
+    
+    This is the Dirichlet energy of the kernel section, used for Sobolev bounds.
+    
+    Args:
+        tau: Dimensionless time parameter
+        m: Dimension of H
+        lambda_val: Jump rate parameter
+        N: Number of Monte Carlo samples
+        seed: Random seed
+        
+    Returns:
+        Estimated E_H^(2)(tau)
+    """
+    rng = np.random.default_rng(seed)
+    
+    acc = 0.0
+    for _ in range(N):
+        theta = rng.uniform(-np.pi, np.pi, size=m)
+        lam = lambda_H(theta, m, lambda_val)
+        # Energy of kernel section: exp(-2*tau*lambda_H)
+        acc += lam * np.exp(-2.0 * tau * lam)
+    
+    return acc / N
+
+
+def estimate_Z_H_2(
+    tau: float,
+    m: int,
+    lambda_val: float = 1.0,
+    N: int = 50000,
+    seed: int = 14
+) -> float:
+    """
+    Estimate Z_H^(2)(tau) = ||k_t(·,0)||_2^2.
+    
+    Z_H^(2)(tau) = int exp(-2*tau*lambda_H(theta)) dmu
+    
+    This is the L^2 norm squared of the kernel section, used for Sobolev bounds.
+    
+    Args:
+        tau: Dimensionless time parameter
+        m: Dimension of H
+        lambda_val: Jump rate parameter
+        N: Number of Monte Carlo samples
+        seed: Random seed
+        
+    Returns:
+        Estimated Z_H^(2)(tau)
+    """
+    rng = np.random.default_rng(seed)
+    
+    acc = 0.0
+    for _ in range(N):
+        theta = rng.uniform(-np.pi, np.pi, size=m)
+        lam = lambda_H(theta, m, lambda_val)
+        # L^2 norm squared: exp(-2*tau*lambda_H)
+        acc += np.exp(-2.0 * tau * lam)
     
     return acc / N
 
