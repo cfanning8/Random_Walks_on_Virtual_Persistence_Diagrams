@@ -49,7 +49,8 @@ def estimate_Z_H(
     """
     rng = np.random.default_rng(seed)
     J, rates = build_jump_kernel(m, lambda_val)
-    t = tau / lambda_val
+    # With lambda=1, tau = t directly (no scaling needed)
+    t = tau
     
     count = 0
     for _ in range(N):
