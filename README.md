@@ -30,11 +30,13 @@ Persistent homology associates to a filtered simplicial complex a persistence di
 
 ### Requirements
 
-- Python 3.8 or higher
-- NumPy, SciPy, Matplotlib
-- NetworkX (for graph-based examples)
-- gudhi (for persistence computation)
-- pyvista (for 3D visualizations)
+- Python >= 3.8
+- NumPy >= 1.24.0
+- SciPy >= 1.10.0
+- NetworkX >= 3.0
+- gudhi >= 3.7.0
+- Matplotlib
+- PyVista
 
 ### Install Dependencies
 
