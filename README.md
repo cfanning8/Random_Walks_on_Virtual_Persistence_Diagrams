@@ -8,21 +8,21 @@ This repository provides a Python implementation of translation-invariant heat f
 
 ### Virtual Persistence Diagram Groups
 
-Persistent homology associates to a filtered simplicial complex a persistence diagram: a finite multiset of points in R^2 encoding birth and death parameters of homological features. However, finite persistence diagrams form a commutative monoid without additive inverses.
+Persistent homology associates to a filtered simplicial complex a persistence diagram: a finite multiset of points in $\mathbb{R}^2$ encoding birth and death parameters of homological features. However, finite persistence diagrams form a commutative monoid without additive inverses.
 
-**Virtual persistence diagrams** extend this framework to arbitrary pointed metric spaces. They are constructed by passing to the Grothendieck group K(X,A) of diagrams relative to a metric pair (X,d,A), equipped with the canonical translation-invariant Grothendieck metric rho extending the Wasserstein-1 distance.
+**Virtual persistence diagrams** extend this framework to arbitrary pointed metric spaces. They are constructed by passing to the Grothendieck group $K(X,A)$ of diagrams relative to a metric pair $(X,d,A)$, equipped with the canonical translation-invariant Grothendieck metric $\rho$ extending the Wasserstein-1 distance.
 
 ### Key Results
 
-1. **Uniformly Discrete Metric Pairs**: For integer-valued filtrations, (X/A, d_1, [A]) is uniformly discrete, where d_1 is the 1-strengthened metric.
+1. **Uniformly Discrete Metric Pairs**: For integer-valued filtrations, $(X/A, d_1, [A])$ is uniformly discrete, where $d_1$ is the 1-strengthened metric.
 
 2. **Canonical Levy Measure**: Geometry-induced Levy measure constructed from VPD metric via graph Laplacian on birth-death points.
 
-3. **Heat Kernel Invariants**: Spectral integration over dual group hat(H) to compute:
-   - Return probability p_t(0)
-   - Collision probability sum_h p_t(h)^2
-   - Energy derivative -d/dt p_t(0)
-   - Resolvent diagonal G_s(0,0)
+3. **Heat Kernel Invariants**: Spectral integration over dual group $\widehat{H}$ to compute:
+   - Return probability $p_t(0)$
+   - Collision probability $\sum_h p_t(h)^2$
+   - Energy derivative $-\frac{d}{dt}p_t(0)$
+   - Resolvent diagonal $G_s(0,0)$
 
 4. **Theoretical Bounds**: Lipschitz, ultracontractive, and Sobolev-Green bounds using spectral formulas.
 
@@ -84,24 +84,24 @@ python scripts/example/generate_figures.py all
 
 ### `src/vpd_group.py`
 - Geometry window construction from BD points
-- Mass functional M(g) = sum |n_u| * d_1(u, [A])
-- 1-strengthened metric d_1 computation
+- Mass functional $M(g) = \sum_u |n_u| \cdot d_1(u, [A])$
+- 1-strengthened metric $d_1$ computation
 
 ### `src/jump_kernel.py`
 - `LevyMeasure` class with jumps and rates
 - Canonical geometry-induced Levy measure construction
-- Levy-Khintchine exponent lambda_H(theta)
+- Levy-Khintchine exponent $\lambda_H(\theta)$
 
 ### `src/invariants.py`
-- Return probability p_t(0) via Monte Carlo integration
-- Collision probability sum_h p_t(h)^2
-- Energy derivative -d/dt p_t(0)
-- Resolvent diagonal G_s(0,0)
+- Return probability $p_t(0)$ via Monte Carlo integration
+- Collision probability $\sum_h p_t(h)^2$
+- Energy derivative $-\frac{d}{dt}p_t(0)$
+- Resolvent diagonal $G_s(0,0)$
 
 ### `src/bounds.py`
-- Lipschitz bounds: Lip_rho(f) <= |f|_{H_t} * (-d/dt p_t(0))^{1/2}
-- Ultracontractive bounds: ||P_t||_{2->infty} = sqrt(sum_h p_t(h)^2)
-- Sobolev-Green bounds using G_s(0,0)
+- Lipschitz bounds: $\mathrm{Lip}_\rho(f) \leq |f|_{H_t} \cdot (-\frac{d}{dt}p_t(0))^{1/2}$
+- Ultracontractive bounds: $\|P_t\|_{2\to\infty} = \sqrt{\sum_h p_t(h)^2}$
+- Sobolev-Green bounds using $G_s(0,0)$
 
 ### `src/random_walk.py`
 - Compound Poisson simulation (generic over LevyMeasure)
@@ -111,9 +111,9 @@ python scripts/example/generate_figures.py all
 
 **Architecture**: Geometry-first approach - build geometry window and canonical Levy measure from VPD metric, compute invariants from Levy measure (geometry-only), then apply to specific diagrams.
 
-**Notation**: We use only primitive notation from the mathematics: p_t(0), sum_h p_t(h)^2, -d/dt p_t(0), G_s(0,0). No shorthand invariants.
+**Notation**: We use only primitive notation from the mathematics: $p_t(0)$, $\sum_h p_t(h)^2$, $-\frac{d}{dt}p_t(0)$, $G_s(0,0)$. No shorthand invariants.
 
-**Random Seed**: All random operations use seed=14 for reproducibility.
+**Random Seed**: All random operations use `seed=14` for reproducibility.
 
 ## References
 
