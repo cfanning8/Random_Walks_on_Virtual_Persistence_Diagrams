@@ -4,27 +4,9 @@ This repository provides a Python implementation of translation-invariant heat f
 
 **Paper Title**: *Random Walks on Virtual Persistence Diagrams*
 
-## Mathematical Background
+## Abstract
 
-### Virtual Persistence Diagram Groups
-
-Persistent homology associates to a filtered simplicial complex a persistence diagram: a finite multiset of points in $\mathbb{R}^2$ encoding birth and death parameters of homological features. However, finite persistence diagrams form a commutative monoid without additive inverses.
-
-**Virtual persistence diagrams** extend this framework to arbitrary pointed metric spaces. They are constructed by passing to the Grothendieck group $K(X,A)$ of diagrams relative to a metric pair $(X,d,A)$, equipped with the canonical translation-invariant Grothendieck metric $\rho$ extending the Wasserstein-1 distance.
-
-### Key Results
-
-1. **Uniformly Discrete Metric Pairs**: For integer-valued filtrations, $(X/A, d_1, [A])$ is uniformly discrete, where $d_1$ is the 1-strengthened metric.
-
-2. **Canonical Lévy Measure**: Geometry-induced Lévy measure constructed from VPD metric via graph Laplacian on birth-death points.
-
-3. **Heat Kernel Invariants**: Spectral integration over dual group $\widehat{H}$ to compute:
-   - Return probability $p_t(0)$
-   - Collision probability $\sum_h p_t(h)^2$
-   - Energy derivative $-\frac{d}{dt}p_t(0)$
-   - Resolvent diagonal $G_s(0,0)$
-
-4. **Theoretical Bounds**: Lipschitz, ultracontractive, and Sobolev-Green bounds using spectral formulas.
+Persistence diagrams encode the interval decomposition of persistence modules arising from filtered topological data and are equipped with bottleneck and Wasserstein matching metrics. Algebraically, finite persistence diagrams form a commutative monoid with nonnegative multiplicities, supporting addition but not cancellation, which restricts the arithmetic available for translation invariant constructions compatible with the matching geometry. Virtual persistence diagrams extend this arithmetic by Grothendieck completion, allowing signed multiplicities and yielding a translation invariant metric group $(K(X,A),\rho)$ that preserves the Wasserstein--1 geometry. When the pointed metric space $(X/A,\overline{d}_1,[A])$ is uniformly discrete, $(K(X,A),\rho)$ is a discrete locally compact abelian group, but may be uncountable. We construct canonical translation--invariant heat and jump dynamics on the virtual persistence diagram group $K(X,A)$ from the VPD metric geometry. Using finite--volume approximations, we obtain a symmetric Markov semigroup whose convolution kernels define a geometry--induced random walk and whose effective support lies in a canonical countable subgroup $H\le K(X,A)$. On this effective group we establish a Lévy--Khintchine representation of the dynamics, develop the associated heat--kernel reproducing kernel Hilbert spaces, and identify dense finite--coordinate and metric--truncation subspaces. We show that a small collection of scalar random--walk invariants determined by the Lévy--Khintchine exponent---including return probabilities, collision probabilities, and diagonal resolvent values---governs global regularity properties of diagram functionals. These invariants appear as sharp constants in Lipschitz, smoothing, and Sobolev--type inequalities for the heat flow.
 
 ## Installation
 
