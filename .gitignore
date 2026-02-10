@@ -62,3 +62,4 @@ data/*
 *.tmp
 *.temp
 .cache/
+temp/
