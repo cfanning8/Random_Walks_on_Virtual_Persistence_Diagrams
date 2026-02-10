@@ -1,70 +1,74 @@
 """
-Compound Poisson Random Walk Simulation
+Compound Poisson Simulation for Levy Process
 
-Exact path simulation for finite-activity jump processes.
+Generalized to work with arbitrary LevyMeasure.
 """
 
 import numpy as np
-from typing import Tuple
-from src.jump_kernel import compute_total_rate, compute_jump_probabilities
+from src.jump_kernel import LevyMeasure
 
 
-def sample_compound_poisson(
+def simulate_levy_process(
+    levy_measure: LevyMeasure,
     t: float,
-    J: np.ndarray,
-    rates: np.ndarray,
     rng: np.random.Generator
 ) -> np.ndarray:
     """
-    Sample X_t from compound Poisson process.
+    Simulate X_t on H for finite-activity Levy measure.
     
-    X_t = sum_{j=1}^{N_t} xi_j
-    where N_t ~ Pois(q*t) and xi_j are i.i.d. with law pi.
+    For truncated nu_R (finite mass), the process has compound Poisson representation:
+    X_t = sum_{k=1}^{N_t} xi_k
+    
+    where N_t ~ Pois(q*t) and xi_k are i.i.d. with distribution pi(kappa) = nu(kappa)/q.
     
     Args:
+        levy_measure: LevyMeasure instance (must have finite total mass)
         t: Time parameter
-        J: Jump vectors [M, m]
-        rates: Jump rates [M]
-        rng: Random number generator (seed=14)
+        rng: NumPy random number generator
         
     Returns:
-        X_t: Final position in Z^m
+        coeffs: Integer np.ndarray shape (m,) representing X_t in basis
     """
-    if len(J) == 0:
-        raise ValueError("Cannot sample from empty jump kernel. Effective subgroup H has dimension 0.")
+    if levy_measure.K == 0:
+        return np.zeros(levy_measure.m, dtype=np.int64)
     
-    q = compute_total_rate(rates)
-    pi = compute_jump_probabilities(rates)
+    total_rate = levy_measure.total_mass()
+    if total_rate == 0:
+        return np.zeros(levy_measure.m, dtype=np.int64)
     
-    N_t = rng.poisson(q * t)
+    # Number of jumps
+    N_t = rng.poisson(total_rate * t)
     
     if N_t == 0:
-        return np.zeros(J.shape[1], dtype=np.int64)
+        return np.zeros(levy_measure.m, dtype=np.int64)
     
-    jump_indices = rng.choice(len(J), size=N_t, p=pi)
-    total_jump = np.sum(J[jump_indices], axis=0)
+    # Discrete distribution over jumps
+    probs = levy_measure.jump_probabilities()
     
-    return total_jump.astype(np.int64)
+    # Sample jump indices
+    jump_indices = rng.choice(levy_measure.K, size=N_t, p=probs)
+    
+    # Sum jumps
+    jumps = levy_measure.jumps[jump_indices]  # shape [N_t, m]
+    return jumps.sum(axis=0).astype(np.int64)
 
 
 def sample_two_paths(
+    levy_measure: LevyMeasure,
     t: float,
-    J: np.ndarray,
-    rates: np.ndarray,
     rng: np.random.Generator
 ) -> Tuple[np.ndarray, np.ndarray]:
     """
-    Sample two independent copies X_t and X'_t.
+    Sample two independent copies of the Levy process.
     
     Args:
+        levy_measure: LevyMeasure instance
         t: Time parameter
-        J: Jump vectors
-        rates: Jump rates
-        rng: Random number generator
+        rng: NumPy random number generator
         
     Returns:
-        X_t, X'_t: Two independent paths
+        X_t, X_t': Two independent copies
     """
-    X_t = sample_compound_poisson(t, J, rates, rng)
-    X_prime_t = sample_compound_poisson(t, J, rates, rng)
-    return X_t, X_prime_t
+    X_t = simulate_levy_process(levy_measure, t, rng)
+    X_t_prime = simulate_levy_process(levy_measure, t, rng)
+    return X_t, X_t_prime

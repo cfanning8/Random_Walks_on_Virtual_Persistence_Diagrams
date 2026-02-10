@@ -1,234 +1,251 @@
 """
 Heat Kernel Invariants
 
-Computation of Z_H(t), E_H(t), C_H(t), R_{s,H}(0) via Monte Carlo.
+Computation of p_t(0), sum_h p_t(h)^2, -d/dt p_t(0), G_s(0,0) via Monte Carlo.
+All functions use generic LevyMeasure, not hard-coded nearest-neighbor.
 """
 
 import numpy as np
-from typing import Tuple
-from src.random_walk import sample_compound_poisson, sample_two_paths
-from src.jump_kernel import build_jump_kernel
+from typing import Callable
+from src.jump_kernel import LevyMeasure, lambda_symbol
 
 
-def lambda_H(theta: np.ndarray, m: int, lambda_val: float = 1.0) -> float:
-    """
-    Compute Levy-Khintchine exponent for nearest-neighbor kernel.
-    
-    lambda_H(xi) = 2*lambda * sum_{i=1}^m (1 - cos(xi_i))
-    
-    Args:
-        theta: Character in [-pi, pi)^m
-        m: Dimension
-        lambda_val: Jump rate parameter
-        
-    Returns:
-        lambda_H(theta)
-    """
-    return 2.0 * lambda_val * np.sum(1.0 - np.cos(theta))
-
-
-def estimate_Z_H(
-    tau: float,
-    m: int,
-    lambda_val: float = 1.0,
+def estimate_return_probability(
+    t: float,
+    levy_measure: LevyMeasure,
     N: int = 100000,
     seed: int = 14
 ) -> float:
     """
-    Estimate return profile Z_H(tau) = p_tau(0) via Monte Carlo.
+    Estimate return probability p_t(0) via spectral integration.
+    
+    p_t(0) = int_{hat(H)} exp(-t*lambda_H(theta)) dmu(theta)
     
     Args:
-        tau: Dimensionless time parameter
-        m: Dimension of H
-        lambda_val: Jump rate parameter
-        N: Number of Monte Carlo samples
+        t: Time parameter
+        levy_measure: LevyMeasure instance (may be truncated)
+        N: Number of Monte Carlo samples for theta-space integration
         seed: Random seed
         
     Returns:
-        Estimated Z_H(tau)
+        Estimate of p_t(0)
     """
     rng = np.random.default_rng(seed)
-    J, rates = build_jump_kernel(m, lambda_val)
-    # With lambda=1, tau = t directly (no scaling needed)
-    t = tau
-    
-    count = 0
-    for _ in range(N):
-        X_t = sample_compound_poisson(t, J, rates, rng)
-        if np.array_equal(X_t, np.zeros(m, dtype=np.int64)):
-            count += 1
-    
-    return count / N
-
-
-def estimate_C_H(
-    tau: float,
-    m: int,
-    lambda_val: float = 1.0,
-    N: int = 100000,
-    seed: int = 14
-) -> float:
-    """
-    Estimate collision profile C_H(tau) = P(X_tau = X'_tau) via Monte Carlo.
-    
-    Args:
-        tau: Dimensionless time parameter
-        m: Dimension of H
-        lambda_val: Jump rate parameter
-        N: Number of Monte Carlo samples
-        seed: Random seed
-        
-    Returns:
-        Estimated C_H(tau)
-    """
-    rng = np.random.default_rng(seed)
-    J, rates = build_jump_kernel(m, lambda_val)
-    # With lambda=1, tau = t directly (no scaling needed)
-    t = tau
-    
-    count = 0
-    for _ in range(N):
-        X_t, X_prime_t = sample_two_paths(t, J, rates, rng)
-        if np.array_equal(X_t, X_prime_t):
-            count += 1
-    
-    return count / N
-
-
-def estimate_E_H(
-    tau: float,
-    m: int,
-    lambda_val: float = 1.0,
-    N: int = 50000,
-    seed: int = 14
-) -> float:
-    """
-    Estimate energy profile E_H(tau) via Monte Carlo on theta-space.
-    
-    E_H(tau) = int lambda_H(theta) * exp(-tau*lambda_H(theta)) dmu
-    
-    Args:
-        tau: Dimensionless time parameter
-        m: Dimension of H
-        lambda_val: Jump rate parameter
-        N: Number of Monte Carlo samples
-        seed: Random seed
-        
-    Returns:
-        Estimated E_H(tau)
-    """
-    rng = np.random.default_rng(seed)
+    m = levy_measure.m
     
     acc = 0.0
     for _ in range(N):
         theta = rng.uniform(-np.pi, np.pi, size=m)
-        lam = lambda_H(theta, m, lambda_val)
-        # Spectral side: exp(-tau * lambda_H(theta))
-        acc += lam * np.exp(-tau * lam)
+        lam = lambda_symbol(theta, levy_measure)
+        acc += np.exp(-t * lam)
     
     return acc / N
 
 
-def estimate_E_H_2(
-    tau: float,
-    m: int,
-    lambda_val: float = 1.0,
+def estimate_collision_probability(
+    t: float,
+    levy_measure: LevyMeasure,
+    N: int = 100000,
+    seed: int = 14
+) -> float:
+    """
+    Estimate collision probability sum_h p_t(h)^2 via spectral integration.
+    
+    sum_{h in H} p_t(h)^2 = int_{hat(H)} exp(-2*t*lambda_H(theta)) dmu(theta)
+    
+    This equals P(X_t = X_t') for two independent copies.
+    
+    Args:
+        t: Time parameter
+        levy_measure: LevyMeasure instance (may be truncated)
+        N: Number of Monte Carlo samples
+        seed: Random seed
+        
+    Returns:
+        Estimate of sum_h p_t(h)^2
+    """
+    rng = np.random.default_rng(seed)
+    m = levy_measure.m
+    
+    acc = 0.0
+    for _ in range(N):
+        theta = rng.uniform(-np.pi, np.pi, size=m)
+        lam = lambda_symbol(theta, levy_measure)
+        acc += np.exp(-2.0 * t * lam)
+    
+    return acc / N
+
+
+def estimate_energy_derivative(
+    t: float,
+    levy_measure: LevyMeasure,
     N: int = 50000,
     seed: int = 14
 ) -> float:
     """
-    Estimate E_H^(2)(tau) = energy of kernel section k_t(·,0).
+    Estimate energy -d/dt p_t(0) via spectral integration.
     
-    E_H^(2)(tau) = int lambda_H(theta) * exp(-2*tau*lambda_H(theta)) dmu
+    -d/dt p_t(0) = int_{hat(H)} lambda_H(theta) * exp(-t*lambda_H(theta)) dmu(theta)
+    
+    Args:
+        t: Time parameter
+        levy_measure: LevyMeasure instance (may be truncated)
+        N: Number of Monte Carlo samples
+        seed: Random seed
+        
+    Returns:
+        Estimate of -d/dt p_t(0)
+    """
+    rng = np.random.default_rng(seed)
+    m = levy_measure.m
+    
+    acc = 0.0
+    for _ in range(N):
+        theta = rng.uniform(-np.pi, np.pi, size=m)
+        lam = lambda_symbol(theta, levy_measure)
+        acc += lam * np.exp(-t * lam)
+    
+    return acc / N
+
+
+def estimate_resolvent_diagonal(
+    s: float,
+    levy_measure: LevyMeasure,
+    N: int = 50000,
+    seed: int = 14
+) -> float:
+    """
+    Estimate resolvent diagonal G_s(0,0) via spectral integration.
+    
+    G_s(0,0) = int_{hat(H)} 1/(s + lambda_H(theta)) dmu(theta)
+    
+    Args:
+        s: Resolvent parameter
+        levy_measure: LevyMeasure instance (may be truncated)
+        N: Number of Monte Carlo samples
+        seed: Random seed
+        
+    Returns:
+        Estimate of G_s(0,0)
+    """
+    rng = np.random.default_rng(seed)
+    m = levy_measure.m
+    
+    acc = 0.0
+    for _ in range(N):
+        theta = rng.uniform(-np.pi, np.pi, size=m)
+        lam = lambda_symbol(theta, levy_measure)
+        acc += 1.0 / (s + lam)
+    
+    return acc / N
+
+
+def estimate_kernel_section_energy(
+    t: float,
+    levy_measure: LevyMeasure,
+    N: int = 50000,
+    seed: int = 14
+) -> float:
+    """
+    Estimate energy of kernel section k_t(·,0).
+    
+    E_H^(2)(t) = int lambda_H(theta) * exp(-2*t*lambda_H(theta)) dmu
     
     This is the Dirichlet energy of the kernel section, used for Sobolev bounds.
     
     Args:
-        tau: Dimensionless time parameter
-        m: Dimension of H
-        lambda_val: Jump rate parameter
+        t: Time parameter
+        levy_measure: LevyMeasure instance (may be truncated)
         N: Number of Monte Carlo samples
         seed: Random seed
         
     Returns:
-        Estimated E_H^(2)(tau)
+        Estimate of E_H^(2)(t)
     """
     rng = np.random.default_rng(seed)
+    m = levy_measure.m
     
     acc = 0.0
     for _ in range(N):
         theta = rng.uniform(-np.pi, np.pi, size=m)
-        lam = lambda_H(theta, m, lambda_val)
-        # Energy of kernel section: exp(-2*tau*lambda_H)
-        acc += lam * np.exp(-2.0 * tau * lam)
+        lam = lambda_symbol(theta, levy_measure)
+        acc += lam * np.exp(-2.0 * t * lam)
     
     return acc / N
 
 
-def estimate_Z_H_2(
-    tau: float,
-    m: int,
-    lambda_val: float = 1.0,
+def estimate_kernel_section_l2_squared(
+    t: float,
+    levy_measure: LevyMeasure,
     N: int = 50000,
     seed: int = 14
 ) -> float:
     """
-    Estimate Z_H^(2)(tau) = ||k_t(·,0)||_2^2.
+    Estimate L^2 norm squared of kernel section k_t(·,0).
     
-    Z_H^(2)(tau) = int exp(-2*tau*lambda_H(theta)) dmu
+    Z_H^(2)(t) = ||k_t(·,0)||_2^2 = int exp(-2*t*lambda_H(theta)) dmu
     
-    This is the L^2 norm squared of the kernel section, used for Sobolev bounds.
+    This is used for Sobolev bounds.
     
     Args:
-        tau: Dimensionless time parameter
-        m: Dimension of H
-        lambda_val: Jump rate parameter
+        t: Time parameter
+        levy_measure: LevyMeasure instance (may be truncated)
         N: Number of Monte Carlo samples
         seed: Random seed
         
     Returns:
-        Estimated Z_H^(2)(tau)
+        Estimate of ||k_t(·,0)||_2^2
     """
     rng = np.random.default_rng(seed)
+    m = levy_measure.m
     
     acc = 0.0
     for _ in range(N):
         theta = rng.uniform(-np.pi, np.pi, size=m)
-        lam = lambda_H(theta, m, lambda_val)
-        # L^2 norm squared: exp(-2*tau*lambda_H)
-        acc += np.exp(-2.0 * tau * lam)
+        lam = lambda_symbol(theta, levy_measure)
+        acc += np.exp(-2.0 * t * lam)
     
     return acc / N
 
 
-def estimate_R_s_H(
-    s: float,
-    m: int,
-    lambda_val: float = 1.0,
+def estimate_Ht_norm_squared(
+    f_values: np.ndarray,
+    basis_points: list,
+    levy_measure: LevyMeasure,
+    t: float,
     N: int = 50000,
     seed: int = 14
 ) -> float:
     """
-    Estimate resolvent R_{s,H}(0) via Monte Carlo on theta-space.
+    Estimate RKHS norm squared |f|_{H_t}^2 for finitely supported function f.
     
-    R_{s,H}(0) = int 1/(s + lambda_H(theta)) dmu
+    |f|_{H_t}^2 = int |hat{f}(theta)|^2 * exp(t*lambda_H(theta)) dmu(theta)
     
     Args:
-        s: Resolvent parameter (should be s = lambda_val)
-        m: Dimension of H
-        lambda_val: Jump rate parameter
+        f_values: Array of shape (M,) giving f(h_j) on finite set {h_j}
+        basis_points: List of M group elements h_j, each as integer coefficients
+        levy_measure: LevyMeasure instance
+        t: Time parameter
         N: Number of Monte Carlo samples
         seed: Random seed
         
     Returns:
-        Estimated R_{s,H}(0)
+        Estimate of |f|_{H_t}^2
     """
     rng = np.random.default_rng(seed)
+    m = levy_measure.m
+    
+    h_vectors = np.stack(basis_points, axis=0)  # shape [M, m]
     
     acc = 0.0
     for _ in range(N):
         theta = rng.uniform(-np.pi, np.pi, size=m)
-        lam = lambda_H(theta, m, lambda_val)
-        acc += 1.0 / (s + lam)
+        
+        # Fourier transform: hat{f}(theta) = sum_j f(h_j) * exp(-i <theta, h_j>)
+        phases = h_vectors @ theta  # shape [M]
+        f_hat = np.dot(f_values, np.exp(-1j * phases))
+        
+        lam = lambda_symbol(theta, levy_measure)
+        acc += (np.abs(f_hat) ** 2) * np.exp(t * lam)
     
     return acc / N
