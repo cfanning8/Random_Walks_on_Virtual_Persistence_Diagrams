@@ -80,7 +80,7 @@ python scripts/example/generate_figures.py all
 - Sobolev-Green bounds using $G_s(0,0)$
 
 ### `src/random_walk.py`
-- Compound Poisson simulation (generic over LevyMeasure)
+- Compound Poisson simulation
 - Translation-invariant heat flow random walks
 
 ## References
