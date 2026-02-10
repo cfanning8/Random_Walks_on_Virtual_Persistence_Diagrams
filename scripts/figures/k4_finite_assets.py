@@ -1,15 +1,5 @@
-"""Generate K4 finite panel assets: 3D graph and LaTeX labels.
+"""Generate K4 finite panel assets."""
 
-Outputs (all with transparent backgrounds):
-- results/figures/finite/assets/k4_graph.png
-- results/figures/finite/assets/basepoint_label.png
-- results/figures/finite/assets/top_label.png
-- results/figures/finite/assets/edge_label.png
-- results/figures/finite/assets/mass_top_label.png
-- results/figures/finite/assets/mass_basepoint_label.png
-"""
-
-import os
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -26,7 +16,7 @@ def make_output_dir() -> Path:
 
 
 def build_k4_graph():
-    """Build K4 with nodes indexed 0..3."""
+    """Build K4 graph."""
     G = nx.Graph()
     G.add_nodes_from(range(4))
     for i in range(4):
@@ -36,8 +26,7 @@ def build_k4_graph():
 
 
 def k4_positions_3d():
-    """Deterministic 3D positions arranged as a diamond from the camera view."""
-    # Bottom, middle left, middle right, top
+    """3D positions arranged as diamond."""
     pos_3d = {
         0: (0.0, -1.0, 0.0),
         1: (-1.0, 0.0, 0.0),
@@ -57,7 +46,6 @@ def generate_k4_graph_image(output_dir: Path) -> None:
     output_path = output_dir / "k4_graph.png"
 
     if not PYVISTA_AVAILABLE:
-        # Minimal 2D fallback with same layout if PyVista is unavailable.
         fig, ax = plt.subplots(figsize=(6, 6), dpi=FIGURE_DPI)
         pos_2d = {n: (pos_3d[n][0], pos_3d[n][1]) for n in G.nodes()}
         nx.draw_networkx_edges(G, pos_2d, ax=ax, edge_color="#333333", width=2.0, alpha=0.85)
@@ -105,6 +93,7 @@ def generate_k4_graph_image(output_dir: Path) -> None:
 
 
 def _latex_png(text: str, path: Path) -> None:
+    """Generate LaTeX text as PNG."""
     fig = plt.figure(figsize=(2, 1), dpi=FIGURE_DPI)
     fig.patch.set_alpha(0.0)
     ax = fig.add_axes([0.0, 0.0, 1.0, 1.0])
@@ -136,4 +125,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

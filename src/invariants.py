@@ -1,9 +1,4 @@
-"""
-Heat Kernel Invariants
-
-Computation of p_t(0), sum_h p_t(h)^2, -d/dt p_t(0), G_s(0,0) via Monte Carlo.
-All functions use generic LevyMeasure, not hard-coded nearest-neighbor.
-"""
+"""Heat kernel invariants via Monte Carlo integration."""
 
 import numpy as np
 from typing import Callable
@@ -16,20 +11,7 @@ def estimate_return_probability(
     N: int = 100000,
     seed: int = 14
 ) -> float:
-    """
-    Estimate return probability p_t(0) via spectral integration.
-    
-    p_t(0) = int_{hat(H)} exp(-t*lambda_H(theta)) dmu(theta)
-    
-    Args:
-        t: Time parameter
-        levy_measure: LevyMeasure instance (may be truncated)
-        N: Number of Monte Carlo samples for theta-space integration
-        seed: Random seed
-        
-    Returns:
-        Estimate of p_t(0)
-    """
+    """Estimate p_t(0) = int exp(-t*lambda_H(theta)) dmu."""
     rng = np.random.default_rng(seed)
     m = levy_measure.m
     
@@ -48,22 +30,7 @@ def estimate_collision_probability(
     N: int = 100000,
     seed: int = 14
 ) -> float:
-    """
-    Estimate collision probability sum_h p_t(h)^2 via spectral integration.
-    
-    sum_{h in H} p_t(h)^2 = int_{hat(H)} exp(-2*t*lambda_H(theta)) dmu(theta)
-    
-    This equals P(X_t = X_t') for two independent copies.
-    
-    Args:
-        t: Time parameter
-        levy_measure: LevyMeasure instance (may be truncated)
-        N: Number of Monte Carlo samples
-        seed: Random seed
-        
-    Returns:
-        Estimate of sum_h p_t(h)^2
-    """
+    """Estimate sum_h p_t(h)^2 = int exp(-2*t*lambda_H(theta)) dmu."""
     rng = np.random.default_rng(seed)
     m = levy_measure.m
     
@@ -82,20 +49,7 @@ def estimate_energy_derivative(
     N: int = 50000,
     seed: int = 14
 ) -> float:
-    """
-    Estimate energy -d/dt p_t(0) via spectral integration.
-    
-    -d/dt p_t(0) = int_{hat(H)} lambda_H(theta) * exp(-t*lambda_H(theta)) dmu(theta)
-    
-    Args:
-        t: Time parameter
-        levy_measure: LevyMeasure instance (may be truncated)
-        N: Number of Monte Carlo samples
-        seed: Random seed
-        
-    Returns:
-        Estimate of -d/dt p_t(0)
-    """
+    """Estimate -d/dt p_t(0) = int lambda_H(theta) * exp(-t*lambda_H(theta)) dmu."""
     rng = np.random.default_rng(seed)
     m = levy_measure.m
     
@@ -114,20 +68,7 @@ def estimate_resolvent_diagonal(
     N: int = 50000,
     seed: int = 14
 ) -> float:
-    """
-    Estimate resolvent diagonal G_s(0,0) via spectral integration.
-    
-    G_s(0,0) = int_{hat(H)} 1/(s + lambda_H(theta)) dmu(theta)
-    
-    Args:
-        s: Resolvent parameter
-        levy_measure: LevyMeasure instance (may be truncated)
-        N: Number of Monte Carlo samples
-        seed: Random seed
-        
-    Returns:
-        Estimate of G_s(0,0)
-    """
+    """Estimate G_s(0,0) = int 1/(s + lambda_H(theta)) dmu."""
     rng = np.random.default_rng(seed)
     m = levy_measure.m
     
@@ -146,22 +87,7 @@ def estimate_kernel_section_energy(
     N: int = 50000,
     seed: int = 14
 ) -> float:
-    """
-    Estimate energy of kernel section k_t(·,0).
-    
-    E_H^(2)(t) = int lambda_H(theta) * exp(-2*t*lambda_H(theta)) dmu
-    
-    This is the Dirichlet energy of the kernel section, used for Sobolev bounds.
-    
-    Args:
-        t: Time parameter
-        levy_measure: LevyMeasure instance (may be truncated)
-        N: Number of Monte Carlo samples
-        seed: Random seed
-        
-    Returns:
-        Estimate of E_H^(2)(t)
-    """
+    """Estimate Dirichlet energy E_H^(2)(t) = int lambda_H(theta) * exp(-2*t*lambda_H(theta)) dmu."""
     rng = np.random.default_rng(seed)
     m = levy_measure.m
     
@@ -180,22 +106,7 @@ def estimate_kernel_section_l2_squared(
     N: int = 50000,
     seed: int = 14
 ) -> float:
-    """
-    Estimate L^2 norm squared of kernel section k_t(·,0).
-    
-    Z_H^(2)(t) = ||k_t(·,0)||_2^2 = int exp(-2*t*lambda_H(theta)) dmu
-    
-    This is used for Sobolev bounds.
-    
-    Args:
-        t: Time parameter
-        levy_measure: LevyMeasure instance (may be truncated)
-        N: Number of Monte Carlo samples
-        seed: Random seed
-        
-    Returns:
-        Estimate of ||k_t(·,0)||_2^2
-    """
+    """Estimate ||k_t(·,0)||_2^2 = int exp(-2*t*lambda_H(theta)) dmu."""
     rng = np.random.default_rng(seed)
     m = levy_measure.m
     
@@ -216,33 +127,17 @@ def estimate_Ht_norm_squared(
     N: int = 50000,
     seed: int = 14
 ) -> float:
-    """
-    Estimate RKHS norm squared |f|_{H_t}^2 for finitely supported function f.
-    
-    |f|_{H_t}^2 = int |hat{f}(theta)|^2 * exp(t*lambda_H(theta)) dmu(theta)
-    
-    Args:
-        f_values: Array of shape (M,) giving f(h_j) on finite set {h_j}
-        basis_points: List of M group elements h_j, each as integer coefficients
-        levy_measure: LevyMeasure instance
-        t: Time parameter
-        N: Number of Monte Carlo samples
-        seed: Random seed
-        
-    Returns:
-        Estimate of |f|_{H_t}^2
-    """
+    """Estimate RKHS norm |f|_{H_t}^2 = int |hat{f}(theta)|^2 * exp(t*lambda_H(theta)) dmu."""
     rng = np.random.default_rng(seed)
     m = levy_measure.m
     
-    h_vectors = np.stack(basis_points, axis=0)  # shape [M, m]
+    h_vectors = np.stack(basis_points, axis=0)
     
     acc = 0.0
     for _ in range(N):
         theta = rng.uniform(-np.pi, np.pi, size=m)
         
-        # Fourier transform: hat{f}(theta) = sum_j f(h_j) * exp(-i <theta, h_j>)
-        phases = h_vectors @ theta  # shape [M]
+        phases = h_vectors @ theta
         f_hat = np.dot(f_values, np.exp(-1j * phases))
         
         lam = lambda_symbol(theta, levy_measure)

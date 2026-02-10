@@ -1,22 +1,10 @@
-"""Generate RKHS K6 panel assets: 3D graph with edge coloring and LaTeX labels.
+"""Generate RKHS K6 panel assets."""
 
-Outputs (all with transparent backgrounds):
-- results/figures/RKHS/assets/k6_graph.png
-- results/figures/RKHS/assets/label_e.png (identity)
-- results/figures/RKHS/assets/label_12.png
-- results/figures/RKHS/assets/label_23.png
-- results/figures/RKHS/assets/label_123.png
-- results/figures/RKHS/assets/label_132.png
-- results/figures/RKHS/assets/label_13.png
-"""
-
-import os
 from pathlib import Path
 from typing import Dict, Tuple
 
 import matplotlib
 import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
 import networkx as nx
 import numpy as np
 
@@ -32,23 +20,10 @@ def make_output_dir() -> Path:
 
 
 def s3_word_metric(g1: str, g2: str) -> int:
-    """Compute word metric distance in S_3 with generating set {(12), (23)}.
-    
-    S_3 elements:
-    - 'e': identity
-    - '12': transposition (12)
-    - '23': transposition (23)
-    - '123': 3-cycle (123) = (12)(23)
-    - '132': 3-cycle (132) = (23)(12)
-    - '13': transposition (13) = (12)(23)(12)
-    
-    Returns:
-        Word metric distance d(g1, g2)
-    """
+    """Word metric distance in S_3 with generating set {(12), (23)}."""
     if g1 == g2:
         return 0
     
-    # Precompute distances from identity
     dist_from_e = {
         'e': 0,
         '12': 1,
@@ -58,7 +33,6 @@ def s3_word_metric(g1: str, g2: str) -> int:
         '13': 3,
     }
     
-    # Multiplication table for S_3
     mult_table = {
         ('e', 'e'): 'e',
         ('e', '12'): '12',
@@ -98,9 +72,6 @@ def s3_word_metric(g1: str, g2: str) -> int:
         ('13', '13'): 'e',
     }
     
-    # d(g1, g2) = d(e, g1^{-1} * g2)
-    # For S_3, inverse is: e^{-1}=e, (12)^{-1}=(12), (23)^{-1}=(23),
-    # (123)^{-1}=(132), (132)^{-1}=(123), (13)^{-1}=(13)
     inv_table = {
         'e': 'e',
         '12': '12',
@@ -116,11 +87,7 @@ def s3_word_metric(g1: str, g2: str) -> int:
 
 
 def build_k6_graph() -> Tuple[nx.Graph, Dict[int, str]]:
-    """Build K6 graph representing S_3 with node labels.
-    
-    Returns:
-        (Graph, node_to_element) where node_to_element maps node index to S_3 element string
-    """
+    """Build K6 graph representing S_3."""
     G = nx.Graph()
     elements = ['e', '12', '23', '123', '132', '13']
     node_to_element = {i: elem for i, elem in enumerate(elements)}
@@ -134,48 +101,31 @@ def build_k6_graph() -> Tuple[nx.Graph, Dict[int, str]]:
 
 
 def k6_positions_3d() -> Dict[int, Tuple[float, float, float]]:
-    """3D positions for K6 arranged in regular hexagon on plane perpendicular to camera view.
-    
-    Camera is at (5, 5, 5) looking at (0, 0, 0) with up (0, 0, 1).
-    View direction is approximately (-1, -1, -1).
-    Hexagon is arranged in plane perpendicular to view direction.
-    """
-    # Camera parameters (matching pyvista_helpers.py)
+    """3D positions in regular hexagon on plane perpendicular to camera view."""
     camera_pos = np.array([5.0, 5.0, 5.0])
     camera_focal = np.array([0.0, 0.0, 0.0])
     camera_up = np.array([0.0, 0.0, 1.0])
     
-    # View direction (from camera to focal point)
     view_dir = camera_focal - camera_pos
     view_dir = view_dir / (np.linalg.norm(view_dir) + 1e-10)
     
-    # Plane normal is along view direction
     plane_normal = view_dir
     
-    # Find two orthogonal vectors in the plane
-    # Use camera up vector projected onto plane
     up_proj = camera_up - np.dot(camera_up, plane_normal) * plane_normal
     if np.linalg.norm(up_proj) < 1e-6:
-        # If up is parallel to normal, use a different vector
         up_proj = np.array([1.0, 0.0, 0.0]) - np.dot(np.array([1.0, 0.0, 0.0]), plane_normal) * plane_normal
     up_proj = up_proj / (np.linalg.norm(up_proj) + 1e-10)
     
-    # Second vector in plane (perpendicular to first)
     right_proj = np.cross(plane_normal, up_proj)
     right_proj = right_proj / (np.linalg.norm(right_proj) + 1e-10)
     
-    # Regular hexagon in plane
-    # Hexagon vertices at angles: 0, 60, 120, 180, 240, 300 degrees
     radius = 1.5
     hex_angles = np.deg2rad([0, 60, 120, 180, 240, 300])
     
     pos_3d = {}
     for i, angle in enumerate(hex_angles):
-        # Hexagon coordinates in plane
         x_local = radius * np.cos(angle)
         y_local = radius * np.sin(angle)
-        
-        # Transform to 3D space
         point_3d = x_local * right_proj + y_local * up_proj
         pos_3d[i] = tuple(point_3d)
     
@@ -183,16 +133,7 @@ def k6_positions_3d() -> Dict[int, Tuple[float, float, float]]:
 
 
 def compute_edge_weights(G: nx.Graph, node_to_element: Dict[int, str], alpha: float = 1.0) -> Dict[Tuple[int, int], float]:
-    """Compute edge weights using Gaussian interaction profile psi(r) = exp(-alpha * r^2).
-    
-    Args:
-        G: Graph
-        node_to_element: Mapping from node index to S_3 element
-        alpha: Decay parameter for Gaussian
-        
-    Returns:
-        Dictionary mapping (u, v) edge to weight w(u,v) = psi(d(u,v))
-    """
+    """Compute edge weights using psi(r) = exp(-alpha * r^2)."""
     weights = {}
     for u, v in G.edges():
         elem_u = node_to_element[u]
@@ -204,24 +145,12 @@ def compute_edge_weights(G: nx.Graph, node_to_element: Dict[int, str], alpha: fl
 
 
 def weight_to_color(weight: float, min_weight: float, max_weight: float) -> str:
-    """Map edge weight to color from sky blue (high weight) to crimson (low weight).
-    
-    Args:
-        weight: Edge weight
-        min_weight: Minimum weight in graph
-        max_weight: Maximum weight in graph
-        
-    Returns:
-        Hex color string
-    """
+    """Map edge weight to color from sky blue to crimson."""
     if max_weight == min_weight:
         return "#87CEEB"
     
-    # Normalize to [0, 1] where 0 = min (crimson), 1 = max (sky blue)
     t = (weight - min_weight) / (max_weight - min_weight)
     
-    # Sky blue: RGB(135, 206, 235) = #87CEEB
-    # Crimson: RGB(220, 20, 60) = #DC143C
     sky_blue = np.array([135, 206, 235])
     crimson = np.array([220, 20, 60])
     
@@ -231,7 +160,7 @@ def weight_to_color(weight: float, min_weight: float, max_weight: float) -> str:
 
 
 def generate_k6_graph_image(output_dir: Path) -> None:
-    """Generate K6 graph with edge coloring based on Gaussian interaction profile."""
+    """Generate K6 graph with edge coloring."""
     G, node_to_element = build_k6_graph()
     pos_3d = k6_positions_3d()
     
@@ -265,10 +194,6 @@ def generate_k6_graph_image(output_dir: Path) -> None:
         plt.savefig(output_path, dpi=FIGURE_DPI, bbox_inches="tight", pad_inches=0.0, transparent=True)
         plt.close(fig)
         return
-    
-    # For PyVista, we need to modify the visualization function to support per-edge colors
-    # For now, use a simplified approach: visualize with uniform color and add colored edges
-    # Actually, let's create a custom visualization that supports edge colors
     
     import pyvista as pv
     try:
@@ -339,7 +264,7 @@ def generate_k6_graph_image(output_dir: Path) -> None:
 
 
 def _latex_png(text: str, path: Path) -> None:
-    """Generate LaTeX text as PNG with transparent background."""
+    """Generate LaTeX text as PNG."""
     fig = plt.figure(figsize=(2, 1), dpi=FIGURE_DPI)
     fig.patch.set_alpha(0.0)
     ax = fig.add_axes([0.0, 0.0, 1.0, 1.0])
@@ -366,15 +291,10 @@ def generate_labels(output_dir: Path) -> None:
 
 
 def generate_node_position_map(output_dir: Path) -> None:
-    """Generate text document mapping node positions to S_3 element labels.
-    
-    Creates a text file describing which label goes on which node position
-    in the hexagon layout.
-    """
+    """Generate node position mapping document."""
     G, node_to_element = build_k6_graph()
     pos_3d = k6_positions_3d()
     
-    # Project positions to 2D for labeling (using camera view)
     camera_pos = np.array([5.0, 5.0, 5.0])
     camera_focal = np.array([0.0, 0.0, 0.0])
     camera_up = np.array([0.0, 0.0, 1.0])
@@ -382,7 +302,6 @@ def generate_node_position_map(output_dir: Path) -> None:
     view_dir = camera_focal - camera_pos
     view_dir = view_dir / (np.linalg.norm(view_dir) + 1e-10)
     
-    # Project onto plane perpendicular to view
     plane_normal = view_dir
     up_proj = camera_up - np.dot(camera_up, plane_normal) * plane_normal
     if np.linalg.norm(up_proj) < 1e-6:
@@ -391,7 +310,6 @@ def generate_node_position_map(output_dir: Path) -> None:
     right_proj = np.cross(plane_normal, up_proj)
     right_proj = right_proj / (np.linalg.norm(right_proj) + 1e-10)
     
-    # Project each node to 2D coordinates
     node_2d = {}
     for node_idx in range(6):
         pos = np.array(pos_3d[node_idx])
@@ -399,20 +317,14 @@ def generate_node_position_map(output_dir: Path) -> None:
         y_2d = np.dot(pos, up_proj)
         node_2d[node_idx] = (x_2d, y_2d)
     
-    # Determine positions: top, bottom, left, right, etc.
-    # Sort by angle from center
-    center = (0.0, 0.0)
     node_angles = []
     for node_idx in range(6):
         x, y = node_2d[node_idx]
-        angle = np.arctan2(y, x)  # Angle in radians, -pi to pi
+        angle = np.arctan2(y, x)
         node_angles.append((node_idx, angle, x, y))
     
-    # Sort by angle (starting from top, going clockwise)
-    # Adjust so 0 is at top (y positive)
     node_angles.sort(key=lambda x: (x[1] + np.pi/2) % (2*np.pi))
     
-    # Assign position labels
     position_labels = [
         "top",
         "top-right",
@@ -422,7 +334,6 @@ def generate_node_position_map(output_dir: Path) -> None:
         "top-left"
     ]
     
-    # Write mapping document
     map_path = output_dir / "node_position_map.txt"
     with open(map_path, 'w') as f:
         f.write("K6 Graph Node Position Mapping\n")

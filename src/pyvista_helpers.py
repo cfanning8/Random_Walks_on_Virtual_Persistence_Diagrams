@@ -1,4 +1,4 @@
-"""PyVista 3D visualization helpers for graph rendering."""
+"""PyVista 3D graph visualization."""
 
 import numpy as np
 import networkx as nx
@@ -28,7 +28,7 @@ def visualize_graph_3d_pyvista(
     highlight_nodes: Optional[Iterable[int]] = None,
     highlight_edges: Optional[Iterable[Tuple[int, int]]] = None,
 ) -> None:
-    """Visualize graph in 3D using PyVista with label on closest edge."""
+    """Visualize graph in 3D using PyVista."""
     if not PYVISTA_AVAILABLE:
         raise ImportError("PyVista is required for 3D visualization")
     
@@ -117,7 +117,7 @@ def visualize_graph_3d_pyvista(
                 highlight_edges_set.add((min(u, v), max(u, v)))
     
     def create_curved_edge_from_homeomorphism(u, v, phi_e, t_samples, start, end):
-        """Create a curved edge based on homeomorphism phi_e."""
+        """Create curved edge from homeomorphism phi_e."""
         if len(phi_e) != len(t_samples):
             t_old = np.linspace(0, 1, len(phi_e))
             phi_e = np.interp(t_samples, t_old, phi_e)
@@ -163,7 +163,7 @@ def visualize_graph_3d_pyvista(
                             ((u, v) == closest_edge or (v, u) == closest_edge))
             
             tube = create_curved_edge_from_homeomorphism(u, v, phi_e, t_samples, start, end)
-            edge_color = '#333333'  # All edges same color, no red highlighting
+            edge_color = '#333333'
             actor = plotter.add_mesh(tube, color=edge_color, opacity=0.85, smooth_shading=True,
                             ambient=0.3, diffuse=0.6, specular=0.2, specular_power=20,
                             show_edges=False, pbr=False, metallic=0.0, roughness=0.6)
@@ -206,43 +206,6 @@ def visualize_graph_3d_pyvista(
                         pbr=False, metallic=0.0, roughness=0.5)
         actor.GetProperty().SetLighting(True)
     
-    label_text = None
-    label_3d_pos = None
-    
-    # Skip label addition - no numerical labels on edges
-    if False and closest_edge is not None:
-        u, v = closest_edge
-        edge = tuple(sorted((u, v)))
-        
-        if u in pos_3d and v in pos_3d:
-            start_pos = np.array(pos_3d[u])
-            end_pos = np.array(pos_3d[v])
-            mid_point = (start_pos + end_pos) / 2
-            label_3d_pos = mid_point
-        elif closest_edge in edge_midpoints:
-            label_3d_pos = edge_midpoints[closest_edge]
-        elif (v, u) in edge_midpoints:
-            label_3d_pos = edge_midpoints[(v, u)]
-        else:
-            label_3d_pos = list(edge_midpoints.values())[0] if edge_midpoints else np.array([0, 0, 0])
-        
-        if label_type == "scalar":
-            val = edge_labels.get(edge, 0.0)
-            val_str = f"{val:.2f}"
-            label_text = f"${val_str}$"
-        elif label_type == "vector":
-            vec = edge_labels.get(edge, np.zeros(3))
-            v_strs = [f"{val:.2f}" for val in vec]
-            label_text = f"$({v_strs[0]}, {v_strs[1]}, {v_strs[2]})$"
-        elif label_type == "matrix":
-            M = edge_labels.get(edge, np.zeros((3, 3)))
-            matrix_rows = []
-            for i in range(3):
-                row_vals = [f"{M[i,j]:.2f}" for j in range(3)]
-                matrix_rows.append(" & ".join(row_vals))
-            matrix_str = r"$\left(\begin{array}{@{}c@{\hspace{0.6em}}c@{\hspace{0.6em}}c@{}}" + "\\\\".join(matrix_rows) + r"\end{array}\right)$"
-            label_text = matrix_str
-    
     plotter.renderer.SetUseFXAA(False)
     plotter.renderer.SetBackgroundAlpha(0.0)
     plotter.renderer.SetAutomaticLightCreation(False)
@@ -255,108 +218,18 @@ def visualize_graph_3d_pyvista(
     plotter.screenshot(str(temp_img_path), transparent_background=True)
     plotter.close()
     
-    if label_text is not None and label_3d_pos is not None:
-        import matplotlib.pyplot as plt
-        from PIL import Image
-        
-        img_3d = Image.open(temp_img_path)
-        img_array = np.array(img_3d)
-        img_width, img_height = img_3d.size
-        
-        red_mask = (img_array[:, :, 0] > 200) & (img_array[:, :, 1] < 100) & (img_array[:, :, 2] < 100)
-        
-        if np.any(red_mask):
-            red_coords = np.argwhere(red_mask)
-            if len(red_coords) > 0:
-                center_y, center_x = red_coords.mean(axis=0)
-                x_screen = center_x + img_width * 0.05
-                y_screen = center_y - img_height * 0.02
-            else:
-                x_screen = img_width / 2
-                y_screen = img_height / 2
-        else:
-            x_screen = img_width / 2
-            y_screen = img_height / 2
-        
-        fig, ax = plt.subplots(figsize=(img_width/FIGURE_DPI, img_height/FIGURE_DPI), dpi=FIGURE_DPI)
-        ax.imshow(img_3d, origin='upper')
-        ax.axis('off')
-        
-        if label_type == "scalar":
-            fontsize = 24
-        elif label_type == "vector":
-            fontsize = 22
-        elif label_type == "matrix":
-            fontsize = 20
-        else:
-            fontsize = 24
-        
-        text_obj = ax.text(x_screen, y_screen, label_text, fontsize=fontsize, 
-                          ha='left', va='center', fontweight='bold', color='red',
-                          transform=ax.transData)
-        
-        fig.canvas.draw()
-        bbox = text_obj.get_window_extent(renderer=fig.canvas.renderer)
-        bbox_data = bbox.transformed(ax.transData.inverted())
-        
-        text_center_x = (bbox_data.x0 + bbox_data.x1) / 2
-        text_center_y = (bbox_data.y0 + bbox_data.y1) / 2
-        
-        ax_xlim = ax.get_xlim()
-        ax_ylim = ax.get_ylim()
-        pad_x_pixels = 15
-        pad_y_pixels = 15
-        pad_x = pad_x_pixels * (ax_xlim[1] - ax_xlim[0]) / img_width
-        pad_y = pad_y_pixels * (ax_ylim[1] - ax_ylim[0]) / img_height
-        
-        box_width = bbox_data.width + 2 * pad_x
-        box_height = bbox_data.height + 2 * pad_y
-        box_x = text_center_x - box_width / 2
-        box_y = text_center_y - box_height / 2
-        
-        from matplotlib.patches import FancyBboxPatch
-        
-        box_face = FancyBboxPatch(
-            (box_x, box_y), box_width, box_height,
-            boxstyle="round,pad=0.01",
-            facecolor='white',
-            edgecolor='none',
-            alpha=0.6,
-            zorder=1
-        )
-        ax.add_patch(box_face)
-        
-        box_border = FancyBboxPatch(
-            (box_x, box_y), box_width, box_height,
-            boxstyle="round,pad=0.01",
-            facecolor='none',
-            edgecolor='black',
-            linewidth=2.0,
-            alpha=1.0,
-            zorder=2
-        )
-        ax.add_patch(box_border)
-        
-        text_obj.set_zorder(3)
-        
-        plt.savefig(output_path, bbox_inches='tight', pad_inches=0, dpi=FIGURE_DPI, 
-                   facecolor='none', transparent=True)
-        plt.close(fig)
-        
-        temp_img_path.unlink()
-    else:
-        import matplotlib.pyplot as plt
-        from PIL import Image
-        
-        img_3d = Image.open(temp_img_path)
-        img_width, img_height = img_3d.size
-        
-        fig, ax = plt.subplots(figsize=(img_width/FIGURE_DPI, img_height/FIGURE_DPI), dpi=FIGURE_DPI)
-        ax.imshow(img_3d, origin='upper')
-        ax.axis('off')
-        
-        plt.savefig(output_path, bbox_inches='tight', pad_inches=0, dpi=FIGURE_DPI, 
-                   facecolor='none', transparent=True)
-        plt.close(fig)
-        
-        temp_img_path.unlink()
+    import matplotlib.pyplot as plt
+    from PIL import Image
+    
+    img_3d = Image.open(temp_img_path)
+    img_width, img_height = img_3d.size
+    
+    fig, ax = plt.subplots(figsize=(img_width/FIGURE_DPI, img_height/FIGURE_DPI), dpi=FIGURE_DPI)
+    ax.imshow(img_3d, origin='upper')
+    ax.axis('off')
+    
+    plt.savefig(output_path, bbox_inches='tight', pad_inches=0, dpi=FIGURE_DPI, 
+               facecolor='none', transparent=True)
+    plt.close(fig)
+    
+    temp_img_path.unlink()
