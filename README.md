@@ -17,8 +17,8 @@ Persistence diagrams encode the interval decomposition of persistence modules ar
 - SciPy >= 1.10.0
 - NetworkX >= 3.0
 - gudhi >= 3.7.0
-- Matplotlib
-- PyVista
+- Matplotlib >= 3.7.0
+- PyVista >= 0.40.0
 
 ### Install Dependencies
 
