@@ -75,7 +75,7 @@ python scripts/example/generate_figures.py all
 - Resolvent diagonal $G_s(0,0)$
 
 ### `src/bounds.py`
-- Lipschitz bounds: $\mathrm{Lip}_\rho(f) \leq |f|_{H_t} \cdot (-\frac{d}{dt}p_t(0))^{1/2}$
+- Lipschitz bounds: $Lip_\rho(f) \leq |f|_{H_t} \cdot (-\frac{d}{dt}p_t(0))^{1/2}$
 - Ultracontractive bounds: $\|P_t\|_{2\to\infty} = \sqrt{\sum_h p_t(h)^2}$
 - Sobolev-Green bounds using $G_s(0,0)$
 
