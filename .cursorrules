@@ -157,6 +157,7 @@ After any significant change, do a quick maintenance pass:
 - Treat the Git commit graph (DAG) as a first-class project artifact
 - Commit after EVERY major change (architecture, refactors, restructuring, logic changes)
 - Do NOT batch unrelated changes into a single commit
+- **Commit messages must be minimal: one or two words only**
 - Use an aggressive .gitignore by default:
   - ignore generated artifacts, caches, logs, outputs, temp files, environments
   - only track files that are essential and reproducible
