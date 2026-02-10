@@ -46,6 +46,7 @@ results/figures/*
 results/example/*
 !results/example/.gitkeep
 scripts/figures/*
+!scripts/figures/*.py
 !scripts/figures/.gitkeep
 scripts/example/*
 !scripts/example/.gitkeep
