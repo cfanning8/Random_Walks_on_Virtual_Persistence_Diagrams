@@ -103,14 +103,13 @@ python scripts/example/generate_figures.py all
 
 ## References
 
-1. Liggett, T. M. (2010). *Continuous Time Markov Processes: An Introduction*. Graduate Studies in Mathematics, 113. American Mathematical Society.
-2. Bubenik, P., & Elchesen, A. (2022). Virtual persistence diagrams, signed measures, Wasserstein distances, and Banach spaces. *Journal of Applied and Computational Topology*, 6, 429--474.
-3. Fanning, C., & Aktas, M. (2025). Reproducing Kernel Hilbert Spaces for Virtual Persistence Diagrams. Preprint: https://arxiv.org/abs/2512.07282
-4. Fukushima, M., Oshima, Y., & Takeda, M. (1994). *Dirichlet Forms and Symmetric Markov Processes*. De Gruyter Studies in Mathematics, 19. Walter de Gruyter.
-5. Applebaum, D. (2009). *L\'evy Processes and Stochastic Calculus* (2nd ed.). Cambridge Studies in Advanced Mathematics, 116. Cambridge University Press.
-6. Berg, C., & Forst, G. (1975). *Potential Theory on Locally Compact Abelian Groups*. Ergebnisse der Mathematik und ihrer Grenzgebiete, 87. Springer-Verlag.
-7. Edelsbrunner, H., Letscher, D., & Zomorodian, A. (2000). Topological persistence and simplification. *Proceedings 41st Annual Symposium on Foundations of Computer Science*, 454--463.
-8. Zomorodian, A., & Carlsson, G. (2005). Computing Persistent Homology. *Discrete & Computational Geometry*, 33, 249--274.
-9. Cohen-Steiner, D., Edelsbrunner, H., & Harer, J. (2007). Stability of Persistence Diagrams. *Discrete & Computational Geometry*, 37(1), 103--120.
-10. Oudot, S. Y. (2015). *Persistence Theory: From Quiver Representations to Data Analysis*. Mathematical Surveys and Monographs, 209. American Mathematical Society.
-11. Watts, D. J., & Strogatz, S. H. (1998). Collective dynamics of "small-world" networks. *Nature*, 393(6684), 440--442.
+1. Edelsbrunner, H., Letscher, D., & Zomorodian, A. (2000). Topological persistence and simplification. *Proceedings 41st Annual Symposium on Foundations of Computer Science*, 454--463.
+2. Zomorodian, A., & Carlsson, G. (2005). Computing persistent homology. *Discrete & Computational Geometry*, 33, 249--274.
+3. Cohen-Steiner, D., Edelsbrunner, H., & Harer, J. (2007). Stability of persistence diagrams. *Discrete & Computational Geometry*, 37(1), 103--120.
+4. Oudot, S. Y. (2015). *Persistence Theory: From Quiver Representations to Data Analysis*. Mathematical Surveys and Monographs, 209. American Mathematical Society.
+5. Bubenik, P., & Elchesen, A. (2022). Virtual persistence diagrams, signed measures, Wasserstein distances, and Banach spaces. *Journal of Applied and Computational Topology*, 6, 429--474.
+6. Fanning, C., & Aktas, M. (2025). Reproducing Kernel Hilbert Spaces for Virtual Persistence Diagrams. Preprint: https://arxiv.org/abs/2512.07282
+7. Applebaum, D. (2009). *L\'evy Processes and Stochastic Calculus* (2nd ed.). Cambridge Studies in Advanced Mathematics, 116. Cambridge University Press.
+8. Berg, C., & Forst, G. (1975). *Potential Theory on Locally Compact Abelian Groups*. Ergebnisse der Mathematik und ihrer Grenzgebiete, 87. Springer-Verlag.
+9. Liggett, T. M. (2010). *Continuous Time Markov Processes: An Introduction*. Graduate Studies in Mathematics, 113. American Mathematical Society.
+10. Watts, D. J., & Strogatz, S. H. (1998). Collective dynamics of "small-world" networks. *Nature*, 393(6684), 440--442.
