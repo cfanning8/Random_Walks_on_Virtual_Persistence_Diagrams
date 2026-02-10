@@ -1,8 +1,8 @@
-# Heat Flow Random Walks for Uniformly Discrete Virtual Persistence Diagrams
+# Random Walks on Virtual Persistence Diagrams
 
 This repository provides a Python implementation of translation-invariant heat flow random walks on virtual persistence diagram groups, as described in:
 
-**Paper Title**: *Heat Flow Random Walks for Uniformly Discrete Virtual Persistence Diagrams*
+**Paper Title**: *Random Walks on Virtual Persistence Diagrams*
 
 ## Mathematical Background
 
