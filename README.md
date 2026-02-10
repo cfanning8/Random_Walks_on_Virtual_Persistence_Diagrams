@@ -44,16 +44,16 @@ python scripts/example/generate_figures.py all
 
 ```
 .
-├── src/                    # Core implementation
-│   ├── vpd_group.py        # Geometry window, mass functional, d_1 metric
-│   ├── jump_kernel.py      # LevyMeasure class, canonical construction
-│   ├── invariants.py       # Heat kernel invariants
-│   ├── bounds.py           # Theoretical bounds
-│   ├── random_walk.py      # Compound Poisson simulation
-│   └── pyvista_helpers.py  # 3D graph visualization
+├── src/
+│   ├── vpd_group.py
+│   ├── jump_kernel.py
+│   ├── invariants.py
+│   ├── bounds.py
+│   ├── random_walk.py
+│   └── pyvista_helpers.py
 │
-├── scripts/example/        # Example pipeline scripts
-└── results/example/        # Computed results and figures
+├── scripts/example/
+└── results/example/
 ```
 
 ## Core Modules
