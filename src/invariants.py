@@ -106,7 +106,7 @@ def estimate_kernel_section_l2_squared(
     N: int = 50000,
     seed: int = 14
 ) -> float:
-    """Estimate ||k_t(·,0)||_2^2 = int exp(-2*t*lambda_H(theta)) dmu."""
+    """Estimate ||k_t(.,0)||_2^2 = int exp(-2*t*lambda_H(theta)) dmu."""
     rng = np.random.default_rng(seed)
     m = levy_measure.m
     

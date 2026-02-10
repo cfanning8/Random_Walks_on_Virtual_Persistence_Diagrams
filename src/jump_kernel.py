@@ -1,11 +1,11 @@
-"""Lévy measure on VPD group with truncation support."""
+"""Levy measure on VPD group with truncation support."""
 
 import numpy as np
 from typing import Tuple, Callable, Optional
 
 
 class LevyMeasure:
-    """Lévy measure on effective subgroup H."""
+    """Levy measure on effective subgroup H."""
     
     def __init__(self, jumps: np.ndarray, rates: np.ndarray):
         if jumps.shape[0] != rates.shape[0]:
@@ -38,7 +38,7 @@ class LevyMeasure:
 
 
 def lambda_symbol(theta: np.ndarray, levy_measure: LevyMeasure) -> float:
-    """Lévy-Khintchine exponent lambda_H(theta)."""
+    """Levy-Khintchine exponent lambda_H(theta)."""
     if len(theta) != levy_measure.m:
         raise ValueError(f"theta dimension {len(theta)} != {levy_measure.m}")
     
@@ -68,7 +68,7 @@ def build_geometry_levy_measure(
     distance_threshold: Optional[float] = None,
     lambda_val: float = 1.0
 ) -> LevyMeasure:
-    """Build canonical geometry-induced Lévy measure from VPD metric."""
+    """Build canonical geometry-induced Levy measure from VPD metric."""
     m = len(basis_bd_points)
     
     if m == 0:
@@ -137,7 +137,7 @@ def build_geometry_levy_measure(
 
 
 def build_nearest_neighbor_levy_measure(m: int, lambda_val: float = 1.0) -> LevyMeasure:
-    """Build nearest-neighbor Lévy measure for testing."""
+    """Build nearest-neighbor Levy measure for testing."""
     jumps = []
     rates = []
     

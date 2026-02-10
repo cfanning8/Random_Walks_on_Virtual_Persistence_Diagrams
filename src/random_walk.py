@@ -1,4 +1,4 @@
-"""Compound Poisson simulation for Lévy process."""
+"""Compound Poisson simulation for Levy process."""
 
 import numpy as np
 from typing import Tuple
@@ -10,7 +10,7 @@ def simulate_levy_process(
     t: float,
     rng: np.random.Generator
 ) -> np.ndarray:
-    """Simulate X_t on H for finite-activity Lévy measure."""
+    """Simulate X_t on H for finite-activity Levy measure."""
     if levy_measure.K == 0:
         return np.zeros(levy_measure.m, dtype=np.int64)
     
@@ -35,7 +35,7 @@ def sample_two_paths(
     t: float,
     rng: np.random.Generator
 ) -> Tuple[np.ndarray, np.ndarray]:
-    """Sample two independent copies of the Lévy process."""
+    """Sample two independent copies of the Levy process."""
     X_t = simulate_levy_process(levy_measure, t, rng)
     X_t_prime = simulate_levy_process(levy_measure, t, rng)
     return X_t, X_t_prime
